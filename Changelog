@@ -1,0 +1,35 @@
+# Projeto
+
+
+
+==================================================
+11/12/2020
+
+#Adicionado
+Adicionadas as classes Prédio(GP-10) e Carro(GP-10).
+Adicionada a classe Sindico (GP-11)
+Adicionada a classe Zelador (GP-12)
+
+#Alterado
+Alteração nos atributos e construtores das classes Pessoa, Administrador, Prédio e carro.
+
+#Corrigido
+==================================================
+
+10/12/2020
+
+#Adicionado
+Configurações iniciais para o desenvolvimento do projeto.
+
+#Alterado
+
+
+#Corrigido
+
+==================================================
+
+Change Log
+Todas mudanças notáveis para o AppProjetoCondominio serão documentadas neste arquivo.
+
+O formato é baseado em Keep a Changelog e este sistema é aderente ao Versionamento Semântico
+
