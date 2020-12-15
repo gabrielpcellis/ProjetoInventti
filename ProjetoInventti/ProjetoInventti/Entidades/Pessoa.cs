@@ -14,7 +14,17 @@ namespace ProjetoInventti.Entidades {
         public Carro Carro { get; set; }
         public Predio Predio { get; set; }
 
-        //Construtor Sindico, Administrador
+        //Construtor Administrador
+        public Pessoa(string nomeCompleto, DateTime dataNascimento, int telefone, double salario, Carro carro)
+        {
+            NomeCompleto = nomeCompleto;
+            DataNascimento = dataNascimento;
+            Telefone = telefone;
+            Salario = salario;
+            Carro = carro;
+        }
+        
+        //Construtor Sindico
         public Pessoa(string nomeCompleto, DateTime dataNascimento, int telefone, double salario, DateTime dataContratacao, Carro carro, Predio predio)
         {
             NomeCompleto = nomeCompleto;
@@ -23,19 +33,18 @@ namespace ProjetoInventti.Entidades {
             Salario = salario;
             DataContratacao = dataContratacao;
             Carro = carro;
-            Predio = predio;
         }
         //Construtor Zelador
-        public Pessoa(string nomeCompleto, DateTime dataNascimento, int telefone, double salario, Predio predio, Carro carro)
+        public Pessoa(string nomeCompleto, DateTime dataNascimento, int telefone, double salario, DateTime dataContratacao, Carro carro)
         {
             NomeCompleto = nomeCompleto;
             DataNascimento = dataNascimento;
             Telefone = telefone;
             Salario = salario;
+            DataContratacao = dataContratacao;
             Carro = carro;
-            Predio = predio;
         }
-
+        //Construdor Morador
         public Pessoa(string nomeCompleto, DateTime dataNascimento, int telefone, Predio predio, Carro carro) 
         {
             NomeCompleto = nomeCompleto;
@@ -43,6 +52,11 @@ namespace ProjetoInventti.Entidades {
             Telefone = telefone;
             Predio = predio;
             Carro = carro;
+        }
+        //Construtor da lista ListaAdministrador
+        public Pessoa(Administrador ListaAdministrador)
+        {
+
         }
     }
 }

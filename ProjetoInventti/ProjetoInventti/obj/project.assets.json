@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\gabriel.porcellis\\source\\repos\\ProjetoInventti\\ProjetoInventti\\ProjetoInventti\\ProjetoInventti\\ProjetoInventti.csproj",
+      "projectUniqueName": "C:\\Users\\gabriel.porcellis\\Documents\\ProjetoInventti\\ProjetoInventti\\ProjetoInventti\\ProjetoInventti.csproj",
       "projectName": "ProjetoInventti",
-      "projectPath": "C:\\Users\\gabriel.porcellis\\source\\repos\\ProjetoInventti\\ProjetoInventti\\ProjetoInventti\\ProjetoInventti\\ProjetoInventti.csproj",
+      "projectPath": "C:\\Users\\gabriel.porcellis\\Documents\\ProjetoInventti\\ProjetoInventti\\ProjetoInventti\\ProjetoInventti.csproj",
       "packagesPath": "C:\\Users\\gabriel.porcellis\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\gabriel.porcellis\\source\\repos\\ProjetoInventti\\ProjetoInventti\\ProjetoInventti\\ProjetoInventti\\obj\\",
+      "outputPath": "C:\\Users\\gabriel.porcellis\\Documents\\ProjetoInventti\\ProjetoInventti\\ProjetoInventti\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

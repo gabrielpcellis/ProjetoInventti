@@ -1,6 +1,26 @@
 # Projeto
 
-Push
+15/12/2020
+
+#Adicionado
+
+#Alterado
+Leves alterações nas variáveis das classes entidade.
+Alterações nos métodos da classe cadastro.
+
+#Corrigido
+
+==================================================
+14/12/2020
+
+#Adicionado
+Adicionadas as classes entidade: Pessoa, Carro, Predio, Morador, Sindico, Zelador
+Adicionada a classe serviço: Cadastro.
+
+#Alterado
+Alterações nas classes entidade: melhoria nos construtores e atributos.
+
+#Corrigido
 
 ==================================================
 11/12/2020
