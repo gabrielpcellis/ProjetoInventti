@@ -5,10 +5,11 @@ using System.Text;
 namespace ProjetoInventti.Entidades {
     public class Administrador : Pessoa {
 
-        public Administrador(string nomeCompleto, DateTime dataNascimento, int telefone, double salario, Carro carro)
-            : base(nomeCompleto, dataNascimento, telefone, salario, carro)
+        public Administrador(string nomeCompleto, DateTime dataNascimento, string telefone, double salario, Carro carro)
+                    : base(nomeCompleto, dataNascimento, telefone, salario, carro)
         {
 
         }
+
     }
 }
