@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 
 namespace ProjetoInventti {
-    class Program {
+    public class Program {
         static void Main(string[] args)
         {
             //Criar um switch case para definir que tipo de pessoa cadastrar
