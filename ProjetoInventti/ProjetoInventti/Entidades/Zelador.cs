@@ -5,8 +5,8 @@ using System.Text;
 namespace ProjetoInventti.Entidades {
     public class Zelador : Pessoa {
 
-        public Zelador(string nomeCompleto, DateTime dataNascimento, int telefone, double salario, Predio predio, Carro carro)
-            : base(nomeCompleto, dataNascimento, telefone, salario, predio, carro)
+        public Zelador(string nomeCompleto, DateTime dataNascimento, int telefone, double salario, DateTime dataContratacao, Carro carro)
+            : base(nomeCompleto, dataNascimento, telefone, salario, dataContratacao, carro)
         {
 
         }
