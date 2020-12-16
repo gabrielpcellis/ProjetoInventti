@@ -1,56 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ProjetoInventti.Enums;
+using System;
 
 namespace ProjetoInventti.Entidades {
     public class Pessoa {
         public string NomeCompleto { get; set; }
         public DateTime DataNascimento { get; set; }
-        public string Telefone { get; set; }
-        public double Salario { get; set; }
-        public DateTime DataContratacao { get; set; }
+        public string NumeroApartamento { get; set; }
         public Carro Carro { get; set; }
-        public Predio Predio { get; set; }
+        public string Telefone { get; set; }
+        public TipoNivelAcesso TipoNivelAcesso { get; set; }
+        public string UsuarioAcesso { get; set; }
+        public string SenhaAcesso { get; set; }
 
-        //Construtor Administrador
-        public Pessoa(string nomeCompleto, DateTime dataNascimento, string telefone, double salario, Carro carro)
+        public Pessoa(string nomeCompleto, DateTime dataNascimento, string numeroApartamento, Carro carro, string telefone, TipoNivelAcesso tipoNivelAcesso, string user, string senha)
         {
             NomeCompleto = nomeCompleto;
             DataNascimento = dataNascimento;
-            Telefone = telefone;
-            Salario = salario;
+            NumeroApartamento = numeroApartamento;
             Carro = carro;
-        }
-        
-        //Construtor Sindico
-        public Pessoa(string nomeCompleto, DateTime dataNascimento, string telefone, double salario, DateTime dataContratacao, Carro carro, Predio predio)
-        {
-            NomeCompleto = nomeCompleto;
-            DataNascimento = dataNascimento;
             Telefone = telefone;
-            Salario = salario;
-            DataContratacao = dataContratacao;
-            Carro = carro;
-        }
-        //Construtor Zelador
-        public Pessoa(string nomeCompleto, DateTime dataNascimento, string telefone, double salario, DateTime dataContratacao, Carro carro)
-        {
-            NomeCompleto = nomeCompleto;
-            DataNascimento = dataNascimento;
-            Telefone = telefone;
-            Salario = salario;
-            DataContratacao = dataContratacao;
-            Carro = carro;
-        }
-        //Construdor Morador
-        public Pessoa(string nomeCompleto, DateTime dataNascimento, string telefone, Predio predio, Carro carro)
-        {
-            NomeCompleto = nomeCompleto;
-            DataNascimento = dataNascimento;
-            Telefone = telefone;
-            Predio = predio;
-            Carro = carro;
+            TipoNivelAcesso = tipoNivelAcesso;
+            UsuarioAcesso = user;
+            SenhaAcesso = senha;
         }
 
+        public bool VerificarDadosDeAcesso(string usuario, string senha)
+        {
+            //bool informacoesConferem = false;
+
+            //if (usuario == UsuarioAcesso && senha == SenhaAcesso)
+            //    informacoesConferem = true;
+
+            //return informacoesConferem;
+
+            return usuario == UsuarioAcesso && senha == SenhaAcesso;
+        }
     }
 }
