@@ -6,16 +6,14 @@ namespace ProjetoInventti.Entidades {
     public class Pessoa {
         public string NomeCompleto { get; set; }
         public DateTime DataNascimento { get; set; }
-        public int Telefone { get; set; }
-        public int NumeroApartamento { get; set; }
-        public string PlacaCarro { get; set; }
+        public string Telefone { get; set; }
         public double Salario { get; set; }
         public DateTime DataContratacao { get; set; }
         public Carro Carro { get; set; }
         public Predio Predio { get; set; }
 
         //Construtor Administrador
-        public Pessoa(string nomeCompleto, DateTime dataNascimento, int telefone, double salario, Carro carro)
+        public Pessoa(string nomeCompleto, DateTime dataNascimento, string telefone, double salario, Carro carro)
         {
             NomeCompleto = nomeCompleto;
             DataNascimento = dataNascimento;
@@ -25,7 +23,7 @@ namespace ProjetoInventti.Entidades {
         }
         
         //Construtor Sindico
-        public Pessoa(string nomeCompleto, DateTime dataNascimento, int telefone, double salario, DateTime dataContratacao, Carro carro, Predio predio)
+        public Pessoa(string nomeCompleto, DateTime dataNascimento, string telefone, double salario, DateTime dataContratacao, Carro carro, Predio predio)
         {
             NomeCompleto = nomeCompleto;
             DataNascimento = dataNascimento;
@@ -35,7 +33,7 @@ namespace ProjetoInventti.Entidades {
             Carro = carro;
         }
         //Construtor Zelador
-        public Pessoa(string nomeCompleto, DateTime dataNascimento, int telefone, double salario, DateTime dataContratacao, Carro carro)
+        public Pessoa(string nomeCompleto, DateTime dataNascimento, string telefone, double salario, DateTime dataContratacao, Carro carro)
         {
             NomeCompleto = nomeCompleto;
             DataNascimento = dataNascimento;
@@ -45,7 +43,7 @@ namespace ProjetoInventti.Entidades {
             Carro = carro;
         }
         //Construdor Morador
-        public Pessoa(string nomeCompleto, DateTime dataNascimento, int telefone, Predio predio, Carro carro) 
+        public Pessoa(string nomeCompleto, DateTime dataNascimento, string telefone, Predio predio, Carro carro)
         {
             NomeCompleto = nomeCompleto;
             DataNascimento = dataNascimento;
@@ -53,10 +51,6 @@ namespace ProjetoInventti.Entidades {
             Predio = predio;
             Carro = carro;
         }
-        //Construtor da lista ListaAdministrador
-        public Pessoa(Administrador ListaAdministrador)
-        {
 
-        }
     }
 }

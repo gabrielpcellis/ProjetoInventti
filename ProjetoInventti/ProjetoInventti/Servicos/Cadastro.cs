@@ -6,7 +6,7 @@ using ProjetoInventti.Entidades;
 namespace ProjetoInventti.Serviços {
     public static class Cadastro {
 
-        //Método de cadastro Administro
+        //Método de cadastro Administrador
         public static Administrador CadastrarAdministrador()
         {
             Console.WriteLine("Entre com os dados abaixo: ");
@@ -17,7 +17,7 @@ namespace ProjetoInventti.Serviços {
             DateTime dataNascimento = DateTime.Parse(Console.ReadLine());
             Console.WriteLine();
             Console.Write("Telefone: ");
-            int telefone = int.Parse(Console.ReadLine());
+            string telefone = Console.ReadLine();
             Console.WriteLine();
             Console.Write("Salário: ");
             double salario = double.Parse(Console.ReadLine());
@@ -42,7 +42,7 @@ namespace ProjetoInventti.Serviços {
             DateTime dataNascimento = DateTime.Parse(Console.ReadLine());
             Console.WriteLine();
             Console.Write("Telefone: ");
-            int telefone = int.Parse(Console.ReadLine());
+            string telefone = Console.ReadLine();
             Console.WriteLine();
             Console.Write("Salário: ");
             double salario = double.Parse(Console.ReadLine());
@@ -77,7 +77,7 @@ namespace ProjetoInventti.Serviços {
             DateTime dataNascimento = DateTime.Parse(Console.ReadLine());
             Console.WriteLine();
             Console.Write("Telefone: ");
-            int telefone = int.Parse(Console.ReadLine());
+            string telefone = Console.ReadLine();
             Console.WriteLine();
             Console.Write("Salário: ");
             double salario = double.Parse(Console.ReadLine());
@@ -106,7 +106,7 @@ namespace ProjetoInventti.Serviços {
             DateTime dataNascimento = DateTime.Parse(Console.ReadLine());
             Console.WriteLine();
             Console.Write("Telefone: ");
-            int telefone = int.Parse(Console.ReadLine());
+            string telefone = Console.ReadLine();
             Console.WriteLine();
             Console.Write("Salário: ");
             double salario = double.Parse(Console.ReadLine());
