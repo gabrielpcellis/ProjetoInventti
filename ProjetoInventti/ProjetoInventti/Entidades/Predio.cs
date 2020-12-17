@@ -11,6 +11,7 @@ namespace ProjetoInventti.Entidades {
         public int QuantidadeApartamentos { get; set; }
         public DateTime DataConstrucao { get; set; }
         public int Andares { get; set; }
+        public int NumeroApartamento { get; set; }
 
         //Construtor cadastro prédio
         public Predio(string nomePredio, string blocoPredio, int quantidadeAndares, int quantidadeApartamentos, DateTime dataConstrucao, int andares)
@@ -24,10 +25,11 @@ namespace ProjetoInventti.Entidades {
         }
 
         //Construtor pessoa
-        public Predio(string nomePredio, string blocoPredio)
+        public Predio(string nomePredio, string blocoPredio, int numeroApartamento)
         {
             NomePredio = nomePredio;
             BlocoPredio = blocoPredio;
+            NumeroApartamento = numeroApartamento;
         }
     }
 }
