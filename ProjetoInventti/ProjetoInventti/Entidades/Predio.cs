@@ -24,7 +24,7 @@ namespace ProjetoInventti.Entidades {
             Andares = andares;
         }
 
-        //Construtor pessoa
+        //Construtor prédio para pessoa
         public Predio(string nomePredio, string blocoPredio, int numeroApartamento)
         {
             NomePredio = nomePredio;
