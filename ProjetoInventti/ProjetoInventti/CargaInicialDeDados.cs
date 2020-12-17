@@ -8,15 +8,29 @@ namespace ProjetoInventti {
 
         public static List<Pessoa> GerarCarga()
         {
-            List<Pessoa> lista = new List<Pessoa>();
-            lista.Add(new Morador("Usuario 1", DateTime.Now, "1", null, string.Empty, "1", "1", null));
-            lista.Add(new Morador("Usuario 2", DateTime.Now, "2", null, string.Empty, "2", "2", null));
-            lista.Add(new Morador("Usuario 3", DateTime.Now, "3", null, string.Empty, "3", "3", null));
-            lista.Add(new Morador("Usuario 4", DateTime.Now, "4", null, string.Empty, "4", "4", null));
-            lista.Add(new Morador("Usuario 5", DateTime.Now, "5", null, string.Empty, "5", "5", null));
-            lista.Add(new Morador("Usuario 6", DateTime.Now, "6", null, string.Empty, "6", "6", null));
-            lista.Add(new Morador("Usuario 7", DateTime.Now, "7", null, string.Empty, "7", "7", null));
-            lista.Add(new Administrador("Usuario 8", DateTime.Now, "87", null, string.Empty, "8", "8"));
+            //São apenas 2 objetos para todos os usuários (Possível alteração)
+            Carro carro = new Carro("placa 1", "modelo 1");
+            Predio predio = new Predio("nome predio", "bloco predio", 12);
+
+            //Carga inicial de pessoas (incluindo todas as entidades)
+            List<Pessoa> lista = new List<Pessoa>
+            {
+                new Administrador("administrador 1", DateTime.Now, carro, "telefone 1", "usuario 4", "senha 4"),
+                new Administrador("administrador 2", DateTime.Now, carro, "telefone 2", "usuario 5", "senha 5"),
+                new Administrador("administrador 3", DateTime.Now, carro, "telefone 3", "usuario 6", "senha 6"),
+
+                new Morador("morador 1", DateTime.Now, carro, "telefone 1", "usuario 1", "senha 1", predio),
+                new Morador("morador 2", DateTime.Now, carro, "telefone 2", "usuario 2", "senha 2", predio),
+                new Morador("morador 3", DateTime.Now, carro, "telefone 3", "usuario 3", "senha 3", predio),
+
+                new Sindico("síndico 1", DateTime.Now, predio, carro, "telefone 1", "usuario 7", "senha 7", 1000.00),
+                new Sindico("síndico 2", DateTime.Now, predio, carro, "telefone 2", "usuario 8", "senha 8", 1000.00),
+                new Sindico("síndico 3", DateTime.Now, predio, carro, "telefone 3", "usuario 9", "senha 9", 1000.00),
+
+                new Zelador("zelador 1", DateTime.Now, carro, "telefone 1", "usuario 10", "senha 10", predio, 1000.00),
+                new Zelador("zelador 2", DateTime.Now, carro, "telefone 2", "usuario 11", "senha 11", predio, 1000.00),
+                new Zelador("zelador 3", DateTime.Now, carro, "telefone 3", "usuario 12", "senha 12", predio, 1000.00)
+            };
 
             return lista;
         }

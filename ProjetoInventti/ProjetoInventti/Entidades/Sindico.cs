@@ -1,11 +1,18 @@
-﻿using System;
+﻿using ProjetoInventti.Enums;
+using System;
 
-namespace ProjetoInventti.Entidades {
-    public class Sindico {
+namespace ProjetoInventti.Entidades
+{
+    public class Sindico : Pessoa
+    {
+        public Predio PredioSindico { get; set; }
+        public double Salario { get; set; }
 
-        public Sindico(string nomeCompleto, DateTime dataNascimento, string telefone, double salario, DateTime dataContratacao, Carro carro, Predio predio)
+        public Sindico(string nomeCompleto, DateTime dataNascimento, Predio predio, Carro carro, string telefone, string user, string senha, double salario)
+        : base(nomeCompleto, dataNascimento, carro, telefone, TipoNivelAcesso.Sindico, user, senha)
         {
-
+            PredioSindico = predio;
+            Salario = salario;
         }
 
     }
