@@ -1,14 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ProjetoInventti.Enums;
+using System;
 
 namespace ProjetoInventti.Entidades {
     public class Morador : Pessoa {
 
-        public Morador(string nomeCompleto, DateTime dataNascimento, string telefone, Predio predio, Carro carro)
-            : base (nomeCompleto, dataNascimento, telefone, predio, carro)
-        {
+        public Predio PredioDoMorador { get; set; }
 
+
+        public Morador(string nomeCompleto, DateTime dataNascimento, string numeroApartamento, Carro carro, string telefone, string user, string senha, Predio predio)
+            : base(nomeCompleto, dataNascimento, numeroApartamento, carro, telefone, TipoNivelAcesso.Morador, user, senha)
+        {
+            PredioDoMorador = predio;
         }
     }
 }

@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using ProjetoInventti.Enums;
 
 namespace ProjetoInventti.Entidades {
     public class Administrador : Pessoa {
 
-        public Administrador(string nomeCompleto, DateTime dataNascimento, string telefone, double salario, Carro carro)
-                    : base(nomeCompleto, dataNascimento, telefone, salario, carro)
+        public Administrador(string nomeCompleto, DateTime dataNascimento, string numeroApartamento, Carro carro, string telefone, string user, string senha)
+            : base(nomeCompleto, dataNascimento, numeroApartamento, carro, telefone, TipoNivelAcesso.Administrador, user, senha)
         {
 
         }
-
     }
 }
