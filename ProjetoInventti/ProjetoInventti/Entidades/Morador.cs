@@ -12,5 +12,11 @@ namespace ProjetoInventti.Entidades
         {
             PredioDoMorador = predio;
         }
+
+        public Morador(Pessoa pessoa, Predio predio) : base(pessoa.NomeCompleto, pessoa.DataNascimento, pessoa.Carro, pessoa.Telefone, TipoNivelAcesso.Morador, pessoa.UsuarioAcesso, pessoa.SenhaAcesso)
+        {
+            PredioDoMorador = predio;
+        }
+
     }
 }

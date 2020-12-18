@@ -2,25 +2,25 @@
 using ProjetoInventti.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace ProjetoInventti.Servicos
 {
     public class Menu
     {
-        //Menus
-        public static void Administrador(List<Pessoa> usuariosSistema)
-        {
-            usuariosSistema.Add(Cadastro.CadastrarAdministrador());
-            usuariosSistema.Add(Cadastro.CadastrarSindico());
+        Cadastro cadastro = new Cadastro();
 
-            Cadastro.CadastrarSindico();
+        //Menus
+        public void Administrador(List<Pessoa> usuariosSistema)
+        {
+            usuariosSistema.Add(cadastro.CadastrarAdministrador());
+            usuariosSistema.Add(cadastro.CadastrarSindico());
+
         }
         
         public static void Sindico()
         {
-            Cadastro.CadastrarSindico();
-            Cadastro.CadastrarZelador();
         }
 
         public static void Zelador()
@@ -37,124 +37,49 @@ namespace ProjetoInventti.Servicos
     internal class Cadastro
     {
         //Método de cadastrar administrador
-        public static Pessoa CadastrarAdministrador()
+        public Administrador CadastrarAdministrador()
         {
-            Console.WriteLine("Entre com os dados abaixo: ");
-            Console.Write("Nome completo: ");
-            string nomeCompleto = Console.ReadLine();
-            Console.WriteLine();
-            Console.Write("Data de nascimento: ");
-            DateTime dataNascimento = DateTime.Parse(Console.ReadLine());
-            Console.WriteLine();
-            Console.Write("Telefone: ");
-            string telefone = Console.ReadLine();
-            Console.WriteLine();
+            Pessoa pessoa = GerarPessoa();
 
-            Console.WriteLine("Dados do carro: ");
-            Console.Write("Placa do carro: ");
-            string placaCarro = (Console.ReadLine());
-            Console.Write("Modelo do carro: ");
-            string modeloCarro = Console.ReadLine();
-            Carro carro = new Carro(placaCarro, modeloCarro);
-
-            Console.WriteLine("Entre com os dados para login: ");
-            Console.Write("Escolhe seu usuário de acesso:");
-            string user = Console.ReadLine();
-            Console.Write("Escolha sua senha de acesso: ");
-            string senha = Console.ReadLine();
-
-            return new Administrador(nomeCompleto, dataNascimento, carro, telefone, TipoNivelAcesso.Administrador, user, senha);
+            return new Administrador(pessoa);
         }
 
         //Método de cadastrar síndico
-        public static Pessoa CadastrarSindico()
+        public Sindico CadastrarSindico()
         {
-            Console.WriteLine("Entre com os dados abaixo: ");
-            Console.Write("Nome completo: ");
-            string nomeCompleto = Console.ReadLine();
-            Console.WriteLine();
-            Console.Write("Data de nascimento: ");
-            DateTime dataNascimento = DateTime.Parse(Console.ReadLine());
-            Console.WriteLine();
-            Console.Write("Telefone: ");
-            string telefone = Console.ReadLine();
-            Console.WriteLine();
-            Console.Write("Salário: ");
-            double salario = double.Parse(Console.ReadLine());
-            Console.WriteLine();
+            Pessoa pessoa = GerarPessoa();
 
-            Console.WriteLine("Dados do carro: ");
-            Console.Write("Placa do carro: ");
-            string placaCarro = (Console.ReadLine());
-            Console.Write("Modelo do carro: ");
-            string modeloCarro = Console.ReadLine();
-            Carro carro = new Carro(placaCarro, modeloCarro);
+            double salario = Salario();
+         
+            Predio predio = GerarPredio();
 
-            Console.WriteLine("Dados do prédio: ");
-            Console.Write("Nome do prédio: ");
-            string nomePredio = Console.ReadLine();
-            Console.Write("Bloco: ");
-            string bloco = Console.ReadLine();
-            Console.Write("Apartamento: ");
-            int apartamento = int.Parse(Console.ReadLine());
-            Predio predio = new Predio(nomePredio, bloco, apartamento);
-
-            Console.WriteLine("Entre com os dados para login: ");
-            Console.Write("Escolhe seu usuário de acesso:");
-            string user = Console.ReadLine();
-            Console.Write("Escolha sua senha de acesso: ");
-            string senha = Console.ReadLine();
-
-            return new Sindico(nomeCompleto, dataNascimento, predio, carro, telefone, user, senha, salario);
+            return new Sindico(pessoa, predio, salario);
         }
 
         //Método de cadastrar Zelador
-        public static Pessoa CadastrarZelador()
+        public Zelador CadastrarZelador()
         {
+            Pessoa pessoa = GerarPessoa();
 
-            Console.WriteLine("Entre com os dados abaixo: ");
-            Console.Write("Nome completo: ");
-            string nomeCompleto = Console.ReadLine();
-            Console.WriteLine();
-            Console.Write("Data de nascimento: ");
-            DateTime dataNascimento = DateTime.Parse(Console.ReadLine());
-            Console.WriteLine();
-            Console.Write("Telefone: ");
-            string telefone = Console.ReadLine();
-            Console.WriteLine();
-            Console.Write("Salário: ");
-            double salario = double.Parse(Console.ReadLine());
-            Console.WriteLine();
+            double salario = Salario();
 
-            Console.WriteLine("Dados do carro: ");
-            Console.Write("Placa do carro: ");
-            string placaCarro = (Console.ReadLine());
-            Console.Write("Modelo do carro: ");
-            string modeloCarro = Console.ReadLine();
-            Carro carro = new Carro(placaCarro, modeloCarro);
+            Predio predio = GerarPredio();
 
-            Console.WriteLine("Dados do prédio: ");
-            Console.Write("Nome do prédio: ");
-            string nomePredio = Console.ReadLine();
-            Console.Write("Bloco: ");
-            string bloco = Console.ReadLine();
-            Console.Write("Apartamento: ");
-            int apartamento = int.Parse(Console.ReadLine());
-            Predio predio = new Predio(nomePredio, bloco, apartamento);
-
-            Console.WriteLine("Entre com os dados para login: ");
-            Console.Write("Escolhe seu usuário de acesso:");
-            string user = Console.ReadLine();
-            Console.Write("Escolha sua senha de acesso: ");
-            string senha = Console.ReadLine();
-
-            return new Zelador(nomeCompleto, dataNascimento, carro, telefone, user, senha, predio, salario);
+            return new Zelador(pessoa, predio, salario);
         }
 
         //Método de cadastrar Morador
-        public static Pessoa CadastrarMorador()
+        public Morador CadastrarMorador()
         {
+            Pessoa pessoa = GerarPessoa();
 
+            Predio predio = GerarPredio();
+
+            return new Morador(pessoa, predio);
+        }
+
+        private Pessoa GerarPessoa()
+        {
             Console.WriteLine("Entre com os dados abaixo: ");
             Console.Write("Nome completo: ");
             string nomeCompleto = Console.ReadLine();
@@ -173,6 +98,20 @@ namespace ProjetoInventti.Servicos
             string modeloCarro = Console.ReadLine();
             Carro carro = new Carro(placaCarro, modeloCarro);
 
+            Console.WriteLine("Nivel de Acesso : ");
+            var nivel = Enum.Parse<TipoNivelAcesso>(Console.ReadLine());
+
+            Console.WriteLine("Entre com os dados para login: ");
+            Console.Write("Escolhe seu usuário de acesso:");
+            string user = Console.ReadLine();
+            Console.Write("Escolha sua senha de acesso: ");
+            string senha = Console.ReadLine();
+
+            return new Pessoa(nomeCompleto, dataNascimento, carro, telefone, nivel, user, senha);
+        }
+
+        private Predio GerarPredio()
+        {
             Console.WriteLine("Dados do prédio: ");
             Console.Write("Nome do prédio: ");
             string nomePredio = Console.ReadLine();
@@ -181,14 +120,15 @@ namespace ProjetoInventti.Servicos
             Console.Write("Apartamento: ");
             int apartamento = int.Parse(Console.ReadLine());
             Predio predio = new Predio(nomePredio, bloco, apartamento);
-
-            Console.WriteLine("Entre com os dados para login: ");
-            Console.Write("Escolhe seu usuário de acesso:");
-            string user = Console.ReadLine();
-            Console.Write("Escolha sua senha de acesso: ");
-            string senha = Console.ReadLine();
-
-            return new Morador(nomeCompleto, dataNascimento, carro, telefone, user, senha, predio);
+            return predio;
         }
+
+        private double Salario()
+        {
+            Console.Write("Salário: ");
+            double salario = double.Parse(Console.ReadLine());
+            return salario;
+        }
+
     }
 }
