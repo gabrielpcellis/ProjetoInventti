@@ -14,6 +14,7 @@ namespace ProjetoInventti.Servicos
         //Menus
         public void Administrador(List<Pessoa> usuariosSistema)
         {
+            // CRIAR OPÇÕES DE ESCOLHA PARA O ADM
             usuariosSistema.Add(cadastro.CadastrarAdministrador());
             usuariosSistema.Add(cadastro.CadastrarSindico());
 
