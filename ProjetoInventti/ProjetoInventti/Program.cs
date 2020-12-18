@@ -12,8 +12,53 @@ namespace ProjetoInventti
             Pessoa usuarioConectado = null;
             List<Pessoa> usuariosSistema = CargaInicialDeDados.GerarCarga();
             bool usuarioExistente = false;
+            bool sair;
 
-            //Faça enquanto houver usuário existente
+            do
+            {
+
+                //Faça enquanto houver usuário inexistente
+                if (usuarioConectado == null)
+                    ValidarUsuario(ref usuarioConectado, usuariosSistema, usuarioExistente);
+
+                //se houver, dará boas vindas mostrando apenas o nome do objeto 
+                Console.WriteLine("Usuário {0}", usuarioConectado.NomeCompleto);
+                //Verifica o tipo de acesso do objeto atual para liberar o acesso ideal
+                switch (usuarioConectado.TipoNivelAcesso)
+                {
+                    case Enums.TipoNivelAcesso.Administrador:
+                        // menu
+                        // Chamar método estático responsável pelas funções do administrador
+                        var menu = new Menu();
+                        menu.Administrador(usuariosSistema);
+
+                        break;
+                    case Enums.TipoNivelAcesso.Sindico:
+                        // menu
+                        // Chamar método estático responsável pelas funções do sindico
+                        break;
+                    case Enums.TipoNivelAcesso.Zelador:
+                        // menu
+                        // Chamar método estático responsável pelas funções do zelador
+                        break;
+                    case Enums.TipoNivelAcesso.Morador:
+                        // menu
+                        // Chamar método estático responsável pelas funções do morador
+                        break;
+                    default:
+
+                        break;
+                }
+                //Repetir enquanto o usuário não for encontrado
+
+                Console.WriteLine("Deseja sair do Programa ? 1 - Sim 2 - Não");
+                sair = Console.ReadLine() == "1" ? true : false;
+
+            } while (!sair);
+        }
+
+        private static void ValidarUsuario(ref Pessoa usuarioConectado, List<Pessoa> usuariosSistema, bool usuarioExistente)
+        {
             do
             {
                 //Entrada de dados
@@ -35,45 +80,12 @@ namespace ProjetoInventti
                         break;
                     }
                 }
-                //Se não houver um usuário conectado, informará na tela
+
                 if (usuarioConectado == null)
-                {
                     Console.WriteLine("Usuário não encontrado");
-                }
-                //se houver, dará boas vindas mostrando apenas o nome do objeto 
-                else
-                {
-                    Console.WriteLine("Olá usuário {0}, bem-vindo!", usuarioConectado.NomeCompleto);
-                }
-                //Verifica o tipo de acesso do objeto atual para liberar o acesso ideal
-                switch (usuarioConectado.TipoNivelAcesso)
-                {
-                    case Enums.TipoNivelAcesso.Administrador:
-                        // menu
-                        // Chamar método estático responsável pelas funções do administrador
-                        Menu.Administrador();
+                Console.WriteLine();
 
-                        break;
-                    case Enums.TipoNivelAcesso.Sindico:
-                        // menu
-                        // Chamar método estático responsável pelas funções do sindico
-                        break;
-                    case Enums.TipoNivelAcesso.Zelador:
-                        // menu
-                        // Chamar método estático responsável pelas funções do zelador
-                        break;
-                    case Enums.TipoNivelAcesso.Morador:
-                        // menu
-                        // Chamar método estático responsável pelas funções do morador
-                        break;
-                    default:
-
-                        break;
-                }
-                //Repetir enquanto o usuário não for encontrado
             } while (!usuarioExistente);
-
-            Console.ReadLine();
         }
     }
 }

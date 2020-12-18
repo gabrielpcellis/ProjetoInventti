@@ -1,5 +1,5 @@
 ﻿using ProjetoInventti.Enums;
-using ProjetoInventti.Serviços;
+using ProjetoInventti.Servicos;
 using System;
 
 namespace ProjetoInventti.Entidades {

@@ -13,5 +13,11 @@ namespace ProjetoInventti.Entidades {
             PredioZelador = predio;
             Salario = salario;
         }
+
+        public Zelador(Pessoa pessoa, Predio predio, double salario) : base(pessoa.NomeCompleto, pessoa.DataNascimento, pessoa.Carro, pessoa.Telefone, TipoNivelAcesso.Zelador, pessoa.UsuarioAcesso, pessoa.SenhaAcesso)
+        {
+            PredioZelador = predio;
+            Salario = salario;
+        }
     }
 }
