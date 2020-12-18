@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ProjetoInventti.Enums {
-    public enum TipoNivelAcesso {
+namespace ProjetoInventti.Enums
+{
+    public enum TipoNivelAcesso
+    {
 
         Administrador = 0,
         Sindico = 1,
