@@ -16,26 +16,26 @@ namespace ProjetoInventti
 
             do
             {
-
                 //Faça enquanto houver usuário inexistente
                 if (usuarioConectado == null)
                     ValidarUsuario(ref usuarioConectado, usuariosSistema, usuarioExistente);
 
                 //se houver, dará boas vindas mostrando apenas o nome do objeto 
-                Console.WriteLine("Usuário {0}", usuarioConectado.NomeCompleto);
+                Console.WriteLine("Olá '{0}', seja bem vindo!", usuarioConectado.NomeCompleto);
+                var menu = new Menu();
+
                 //Verifica o tipo de acesso do objeto atual para liberar o acesso ideal
                 switch (usuarioConectado.TipoNivelAcesso)
                 {
                     case Enums.TipoNivelAcesso.Administrador:
                         // menu
                         // Chamar método estático responsável pelas funções do administrador
-                        var menu = new Menu();
-                        menu.Administrador(usuariosSistema);
-
+                          menu.MenuAdministrador(usuariosSistema);
                         break;
                     case Enums.TipoNivelAcesso.Sindico:
                         // menu
                         // Chamar método estático responsável pelas funções do sindico
+                        menu.MenuSindico(usuariosSistema, usuarioConectado);
                         break;
                     case Enums.TipoNivelAcesso.Zelador:
                         // menu
@@ -46,17 +46,16 @@ namespace ProjetoInventti
                         // Chamar método estático responsável pelas funções do morador
                         break;
                     default:
-
                         break;
                 }
                 //Repetir enquanto o usuário não for encontrado
-
-                Console.WriteLine("Deseja sair do Programa ? 1 - Sim 2 - Não");
+                Console.WriteLine("Deseja sair do Programa ? 1 - Sim, 2 - Não");
                 sair = Console.ReadLine() == "1" ? true : false;
 
             } while (!sair);
         }
 
+        //Método estático para validar se o usuário está conectado ou não
         private static void ValidarUsuario(ref Pessoa usuarioConectado, List<Pessoa> usuariosSistema, bool usuarioExistente)
         {
             do
@@ -82,7 +81,9 @@ namespace ProjetoInventti
                 }
 
                 if (usuarioConectado == null)
+                {
                     Console.WriteLine("Usuário não encontrado");
+                }
                 Console.WriteLine();
 
             } while (!usuarioExistente);

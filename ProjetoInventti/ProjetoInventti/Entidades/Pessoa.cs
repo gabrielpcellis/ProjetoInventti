@@ -2,8 +2,10 @@
 using ProjetoInventti.Servicos;
 using System;
 
-namespace ProjetoInventti.Entidades {
-    public class Pessoa {
+namespace ProjetoInventti.Entidades
+{
+    public class Pessoa
+    {
         public string NomeCompleto { get; set; }
         public DateTime DataNascimento { get; set; }
         public Carro Carro { get; set; }
@@ -23,6 +25,7 @@ namespace ProjetoInventti.Entidades {
             SenhaAcesso = senha;
         }
 
+        //Método verificador de acesso
         public bool VerificarDadosDeAcesso(string usuario, string senha)
         {
             //bool informacoesConferem = false;
@@ -31,6 +34,24 @@ namespace ProjetoInventti.Entidades {
             //return informacoesConferem;
 
             return usuario == UsuarioAcesso && senha == SenhaAcesso;
+        }
+
+        //Método para alterar a senha
+        public void AlterarSenha(string senha)
+        {
+            SenhaAcesso = senha;
+        }
+
+        //Formatação do objeto para mostrar em tela
+        public override string ToString()
+        {
+            return NomeCompleto + ", "
+                + DataNascimento + ", "
+                + Carro.ModeloCarro + ", "
+                + Carro.PlacaCarro + ", "
+                + Telefone + ", "
+                + UsuarioAcesso + ", "
+                + SenhaAcesso;
         }
     }
 }
