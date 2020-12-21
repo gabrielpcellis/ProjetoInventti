@@ -3,6 +3,7 @@ using ProjetoInventti.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Text;
 
 namespace ProjetoInventti.Servicos
@@ -25,12 +26,12 @@ namespace ProjetoInventti.Servicos
             // CRIAR OPÇÕES DE ESCOLHA PARA O ADM
             Console.WriteLine("Escolha uma opção, por favor:");
             Console.WriteLine(
-                            "   1) Cadastrar novo Administrador,"
-                            + " 2) Cadastrar novo Síndico,"
-                            + " 3) Contas a pagar,"
-                            + " 4) Contas a receber,"
-                            + " 5) Histórico de gastos,"
-                            + " 6) Sair: ");
+                            " 1) Cadastrar novo Administrador, \n"
+                            + " 2) Cadastrar novo Síndico, \n"
+                            + " 3) Contas a pagar, \n"
+                            + " 4) Contas a receber, \n"
+                            + " 5) Histórico de gastos, \n"
+                            + " 6) Nova conta a pagar: ");
 
             int opcao = int.Parse(Console.ReadLine());
             switch (opcao)
@@ -63,11 +64,15 @@ namespace ProjetoInventti.Servicos
                     break;
                 case 5:
                     //Historico de gastos
-
+                    Console.WriteLine("HISTÓRICO DE GASTOS");
+                    for (int i = 0; i < contasAPagar.Count; i++)
+                    {
+                        Console.WriteLine(contasAPagar[i]);
+                    }
                     break;
                 case 6:
                     //Gerar conta a pagar
-                    Console.WriteLine("Nova conta a pagar: ");
+                    Console.WriteLine("CONTAS A PAGAR: ");
                     cadastro.GerarConta();
                     break;
                 default:
@@ -80,11 +85,11 @@ namespace ProjetoInventti.Servicos
         {
             Console.WriteLine("Escolha uma opção, por favor: ");
             Console.WriteLine(
-                            "   1) Cadastrar novo Morador,"
-                            + " 2) Cadastrar novo Zelador,"
-                            + " 3) Alterar senha,"
-                            + " 4) Lista de moradores,"
-                            + " 5) Solicitações pendentes," 
+                            " 1) Cadastrar novo Morador, \n"
+                            + " 2) Cadastrar novo Zelador, \n"
+                            + " 3) Alterar senha, \n"
+                            + " 4) Lista de moradores, \n"
+                            + " 5) Solicitações pendentes, \n" 
                             + " 6) Sair: ");
 
             int opcao = int.Parse(Console.ReadLine());
@@ -128,67 +133,13 @@ namespace ProjetoInventti.Servicos
         //Método para a chamada das opções do zelador
         public void MenuZelador()
         {
-            //Console.WriteLine("Olá, Zelador! Escolha uma opção, por favor: ");
-            //Console.WriteLine(
-            //                "   1) Alterar senha,"
-            //                + " 2) Solicitações pendentes,"
-            //                + " 3) Histórico de solicitações,"
-            //                + " 4) Sair");
-
-            //int opcao = int.Parse(Console.ReadLine());
-            //switch (opcao)
-            //{
-            //    case 1:
-
-            //        break;
-            //    case 2:
-
-            //        break;
-            //    case 3:
-            //        Console.WriteLine("nada ainda");
-            //        break;
-            //    case 4:
-            //        Console.WriteLine("nada ainda");
-            //        break;
-            //    case 5:
-            //        Console.WriteLine("nada ainda");
-            //        break;
-            //    default:
-            //        break;
-            //}
+            
         }
         //Método para a chamada das opções do morador
 
         public void MenuMorador()
         {
-            //Console.WriteLine("Olá, Morador! Escolha uma opção, por favor: ");
-            //Console.WriteLine(
-            //                "   1) Alterar senha,"
-            //                + " 2) Abrir nova solicitação,"
-            //                + " 3) Histórico de solicitações,"
-            //                + " 4) Sair");
-
-            //int opcao = int.Parse(Console.ReadLine());
-            //switch (opcao)
-            //{
-            //    case 1:
-
-            //        break;
-            //    case 2:
-
-            //        break;
-            //    case 3:
-            //        Console.WriteLine("nada ainda");
-            //        break;
-            //    case 4:
-            //        Console.WriteLine("nada ainda");
-            //        break;
-            //    case 5:
-            //        Console.WriteLine("nada ainda");
-            //        break;
-            //    default:
-            //        break;
-            //}
+            
         }
 
     }
@@ -314,23 +265,23 @@ namespace ProjetoInventti.Servicos
             Console.Write("Data da conta: ");
             DateTime dataConta = DateTime.Parse(Console.ReadLine());
             Console.Write("Valor da energia: ");
-            double energia = double.Parse(Console.ReadLine());
+            double energia = double.Parse(Console.ReadLine().ToString(), CultureInfo.InvariantCulture);
             Console.Write("Valor da luz: ");
-            double luz = double.Parse(Console.ReadLine());
+            double luz = double.Parse(Console.ReadLine().ToString(), CultureInfo.InvariantCulture);
             Console.Write("Valor do gás: ");
-            double gas = double.Parse(Console.ReadLine());
+            double gas = double.Parse(Console.ReadLine().ToString(), CultureInfo.InvariantCulture);
             Console.Write("Valor do jardineiro: ");
-            double jardineiro = double.Parse(Console.ReadLine());
+            double jardineiro = double.Parse(Console.ReadLine().ToString(), CultureInfo.InvariantCulture);
             Console.Write("Valo das despesar gerais: ");
-            double despesas = double.Parse(Console.ReadLine());
+            double despesas = double.Parse(Console.ReadLine().ToString(), CultureInfo.InvariantCulture);
             Console.Write("Valor da multa: ");
-            double multa = double.Parse(Console.ReadLine());
+            double multa = double.Parse(Console.ReadLine().ToString(), CultureInfo.InvariantCulture);
             Console.Write("Valor do condomínio: ");
-            double condominio = double.Parse(Console.ReadLine());
+            double condominio = double.Parse(Console.ReadLine().ToString(), CultureInfo.InvariantCulture);
             Console.Write("Salário do zelador: ");
-            double zelador = double.Parse(Console.ReadLine());
+            double zelador = double.Parse(Console.ReadLine().ToString(), CultureInfo.InvariantCulture);
             Console.Write("Salário do síndico: ");
-            double sindico = double.Parse(Console.ReadLine());
+            double sindico = double.Parse(Console.ReadLine().ToString(), CultureInfo.InvariantCulture);
 
             Contas contaAPagar = new Contas(dataConta, energia, luz, gas, jardineiro, despesas, multa, condominio, zelador, sindico);
             return contaAPagar;
