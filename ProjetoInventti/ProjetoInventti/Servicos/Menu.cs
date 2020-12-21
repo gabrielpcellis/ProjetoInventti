@@ -63,6 +63,12 @@ namespace ProjetoInventti.Servicos
                     break;
                 case 5:
                     //Historico de gastos
+
+                    break;
+                case 6:
+                    //Gerar conta a pagar
+                    Console.WriteLine("Nova conta a pagar: ");
+                    cadastro.GerarConta();
                     break;
                 default:
                     break;
@@ -286,6 +292,48 @@ namespace ProjetoInventti.Servicos
             Console.Write("Salário: ");
             double salario = double.Parse(Console.ReadLine());
             return salario;
+        }
+
+        //Método para gerar nova conta a pagar
+        public Contas GerarConta()
+        {
+            Contas conta = null;
+
+            Console.Write("Digite a quantidade de novas contas a pagar: ");
+            int quantidade = int.Parse(Console.ReadLine());
+            for (int i = 0; i < quantidade; i++)
+            {
+                 conta = GerarContaAPagar();
+            }
+            return conta;
+        }
+
+        private Contas GerarContaAPagar()
+        {
+            Console.WriteLine("Contas a pagar: ");
+            Console.Write("Data da conta: ");
+            DateTime dataConta = DateTime.Parse(Console.ReadLine());
+            Console.Write("Valor da energia: ");
+            double energia = double.Parse(Console.ReadLine());
+            Console.Write("Valor da luz: ");
+            double luz = double.Parse(Console.ReadLine());
+            Console.Write("Valor do gás: ");
+            double gas = double.Parse(Console.ReadLine());
+            Console.Write("Valor do jardineiro: ");
+            double jardineiro = double.Parse(Console.ReadLine());
+            Console.Write("Valo das despesar gerais: ");
+            double despesas = double.Parse(Console.ReadLine());
+            Console.Write("Valor da multa: ");
+            double multa = double.Parse(Console.ReadLine());
+            Console.Write("Valor do condomínio: ");
+            double condominio = double.Parse(Console.ReadLine());
+            Console.Write("Salário do zelador: ");
+            double zelador = double.Parse(Console.ReadLine());
+            Console.Write("Salário do síndico: ");
+            double sindico = double.Parse(Console.ReadLine());
+
+            Contas contaAPagar = new Contas(dataConta, energia, luz, gas, jardineiro, despesas, multa, condominio, zelador, sindico);
+            return contaAPagar;
         }
 
     }
