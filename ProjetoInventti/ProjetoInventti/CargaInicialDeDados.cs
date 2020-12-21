@@ -40,9 +40,9 @@ namespace ProjetoInventti
         {
             List<Contas> contasAPagar = new List<Contas>
             {
-                new Contas (DateTime.Now, 10.000, 5.000, 1000, 1500, 5000, 5000, 1000, 1500, 1700),
-                new Contas (DateTime.Now, 12.000, 7.000, 4000, 2500, 15000, 25000, 1000, 1500, 1700),
-                new Contas (DateTime.Now, 120.000, 1.000, 2000, 3500, 5000, 5000, 1000, 1500, 1700)
+                new Contas (DateTime.Now, 10000, 5000, 1000, 1500, 5000, 5000, 1000, 1500, 1700),
+                new Contas (DateTime.Now, 12000, 7000, 4000, 2500, 15000, 25000, 1000, 1500, 1700),
+                new Contas (DateTime.Now, 12400, 1000, 2000, 3500, 5000, 5000, 1000, 1500, 1700)
             };
             return contasAPagar;
         }
@@ -58,5 +58,6 @@ namespace ProjetoInventti
             };
             return contasAPagar;
         }
+
     }
 }
