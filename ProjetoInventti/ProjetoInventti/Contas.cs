@@ -20,7 +20,8 @@ namespace ProjetoInventti
 
 
         //Construtor Contas a pagar
-        public Contas(DateTime dataConta, double energia, double agua, double gas, double jardineiro, double despesasGerais, double multa, double condominio, double salarioZelador, double salarioSindico)
+        public Contas(DateTime dataConta, double energia, double agua, double gas, double jardineiro, double despesasGerais, double multa, double condominio,
+            double salarioZelador, double salarioSindico)
         {
             DataConta = dataConta;
             Energia = energia;
@@ -47,7 +48,23 @@ namespace ProjetoInventti
 
         public override string ToString()
         {
-            return "Data: " + DataConta
+            if (SalarioSindico == 0)
+            {
+                return "Data: " + DataConta
+                + "\n"
+                + "Energia: R$" + Energia.ToString("F2", CultureInfo.InvariantCulture)
+                + "\n"
+                + "Água: R$" + Agua.ToString("F2", CultureInfo.InvariantCulture)
+                + "\n"
+                + "Gás: R$" + Gas.ToString("F2", CultureInfo.InvariantCulture)
+                + "\n"
+                + "Multa: R$" + Multa.ToString("F2", CultureInfo.InvariantCulture)
+                + "\n"
+                + "Condomio: R$" + Condominio.ToString("F2", CultureInfo.InvariantCulture);
+            }
+            else
+            {
+                return "Data: " + DataConta
                 + "\n"
                 + "Energia: R$" + Energia.ToString("F2", CultureInfo.InvariantCulture)
                 + "\n"
@@ -67,6 +84,8 @@ namespace ProjetoInventti
                 + "\n"
                 + "Salário do síndico: R$" + SalarioSindico.ToString("F2", CultureInfo.InvariantCulture)
                 + "\n";
+            }
+            
         }
     }
 }

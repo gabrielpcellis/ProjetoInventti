@@ -20,10 +20,8 @@ namespace ProjetoInventti.Servicos
         //Menus
         //Método para a chamada das opções do administrador
         //O argumento do método é uma lista que adiciona os dados do método chamado pelo objeto "cadastro"
-        public void MenuAdministrador(List<Pessoa> usuariosSistema, List<Contas> contasAPagar)
+        public void MenuAdministrador(List<Pessoa> usuariosSistema, List<Contas> contasAPagar, List<Contas> contasAReceber)
         {
-            contasAPagar = CargaInicialDeDados.GerarContasAPagar();
-
             // CRIAR OPÇÕES DE ESCOLHA PARA O ADM
             Console.WriteLine("Escolha uma opção, por favor:");
             Console.WriteLine(
@@ -47,7 +45,7 @@ namespace ProjetoInventti.Servicos
                     break;
                 case 3:
                     //Contas a pagar
-                    Console.WriteLine("CONTAS A PAGAR: ");
+                    Console.WriteLine("CONTAS A PAGAR:");
                     Console.WriteLine();
                     for (int i = 0; i < contasAPagar.Count; i++)
                     {
@@ -56,6 +54,12 @@ namespace ProjetoInventti.Servicos
                     break;
                 case 4:
                     //Contas a receber
+                    Console.WriteLine("CONTAS A RECEBER:");
+                    Console.WriteLine();
+                    for (int i = 0; i < contasAReceber.Count; i++)
+                    {
+                        Console.WriteLine(contasAReceber[i]);
+                    }
                     break;
                 case 5:
                     //Historico de gastos
