@@ -79,7 +79,7 @@ namespace ProjetoInventti
                         break;
                     }
                 }
-
+                //Se usuarioConectado for nulo, mostrará a mensagem
                 if (usuarioConectado == null)
                 {
                     Console.WriteLine("Usuário não encontrado");

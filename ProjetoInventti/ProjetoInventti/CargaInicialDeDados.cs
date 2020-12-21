@@ -7,7 +7,6 @@ namespace ProjetoInventti
 {
     public static class CargaInicialDeDados
     {
-
         public static List<Pessoa> GerarCarga()
         {
             //São apenas 2 objetos para todos os usuários (Possível alteração)
@@ -36,6 +35,28 @@ namespace ProjetoInventti
 
             return lista;
         }
+        //Carga inicial de contas a pagar
+        public static List<Contas> GerarContasAPagar()
+        {
+            List<Contas> contasAPagar = new List<Contas>
+            {
+                new Contas (DateTime.Now, 10.000, 5.000, 1000, 1500, 5000, 5000, 1000, 1500, 1700),
+                new Contas (DateTime.Now, 12.000, 7.000, 4000, 2500, 15000, 25000, 1000, 1500, 1700),
+                new Contas (DateTime.Now, 120.000, 1.000, 2000, 3500, 5000, 5000, 1000, 1500, 1700)
+            };
+            return contasAPagar;
+        }
 
+        //Carga inicial de contas a receber
+        public static List<Contas> GerarContasAReceber()
+        {
+            List<Contas> contasAPagar = new List<Contas>
+            {
+                new Contas (DateTime.Now, 210, 100, 50, 500, 0),
+                new Contas (DateTime.Now, 260, 150, 60, 500, 110),
+                new Contas (DateTime.Now, 400, 230, 70, 500, 290)
+            };
+            return contasAPagar;
+        }
     }
 }

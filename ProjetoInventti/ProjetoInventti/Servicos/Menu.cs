@@ -29,30 +29,34 @@ namespace ProjetoInventti.Servicos
                             + " 2) Cadastrar novo Síndico,"
                             + " 3) Contas a pagar,"
                             + " 4) Contas a receber,"
-                            + " 5) Histórico de gastos");
+                            + " 5) Histórico de gastos,"
+                            + " 6) Sair: ");
 
             int opcao = int.Parse(Console.ReadLine());
             switch (opcao)
             {
                 case 1:
+                    //Cadastrar administrador
                     usuariosSistema.Add(cadastro.CadastrarAdministrador());
                     break;
                 case 2:
+                    //Cadastrar Síndico
                     usuariosSistema.Add(cadastro.CadastrarSindico());
                     break;
                 case 3:
-                    Console.WriteLine("nada ainda");
+                    //Contas a pagar
+                    Console.WriteLine("Contas a pagar: ");
+
                     break;
                 case 4:
-                    Console.WriteLine("nada ainda");
+                    //Contas a receber
                     break;
                 case 5:
-                    Console.WriteLine("nada ainda");
+                    //Historico de gastos
                     break;
                 default:
                     break;
             }
-
 
         }
         //Método para a chamada das opções do síndico
@@ -64,7 +68,8 @@ namespace ProjetoInventti.Servicos
                             + " 2) Cadastrar novo Zelador,"
                             + " 3) Alterar senha,"
                             + " 4) Lista de moradores,"
-                            + " 5) Solicitações pendentes: ");
+                            + " 5) Solicitações pendentes," 
+                            + " 6) Sair: ");
 
             int opcao = int.Parse(Console.ReadLine());
             switch (opcao)
@@ -91,7 +96,7 @@ namespace ProjetoInventti.Servicos
                         //Verifica se o tipo de nível de acesso do objeto atual é igual ao tipo de nível de acesso de morador
                         if (usuariosSistema[i].TipoNivelAcesso == TipoNivelAcesso.Morador)
                         {
-                            //Mostrando a senha do objeto atual
+                            //Mostrando os dados formatados do objeto atual
                             Console.WriteLine(usuariosSistema[i]);
                         }
                     }
