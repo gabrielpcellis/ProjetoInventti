@@ -9,10 +9,10 @@ namespace ProjetoInventti
     {
         public DateTime DataSolicitacao { get; set; }
         public string Titulo { get; set; }
-        public Pessoa Nome{ get; set; }
+        public string Nome{ get; set; }
         public string Descricao { get; set; }
 
-        public Solicitacoes(DateTime dataSolicitacao, string titulo, Pessoa nome, string descricaozinha)
+        public Solicitacoes(DateTime dataSolicitacao, string titulo, string nome, string descricaozinha)
         {
             DataSolicitacao = dataSolicitacao;
             Titulo = titulo;
@@ -28,7 +28,9 @@ namespace ProjetoInventti
                 + "Título: "
                 + Titulo + "\n"
                 + "Descrição: "
-                + Descricao
+                + Descricao + "\n"
+                + "Nome: " 
+                + Nome;
         }
     }
 }

@@ -57,14 +57,10 @@ namespace ProjetoInventti
 
         public static List<Solicitacoes> GerarSolicitacoes()
         {
-            //Carga inicial de solicitações
-            Pessoa nome = new Pessoa("FULANO souza");
-            Pessoa nome1 = new Pessoa("Beltrano da silva");
-
             List<Solicitacoes> solicitacoes = new List<Solicitacoes>
             {
-                new Solicitacoes (DateTime.Now, "Vizinho chato", nome, "Vou descer a porrada nele"),
-                new Solicitacoes (DateTime.Now, "Problema no encanamento", nome1, "Cano perfurado")
+                new Solicitacoes (DateTime.Now, "Vizinho chato", "Fulano", "Vou descer a porrada nele"),
+                new Solicitacoes (DateTime.Now, "Problema no encanamento", "Beltrano", "Cano perfurado")
             };
             return solicitacoes;
         }

@@ -138,7 +138,7 @@ namespace ProjetoInventti.Servicos
         }
         //Método para a chamada das opções do morador
 
-        public void MenuMorador(List<Solicitacoes> solicitacoes)
+        public void MenuMorador(List<Solicitacoes> solicitacoes, Pessoa usuarioAtual)
         {
             Console.WriteLine("Escolha uma opção, por favor: ");
             Console.WriteLine(
@@ -154,8 +154,11 @@ namespace ProjetoInventti.Servicos
 
                     break;
                 case 2:
-                    Console.WriteLine();
-                    solicitacoes.Add(cadastro.GerarNovaSolicitacao());
+                    Console.WriteLine("Criar nova solicitação: ");
+                    if (usuarioAtual != null)
+                    {
+                        solicitacoes.Add(cadastro.GerarNovaSolicitacao(usuarioAtual));
+                    }
                     break;
                 case 3:
                     Console.WriteLine("HISTÓRICO DE SOLICITAÇÕES:");
@@ -163,6 +166,7 @@ namespace ProjetoInventti.Servicos
                     for (int i = 0; i < solicitacoes.Count; i++)
                     {
                         Console.WriteLine(solicitacoes[i]);
+                        Console.WriteLine();
                     }
                     Console.WriteLine();
                     break;
@@ -317,26 +321,23 @@ namespace ProjetoInventti.Servicos
         }
 
         //Criar método público para chamar o GerarSolicitacao()
-        public Solicitacoes GerarNovaSolicitacao()
+        public Solicitacoes GerarNovaSolicitacao(Pessoa nome)
         {
-            Solicitacoes solicitacao = GerarSolicitacao();
+            Solicitacoes solicitacao = GerarSolicitacao(nome);
             return solicitacao;
         }
 
         //Método gerar solicitação
-        private Solicitacoes GerarSolicitacao()
+        private Solicitacoes GerarSolicitacao(Pessoa nome)
         {
             Console.WriteLine("Gerar solicitação: ");
             DateTime data = DateTime.Now;
             Console.Write("Informe o título da solicitação: ");
             string titulo = Console.ReadLine();
-            Console.Write("Informe seu nome, seu jaguara: ");
-            string nome = Console.ReadLine();
-            Pessoa nomePessoa = new Pessoa(nome);
             Console.WriteLine("Informe a descriçao do problema, meu chapa: ");
             string descricao = Console.ReadLine();
 
-            Solicitacoes solicitacao = new Solicitacoes(data, titulo, nomePessoa, descricao);
+            Solicitacoes solicitacao = new Solicitacoes(data, titulo, nome.NomeCompleto, descricao);
             return solicitacao;
         }
     }

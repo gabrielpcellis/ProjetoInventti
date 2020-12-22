@@ -47,7 +47,7 @@ namespace ProjetoInventti
                     case Enums.TipoNivelAcesso.Morador:
                         // menu
                         // Chamar método estático responsável pelas funções do morador
-                        menu.MenuMorador(solicitacoes);
+                        menu.MenuMorador(solicitacoes, usuarioConectado);
                         break;
                     default:
                         break;
