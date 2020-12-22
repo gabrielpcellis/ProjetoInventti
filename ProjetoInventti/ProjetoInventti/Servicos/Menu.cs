@@ -151,7 +151,11 @@ namespace ProjetoInventti.Servicos
             switch (opcao)
             {
                 case 1:
-
+                    Console.WriteLine();
+                    Console.WriteLine("Para alterar sua senha, informe os dados abaixo: ");
+                    Console.Write("Digite a nova senha: ");
+                    string novaSenha = Console.ReadLine();
+                    usuarioAtual.AlterarSenha(novaSenha);
                     break;
                 case 2:
                     Console.WriteLine("Criar nova solicitação: ");
@@ -327,7 +331,7 @@ namespace ProjetoInventti.Servicos
             return solicitacao;
         }
 
-        //Método gerar solicitação
+        //Método gerar solicitação recebendo o nome do usuário logado como nome do solicitante
         private Solicitacoes GerarSolicitacao(Pessoa nome)
         {
             Console.WriteLine("Gerar solicitação: ");

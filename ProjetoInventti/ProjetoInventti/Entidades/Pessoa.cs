@@ -45,6 +45,7 @@ namespace ProjetoInventti.Entidades
         public void AlterarSenha(string senha)
         {
             SenhaAcesso = senha;
+            Console.WriteLine("Nova senha: " + SenhaAcesso);
         }
 
         //Formatação do objeto para mostrar em tela
