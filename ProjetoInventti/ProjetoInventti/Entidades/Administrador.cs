@@ -11,11 +11,11 @@ namespace ProjetoInventti.Entidades
 
         }
 
-        public Administrador(Pessoa pessoa) : base(pessoa.NomeCompleto, pessoa.DataNascimento, pessoa.Carro, pessoa.Telefone, TipoNivelAcesso.Administrador, pessoa.UsuarioAcesso, pessoa.SenhaAcesso)
+        public Administrador(Pessoa pessoa)
+            : base(pessoa.NomeCompleto, pessoa.DataNascimento, pessoa.Carro, pessoa.Telefone, TipoNivelAcesso.Administrador, pessoa.UsuarioAcesso, pessoa.SenhaAcesso)
         {
            
         }
-
 
     }
 }

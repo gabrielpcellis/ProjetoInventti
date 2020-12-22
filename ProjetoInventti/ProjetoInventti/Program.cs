@@ -11,6 +11,8 @@ namespace ProjetoInventti
         {
             Pessoa usuarioConectado = null;
             List<Pessoa> usuariosSistema = CargaInicialDeDados.GerarCarga();
+            List<Contas> contasAPagar = CargaInicialDeDados.GerarContasAPagar();
+            List<Contas> contasAReceber = CargaInicialDeDados.GerarContasAReceber();
             bool usuarioExistente = false;
             bool sair;
 
@@ -30,7 +32,7 @@ namespace ProjetoInventti
                     case Enums.TipoNivelAcesso.Administrador:
                         // menu
                         // Chamar método estático responsável pelas funções do administrador
-                          menu.MenuAdministrador(usuariosSistema);
+                          menu.MenuAdministrador(usuariosSistema, contasAPagar, contasAReceber);
                         break;
                     case Enums.TipoNivelAcesso.Sindico:
                         // menu
@@ -79,7 +81,7 @@ namespace ProjetoInventti
                         break;
                     }
                 }
-
+                //Se usuarioConectado for nulo, mostrará a mensagem
                 if (usuarioConectado == null)
                 {
                     Console.WriteLine("Usuário não encontrado");
