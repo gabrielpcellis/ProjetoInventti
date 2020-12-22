@@ -13,6 +13,7 @@ namespace ProjetoInventti
             List<Pessoa> usuariosSistema = CargaInicialDeDados.GerarCarga();
             List<Contas> contasAPagar = CargaInicialDeDados.GerarContasAPagar();
             List<Contas> contasAReceber = CargaInicialDeDados.GerarContasAReceber();
+            List<Solicitacoes> solicitacoes = CargaInicialDeDados.GerarSolicitacoes();
             bool usuarioExistente = false;
             bool sair;
 
@@ -46,6 +47,7 @@ namespace ProjetoInventti
                     case Enums.TipoNivelAcesso.Morador:
                         // menu
                         // Chamar método estático responsável pelas funções do morador
+                        menu.MenuMorador(solicitacoes);
                         break;
                     default:
                         break;

@@ -24,6 +24,11 @@ namespace ProjetoInventti.Entidades
             UsuarioAcesso = user;
             SenhaAcesso = senha;
         }
+        //Construtor para o método gerar solicitação
+        public Pessoa(string nome)
+        {
+            NomeCompleto = nome;
+        }
 
         //Método verificador de acesso
         public bool VerificarDadosDeAcesso(string usuario, string senha)
