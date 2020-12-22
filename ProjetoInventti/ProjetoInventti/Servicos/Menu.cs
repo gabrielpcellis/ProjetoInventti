@@ -81,7 +81,7 @@ namespace ProjetoInventti.Servicos
 
         }
         //Método para a chamada das opções do síndico
-        public void MenuSindico(List<Pessoa> usuariosSistema, Pessoa usuarioAtual)
+        public void MenuSindico(List<Pessoa> usuariosSistema, Pessoa usuarioAtual, List<Solicitacoes> solicitacoes)
         {
             Console.WriteLine("Escolha uma opção, por favor: ");
             Console.WriteLine(
@@ -126,18 +126,66 @@ namespace ProjetoInventti.Servicos
                     //Solicitações pendentes
                     Console.WriteLine("nada ainda");
                     break;
+                case 6:
+                    Console.WriteLine("HISTÓRICO DE SOLICITAÇÕES:");
+                    Console.WriteLine();
+                    for (int i = 0; i < solicitacoes.Count; i++)
+                    {
+                        Console.WriteLine(solicitacoes[i]);
+                        Console.WriteLine();
+                    }
+                    Console.WriteLine();
+                    break;
+                case 7:
+                    //implementar
+                    Console.WriteLine("Sair");
+                    break;
                 default:
                     break;
             }
 
         }
         //Método para a chamada das opções do zelador
-        public void MenuZelador()
+        public void MenuZelador(Pessoa usuarioAtual, List<Solicitacoes> solicitacoes)
         {
+            Console.WriteLine("Escolha uma opção, por favor: ");
+            Console.WriteLine(
+                            " 1) Alterar senha, \n"
+                            + " 2) Solicitações pendentes, \n"
+                            + " 3) Histórico de solicitações, \n"
+                            + " 4) Sair: ");
 
+            int opcao = int.Parse(Console.ReadLine());
+
+            switch (opcao)
+            {
+                case 1:
+                    Console.WriteLine();
+                    Console.WriteLine("Para alterar sua senha, informe os dados abaixo: ");
+                    Console.Write("Digite a nova senha: ");
+                    string novaSenha = Console.ReadLine();
+                    usuarioAtual.AlterarSenha(novaSenha);
+                    break;
+                case 2:
+                    //implementar
+                    break;
+                case 3:
+                    //Histórico de solicitações
+                    Console.WriteLine("HISTÓRICO DE SOLICITAÇÕES:");
+                    Console.WriteLine();
+                    for (int i = 0; i < solicitacoes.Count; i++)
+                    {
+                        Console.WriteLine(solicitacoes[i]);
+                        Console.WriteLine();
+                    }
+                    Console.WriteLine();
+                    break;
+                default:
+                    break;
+            }
         }
-        //Método para a chamada das opções do morador
 
+        //Método para a chamada das opções do morador
         public void MenuMorador(List<Solicitacoes> solicitacoes, Pessoa usuarioAtual)
         {
             Console.WriteLine("Escolha uma opção, por favor: ");
@@ -173,6 +221,10 @@ namespace ProjetoInventti.Servicos
                         Console.WriteLine();
                     }
                     Console.WriteLine();
+                    break;
+                case 4:
+                    //implementar
+                    Console.WriteLine("Sair");
                     break;
                 default:
                     break;
