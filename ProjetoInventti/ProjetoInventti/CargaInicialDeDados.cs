@@ -40,7 +40,7 @@ namespace ProjetoInventti
         {
             List<Contas> contasAPagar = new List<Contas>
             {
-                new Contas (DateTime.Now, 10000, 5000, 1000, 1500, 5000, 5000, 1000, 1500, 1700),
+                new Contas (DateTime.Now, 10000, 5000, 1000, 1500, 5000, 5000, 1000, 1500, 1700)
             };
             return contasAPagar;
         }
@@ -50,10 +50,19 @@ namespace ProjetoInventti
         {
             List<Contas> contasAPagar = new List<Contas>
             {
-                new Contas (DateTime.Now, 260, 150, 60, 500, 110),
+                new Contas (DateTime.Now, 260, 150, 60, 500, 110)
             };
             return contasAPagar;
         }
 
+        public static List<Solicitacoes> GerarSolicitacoes()
+        {
+            List<Solicitacoes> solicitacoes = new List<Solicitacoes>
+            {
+                new Solicitacoes (DateTime.Now, "Vizinho chato", "Fulano", "Vou descer a porrada nele"),
+                new Solicitacoes (DateTime.Now, "Problema no encanamento", "Beltrano", "Cano perfurado")
+            };
+            return solicitacoes;
+        }
     }
 }

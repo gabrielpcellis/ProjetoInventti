@@ -24,6 +24,11 @@ namespace ProjetoInventti.Entidades
             UsuarioAcesso = user;
             SenhaAcesso = senha;
         }
+        //Construtor para o método gerar solicitação
+        public Pessoa(string nome)
+        {
+            NomeCompleto = nome;
+        }
 
         //Método verificador de acesso
         public bool VerificarDadosDeAcesso(string usuario, string senha)
@@ -40,6 +45,7 @@ namespace ProjetoInventti.Entidades
         public void AlterarSenha(string senha)
         {
             SenhaAcesso = senha;
+            Console.WriteLine("Nova senha: " + SenhaAcesso);
         }
 
         //Formatação do objeto para mostrar em tela
