@@ -8,7 +8,6 @@ using System.Text;
 
 namespace ProjetoInventti.Servicos
 {
-
     /* Descrição da classe Menu:
      * Esta classe contém os métodos necessários para fazer a chamada das opções de menu de cada tipo de pessoa 
      * Os métodos desta classe serão usados para chamar os métodos da classe cadastro e demais classes + métodos
@@ -21,6 +20,8 @@ namespace ProjetoInventti.Servicos
         //Menus
         //Método para a chamada das opções do administrador
         //O argumento do método é uma lista que adiciona os dados do método chamado pelo objeto "cadastro"
+
+        #region Menu do administrador
         public void MenuAdministrador(List<Pessoa> usuariosSistema, List<Contas> contasAPagar, List<Contas> contasAReceber)
         {
             // CRIAR OPÇÕES DE ESCOLHA PARA O ADM
@@ -80,6 +81,9 @@ namespace ProjetoInventti.Servicos
             }
 
         }
+        #endregion
+
+        #region Menu do síndico
         //Método para a chamada das opções do síndico
         public void MenuSindico(List<Pessoa> usuariosSistema, Pessoa usuarioAtual, List<Solicitacoes> solicitacoes)
         {
@@ -90,7 +94,7 @@ namespace ProjetoInventti.Servicos
                             + " 3) Alterar senha, \n"
                             + " 4) Lista de moradores, \n"
                             + " 5) Solicitações pendentes, \n"
-                            + " 6) Sair: ");
+                            + " 6) Histórico de solicitações: ");
 
             int opcao = int.Parse(Console.ReadLine());
             switch (opcao)
@@ -124,7 +128,10 @@ namespace ProjetoInventti.Servicos
                     break;
                 case 5:
                     //Solicitações pendentes
-                    Console.WriteLine("nada ainda");
+                    Console.WriteLine("Solicitações pendentes: ");
+                    Console.WriteLine();
+                    //NADA AINDA
+                    
                     break;
                 case 6:
                     Console.WriteLine("HISTÓRICO DE SOLICITAÇÕES:");
@@ -145,6 +152,9 @@ namespace ProjetoInventti.Servicos
             }
 
         }
+        #endregion
+
+        #region Menu do zelador
         //Método para a chamada das opções do zelador
         public void MenuZelador(Pessoa usuarioAtual, List<Solicitacoes> solicitacoes)
         {
@@ -168,6 +178,11 @@ namespace ProjetoInventti.Servicos
                     break;
                 case 2:
                     //implementar
+                    //Console.WriteLine("Solicitações pendentes: ");
+                    //Console.WriteLine();
+                    //for (int i = 0; i < solicitacoes.Count; i++)
+                    //{
+                    //}
                     break;
                 case 3:
                     //Histórico de solicitações
@@ -184,7 +199,9 @@ namespace ProjetoInventti.Servicos
                     break;
             }
         }
+        #endregion
 
+        #region Menu do morador
         //Método para a chamada das opções do morador
         public void MenuMorador(List<Solicitacoes> solicitacoes, Pessoa usuarioAtual)
         {
@@ -232,7 +249,9 @@ namespace ProjetoInventti.Servicos
         }
 
     }
+    #endregion
 
+    
     //Classe interna para cadastrar 
     internal class Cadastro
     {
