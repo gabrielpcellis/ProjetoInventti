@@ -130,8 +130,8 @@ namespace ProjetoInventti.Servicos
                     //Solicitações pendentes
                     Console.WriteLine("Solicitações pendentes: ");
                     Console.WriteLine();
-
-
+                    //NADA AINDA
+                    
                     break;
                 case 6:
                     Console.WriteLine("HISTÓRICO DE SOLICITAÇÕES:");
