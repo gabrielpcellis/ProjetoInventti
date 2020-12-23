@@ -38,7 +38,7 @@ namespace ProjetoInventti
                     case Enums.TipoNivelAcesso.Sindico:
                         // menu
                         // Chamar método estático responsável pelas funções do sindico
-                        menu.MenuSindico(usuariosSistema, usuarioConectado);
+                        menu.MenuSindico(usuariosSistema, usuarioConectado, solicitacoes);
                         break;
                     case Enums.TipoNivelAcesso.Zelador:
                         // menu
