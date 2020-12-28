@@ -88,93 +88,93 @@ namespace ProjetoInventti.Servicos
         //Método para a chamada das opções do síndico
         public void MenuSindico(List<Pessoa> usuariosSistema, Pessoa usuarioAtual, List<Solicitacoes> solicitacoes)
         {
-            Console.WriteLine("Escolha uma opção, por favor: ");
-            Console.WriteLine(
-                            " 1) Cadastrar novo Morador, \n"
-                            + " 2) Cadastrar novo Zelador, \n"
-                            + " 3) Alterar senha, \n"
-                            + " 4) Lista de moradores, \n"
-                            + " 5) Solicitações pendentes, \n"
-                            + " 6) Histórico de solicitações: ");
-
-            int opcao = int.Parse(Console.ReadLine());
-            switch (opcao)
+            int sair = 0;
+            do
             {
-                case 1:
-                    usuariosSistema.Add(cadastro.CadastrarMorador());
-                    break;
-                case 2:
-                    usuariosSistema.Add(cadastro.CadastrarZelador());
-                    break;
-                case 3:
-                    Console.WriteLine();
-                    Console.WriteLine("Para alterar sua senha, informe os dados abaixo: ");
-                    Console.Write("Digite a nova senha: ");
-                    string novaSenha = Console.ReadLine();
-                    usuarioAtual.AlterarSenha(novaSenha);
-                    break;
-                case 4:
-                    //Mostrar a lista com as alterações feitas
-                    Console.WriteLine("Lista de moradores: ");
-                    for (int i = 0; i < usuariosSistema.Count; i++)
-                    {
-                        //Condicional para mostrar apenas moradores
-                        //Verifica se o tipo de nível de acesso do objeto atual é igual ao tipo de nível de acesso de morador
-                        if (usuariosSistema[i].TipoNivelAcesso == TipoNivelAcesso.Morador)
-                        {
-                            //Mostrando os dados formatados do objeto atual
-                            Console.WriteLine(usuariosSistema[i]);
-                        }
-                    }
-                    break;
-                case 5:
-                    //Solicitações pendentes
-                    Console.WriteLine("Solicitações pendentes: ");
-                    Console.WriteLine();
-                    for (int i = 0; i < solicitacoes.Count; i++)
-                    {
-                        Console.WriteLine(solicitacoes[i]);
+                Console.WriteLine("Escolha uma opção, por favor: ");
+                Console.WriteLine(
+                                " 1) Cadastrar novo Morador, \n"
+                                + " 2) Cadastrar novo Zelador, \n"
+                                + " 3) Alterar senha, \n"
+                                + " 4) Lista de moradores, \n"
+                                + " 5) Solicitações pendentes, \n"
+                                + " 6) Histórico de solicitações: ");
+
+                int opcao = int.Parse(Console.ReadLine());
+                switch (opcao)
+                {
+                    case 1:
+                        usuariosSistema.Add(cadastro.CadastrarMorador());
+                        break;
+                    case 2:
+                        usuariosSistema.Add(cadastro.CadastrarZelador());
+                        break;
+                    case 3:
                         Console.WriteLine();
-                        Console.WriteLine("ZELADOR: ");
-                        //Caso não tenha sido finalizada a solicitação, faça
-                        if (solicitacoes[i].TipoSolicitacao == TipoSolicitacao.Recebido || solicitacoes[i].TipoSolicitacao == TipoSolicitacao.AnaliseSindico)
+                        Console.WriteLine("Para alterar sua senha, informe os dados abaixo: ");
+                        Console.Write("Digite a nova senha: ");
+                        string novaSenha = Console.ReadLine();
+                        usuarioAtual.AlterarSenha(novaSenha);
+                        break;
+                    case 4:
+                        //Mostrar a lista com as alterações feitas
+                        Console.WriteLine("Lista de moradores: ");
+                        for (int i = 0; i < usuariosSistema.Count; i++)
                         {
-                            Console.WriteLine("Deseja alterar o status da solicitação? 1) sim, 2) não");
-                            Console.WriteLine();
-                            int opt = int.Parse(Console.ReadLine());
-                            switch (opt)
+                            //Condicional para mostrar apenas moradores
+                            //Verifica se o tipo de nível de acesso do objeto atual é igual ao tipo de nível de acesso de morador
+                            if (usuariosSistema[i].TipoNivelAcesso == TipoNivelAcesso.Morador)
                             {
-                                case 1:
-                                    Console.Write("Digite o novo status da solicitação: 'AnaliseSindico', 'Finalizado', 'Zelador', AnaliseZelador: ");
-                                    solicitacoes[i].TipoSolicitacao = Enum.Parse<TipoSolicitacao>(Console.ReadLine());
-                                    break;
-                                case 2:
-                                    Console.WriteLine("Você optou pela não alteração do status.");
-                                    Console.WriteLine();
-                                    break;
+                                //Mostrando os dados formatados do objeto atual
+                                Console.WriteLine(usuariosSistema[i]);
                             }
                         }
-                    }
-
-                    break;
-                case 6:
-                    Console.WriteLine("HISTÓRICO DE SOLICITAÇÕES:");
-                    Console.WriteLine();
-                    for (int i = 0; i < solicitacoes.Count; i++)
-                    {
-                        Console.WriteLine(solicitacoes[i]);
+                        break;
+                    case 5:
+                        //Solicitações pendentes
+                        Console.WriteLine("Solicitações pendentes: ");
                         Console.WriteLine();
-                    }
-                    Console.WriteLine();
-                    break;
-                case 7:
-                    //implementar
-                    Console.WriteLine("Sair");
-                    break;
-                default:
-                    break;
-            }
+                        for (int i = 0; i < solicitacoes.Count; i++)
+                        {
+                            Console.WriteLine(solicitacoes[i]);
+                            Console.WriteLine();
+                            Console.WriteLine("ZELADOR: ");
+                            //Caso não tenha sido finalizada a solicitação, faça
+                            if (solicitacoes[i].TipoSolicitacao == TipoSolicitacao.Recebido || solicitacoes[i].TipoSolicitacao == TipoSolicitacao.AnaliseSindico)
+                            {
+                                Console.WriteLine("Deseja alterar o status da solicitação? 1) sim, 2) não");
+                                Console.WriteLine();
+                                int opt = int.Parse(Console.ReadLine());
+                                switch (opt)
+                                {
+                                    case 1:
+                                        Console.Write("Digite o novo status da solicitação: 'AnaliseSindico', 'Finalizado', 'Zelador', AnaliseZelador: ");
+                                        solicitacoes[i].TipoSolicitacao = Enum.Parse<TipoSolicitacao>(Console.ReadLine());
+                                        break;
+                                    case 2:
+                                        Console.WriteLine("Você optou pela não alteração do status.");
+                                        Console.WriteLine();
+                                        break;
+                                }
+                            }
+                        }
 
+                        break;
+                    case 6:
+                        Console.WriteLine("HISTÓRICO DE SOLICITAÇÕES:");
+                        Console.WriteLine();
+                        for (int i = 0; i < solicitacoes.Count; i++)
+                        {
+                            Console.WriteLine(solicitacoes[i]);
+                            Console.WriteLine();
+                        }
+                        Console.WriteLine();
+                        break;
+                    default:
+                        break;
+                }
+
+            } while (sair != 7);
         }
         #endregion
 
@@ -186,8 +186,7 @@ namespace ProjetoInventti.Servicos
             Console.WriteLine(
                             " 1) Alterar senha, \n"
                             + " 2) Solicitações pendentes, \n"
-                            + " 3) Histórico de solicitações, \n"
-                            + " 4) Sair: ");
+                            + " 3) Histórico de solicitações: ");
 
             int opcao = int.Parse(Console.ReadLine());
 
@@ -251,8 +250,7 @@ namespace ProjetoInventti.Servicos
             Console.WriteLine(
                             " 1) Alterar senha, \n"
                             + " 2) Abrir nova solicitação, \n"
-                            + " 3) Histórico de solicitações, \n"
-                            + " 4) Sair: ");
+                            + " 3) Histórico de solicitações: ");
 
             int opcao = int.Parse(Console.ReadLine());
             switch (opcao)
@@ -281,10 +279,6 @@ namespace ProjetoInventti.Servicos
                     }
                     Console.WriteLine();
                     break;
-                case 4:
-                    //implementar
-                    Console.WriteLine("Sair");
-                    break;
                 default:
                     break;
             }
@@ -293,7 +287,7 @@ namespace ProjetoInventti.Servicos
     }
     #endregion
 
-    
+
     //Classe interna para cadastrar 
     internal class Cadastro
     {

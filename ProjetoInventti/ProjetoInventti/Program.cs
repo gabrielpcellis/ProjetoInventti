@@ -60,7 +60,7 @@ namespace ProjetoInventti
             } while (!sair);
         }
 
-        //Método estático para validar se o usuário está conectado ou não
+        //Método estático para entrar e validar se o usuário está conectado ou não
         private static void ValidarUsuario(ref Pessoa usuarioConectado, List<Pessoa> usuariosSistema, bool usuarioExistente)
         {
             do
@@ -93,5 +93,8 @@ namespace ProjetoInventti
 
             } while (!usuarioExistente);
         }
+
+
+
     }
 }
