@@ -9,7 +9,7 @@ namespace ProjetoInventti
     {
         public DateTime DataSolicitacao { get; set; }
         public string Titulo { get; set; }
-        public string Nome{ get; set; }
+        public string Nome { get; set; }
         public string Descricao { get; set; }
 
         public Solicitacoes(DateTime dataSolicitacao, string titulo, string nome, string descricaozinha)
@@ -29,7 +29,7 @@ namespace ProjetoInventti
                 + Titulo + "\n"
                 + "Descrição: "
                 + Descricao + "\n"
-                + "Nome: " 
+                + "Nome: "
                 + Nome;
         }
     }

@@ -43,6 +43,7 @@ namespace ProjetoInventti
                     case Enums.TipoNivelAcesso.Zelador:
                         // menu
                         // Chamar método estático responsável pelas funções do zelador
+                        menu.MenuZelador(usuarioConectado, solicitacoes);
                         break;
                     case Enums.TipoNivelAcesso.Morador:
                         // menu
