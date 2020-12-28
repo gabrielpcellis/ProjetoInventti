@@ -31,36 +31,32 @@ namespace ProjetoInventti
                 switch (usuarioConectado.TipoNivelAcesso)
                 {
                     case Enums.TipoNivelAcesso.Administrador:
-                        // menu
-                        // Chamar método estático responsável pelas funções do administrador
+                        // Chamar método responsável pelas funções do administrador
                           menu.MenuAdministrador(usuariosSistema, contasAPagar, contasAReceber);
                         break;
                     case Enums.TipoNivelAcesso.Sindico:
-                        // menu
-                        // Chamar método estático responsável pelas funções do sindico
+                        // Chamar método responsável pelas funções do sindico
                         menu.MenuSindico(usuariosSistema, usuarioConectado, solicitacoes);
                         break;
                     case Enums.TipoNivelAcesso.Zelador:
-                        // menu
-                        // Chamar método estático responsável pelas funções do zelador
+                        // Chamar método responsável pelas funções do zelador
                         menu.MenuZelador(usuarioConectado, solicitacoes);
                         break;
                     case Enums.TipoNivelAcesso.Morador:
-                        // menu
-                        // Chamar método estático responsável pelas funções do morador
+                        // Chamar método responsável pelas funções do morador
                         menu.MenuMorador(solicitacoes, usuarioConectado);
                         break;
                     default:
                         break;
                 }
-                //Repetir enquanto o usuário não for encontrado
                 Console.WriteLine("Deseja sair do Programa ? 1 - Sim, 2 - Não");
                 sair = Console.ReadLine() == "1" ? true : false;
-
+                 
+                //desconectar o usuário
             } while (!sair);
         }
 
-        //Método estático para validar se o usuário está conectado ou não
+        //Método estático para entrar e validar se o usuário está conectado ou não
         private static void ValidarUsuario(ref Pessoa usuarioConectado, List<Pessoa> usuariosSistema, bool usuarioExistente)
         {
             do
@@ -93,5 +89,6 @@ namespace ProjetoInventti
 
             } while (!usuarioExistente);
         }
+
     }
 }

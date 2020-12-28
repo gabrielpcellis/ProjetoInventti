@@ -14,6 +14,7 @@ namespace ProjetoInventti.Entidades
         public string UsuarioAcesso { get; set; }
         public string SenhaAcesso { get; set; }
 
+        //Construtor geral
         public Pessoa(string nomeCompleto, DateTime dataNascimento, Carro carro, string telefone, TipoNivelAcesso tipoNivelAcesso, string user, string senha)
         {
             NomeCompleto = nomeCompleto;

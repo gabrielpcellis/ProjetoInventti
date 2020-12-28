@@ -40,7 +40,7 @@ namespace ProjetoInventti
         {
             List<Contas> contasAPagar = new List<Contas>
             {
-                new Contas (DateTime.Now, 10000, 5000, 1000, 1500, 5000, 5000, 1000, 1500, 1700)
+                new Contas (DateTime.Now, 100, 100, 100, 100, 100, 100, 100, 100, 100)
             };
             return contasAPagar;
         }
