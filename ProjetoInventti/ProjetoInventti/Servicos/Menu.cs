@@ -65,6 +65,7 @@ namespace ProjetoInventti.Servicos
                     break;
                 case 5:
                     //Historico de gastos
+                    //REVISAR
                     Console.WriteLine("HISTÓRICO DE GASTOS");
                     for (int i = 0; i < contasAPagar.Count; i++)
                     {
@@ -130,8 +131,31 @@ namespace ProjetoInventti.Servicos
                     //Solicitações pendentes
                     Console.WriteLine("Solicitações pendentes: ");
                     Console.WriteLine();
-                    //NADA AINDA
-                    
+                    for (int i = 0; i < solicitacoes.Count; i++)
+                    {
+                        Console.WriteLine(solicitacoes[i]);
+                        Console.WriteLine();
+                        Console.WriteLine("ZELADOR: ");
+                        //Caso não tenha sido finalizada a solicitação, faça
+                        if (solicitacoes[i].TipoSolicitacao == TipoSolicitacao.Recebido || solicitacoes[i].TipoSolicitacao == TipoSolicitacao.AnaliseSindico)
+                        {
+                            Console.WriteLine("Deseja alterar o status da solicitação? 1) sim, 2) não");
+                            Console.WriteLine();
+                            int opt = int.Parse(Console.ReadLine());
+                            switch (opt)
+                            {
+                                case 1:
+                                    Console.Write("Digite o novo status da solicitação: 'AnaliseSindico', 'Finalizado', 'Zelador', AnaliseZelador: ");
+                                    solicitacoes[i].TipoSolicitacao = Enum.Parse<TipoSolicitacao>(Console.ReadLine());
+                                    break;
+                                case 2:
+                                    Console.WriteLine("Você optou pela não alteração do status.");
+                                    Console.WriteLine();
+                                    break;
+                            }
+                        }
+                    }
+
                     break;
                 case 6:
                     Console.WriteLine("HISTÓRICO DE SOLICITAÇÕES:");
@@ -177,12 +201,30 @@ namespace ProjetoInventti.Servicos
                     usuarioAtual.AlterarSenha(novaSenha);
                     break;
                 case 2:
-                    //implementar
-                    //Console.WriteLine("Solicitações pendentes: ");
-                    //Console.WriteLine();
-                    //for (int i = 0; i < solicitacoes.Count; i++)
-                    //{
-                    //}
+                    Console.WriteLine("Solicitações pendentes: ");
+                    for (int i = 0; i < solicitacoes.Count; i++)
+                    {
+                        Console.WriteLine(solicitacoes[i]);
+                        Console.WriteLine();
+                        //Caso não tenha sido finalizada a solicitação, faça
+                        if (solicitacoes[i].TipoSolicitacao == TipoSolicitacao.Zelador || solicitacoes[i].TipoSolicitacao == TipoSolicitacao.AnaliseZelador)
+                        {
+                            Console.WriteLine("Deseja alterar o status da solicitação? 1) sim, 2) não");
+                            Console.WriteLine();
+                            int opt = int.Parse(Console.ReadLine());
+                            switch (opt)
+                            {
+                                case 1:
+                                    Console.Write("Digite o novo status da solicitação: 'Analise', 'Finalizado'");
+                                    solicitacoes[i].TipoSolicitacao = Enum.Parse<TipoSolicitacao>(Console.ReadLine());
+                                    break;
+                                case 2:
+                                    Console.WriteLine("Você optou pela não alteração do status.");
+                                    Console.WriteLine();
+                                    break;
+                            }
+                        }
+                    }
                     break;
                 case 3:
                     //Histórico de solicitações

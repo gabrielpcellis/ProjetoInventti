@@ -18,7 +18,6 @@ namespace ProjetoInventti
         public double SalarioZelador { get; set; }
         public double SalarioSindico { get; set; }
 
-
         //Construtor Contas a pagar
         public Contas(DateTime dataConta, double energia, double agua, double gas, double jardineiro, double despesasGerais, double multa, double condominio,
             double salarioZelador, double salarioSindico)
