@@ -1,14 +1,36 @@
 # Projeto
 
+29/12/2020
+
+#Adicionado
+Opção sair do usuário logado (GP-14)
+
+#Alterado
+Menus do síndico e zelador melhorados (GP-14)
+
+#Corrigido
+
+==================================================
+28/12/2020
+
+#Adicionado
+Enum de solicitações (GP-13)
+
+#Alterado
+Melhoria nos menus das entidades (GP-13)
+
+#Corrigido
+
+==================================================
 22/12/2020
 
 #Adicionado
 Classe solicitações
-Métodos para gerar novas solicitações 
+Métodos para gerar novas solicitações (GP-11)
 
 #Alterado
-Método alterar senha
-Menus das entidades
+Método alterar senha (GP-11)
+Menus das entidades (GP-11)
 
 #Corrigido
 
