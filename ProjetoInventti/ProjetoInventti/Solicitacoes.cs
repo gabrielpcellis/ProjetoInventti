@@ -27,13 +27,13 @@ namespace ProjetoInventti
         //Formatação do objeto
         public override string ToString()
         {
-            return "Data da solicitação : "
+            return "DATA: "
                 + DataSolicitacao + "\n"
-                + "Título: "
+                + "TÍTULO: "
                 + Titulo + "\n"
-                + "Descrição: "
+                + "DESCRIÇÃO: "
                 + Descricao + "\n"
-                + "Nome: "
+                + "NOME: "
                 + Nome + "\n"
                 + "STATUS: " 
                 + TipoSolicitacao;

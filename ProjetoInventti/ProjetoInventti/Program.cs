@@ -26,6 +26,7 @@ namespace ProjetoInventti
                 }
                 //se houver, dará boas vindas mostrando apenas o nome do objeto 
                 Console.WriteLine("Olá '{0}', seja bem vindo!", usuarioConectado.NomeCompleto);
+                Console.WriteLine();
                 var menu = new Menu();
 
                 //Verifica o tipo de acesso do objeto atual para liberar o acesso ideal
@@ -74,6 +75,10 @@ namespace ProjetoInventti
         {
             do
             {
+                Console.WriteLine("                             BEM VINDO, MEU COMPATRIÓTA!!!!!!!!!!!                           ");
+                Console.WriteLine();
+                Console.WriteLine("Para fazer login, informe os dados abaixo, por gentileza: ");
+                Console.WriteLine();
                 //Entrada de dados
                 Console.Write("Informe seu usuário: ");
                 var usuario = Console.ReadLine();
