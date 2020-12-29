@@ -54,8 +54,7 @@ namespace ProjetoInventti
                 Console.WriteLine("Deseja sair do Programa ? 1 - Sim, 2 - Não");
                 sair = Console.ReadLine() == "1" ? true : false;
 
-                //Trocar usuário
-                //Desconectar o usuário
+                //Trocar usuário ao desconectar
                 if (sair != true)
                 {
                     Console.WriteLine();
