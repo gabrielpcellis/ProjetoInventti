@@ -88,9 +88,7 @@ namespace ProjetoInventti.Servicos
         //Método para a chamada das opções do síndico
         public void MenuSindico(List<Pessoa> usuariosSistema, Pessoa usuarioAtual, List<Solicitacoes> solicitacoes)
         {
-            int sair = 0;
-            do
-            {
+           
                 Console.WriteLine("Escolha uma opção, por favor: ");
                 Console.WriteLine(
                                 " 1) Cadastrar novo Morador, \n"
@@ -161,6 +159,7 @@ namespace ProjetoInventti.Servicos
 
                         break;
                     case 6:
+                        //Filtrar histórico por tipoNivelAcesso
                         Console.WriteLine("HISTÓRICO DE SOLICITAÇÕES:");
                         Console.WriteLine();
                         for (int i = 0; i < solicitacoes.Count; i++)
@@ -173,8 +172,6 @@ namespace ProjetoInventti.Servicos
                     default:
                         break;
                 }
-
-            } while (sair != 7);
         }
         #endregion
 
