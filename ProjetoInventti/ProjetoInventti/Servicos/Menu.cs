@@ -158,8 +158,9 @@ namespace ProjetoInventti.Servicos
                                 Console.WriteLine("Deseja alterar o status da solicitação? \n" +
                                     "1) Sim \n" +
                                     "2) Não");
-                                Console.WriteLine();
                                 int opt = int.Parse(Console.ReadLine());
+                                Console.WriteLine();
+
                                 switch (opt)
                                 {
                                     case 1:
@@ -215,30 +216,53 @@ namespace ProjetoInventti.Servicos
                     usuarioAtual.AlterarSenha(novaSenha);
                     break;
                 case 2:
+                    //Solicitações pendentes
                     Console.WriteLine("Solicitações pendentes: ");
+                    Console.WriteLine();
+
+                    //Percorrerá a lista toda mostrando apenas o título dela
                     for (int i = 0; i < solicitacoes.Count; i++)
                     {
-                        Console.WriteLine(solicitacoes[i]);
-                        Console.WriteLine();
-                        //Caso não tenha sido finalizada a solicitação, faça
-                        if (solicitacoes[i].TipoSolicitacao == TipoSolicitacao.Zelador || solicitacoes[i].TipoSolicitacao == TipoSolicitacao.AnaliseZelador)
+                        Console.WriteLine(i + 1 + " - " + solicitacoes[i].Titulo);
+                    }
+
+                    Console.WriteLine();
+                    Console.WriteLine("Para visualizar uma solicitação, escolha um número de acordo com a solicitação desejada: ");
+                    int posicaoEscolhida = int.Parse(Console.ReadLine());
+                    int posicao = posicaoEscolhida - 1;
+                    Console.WriteLine();
+
+                    //Percorrerá a lista, mostrando apenas a posição escolhida
+                    for (int i = 0; i < solicitacoes.Count; i++)
+                    {
+                        if (solicitacoes[i] == solicitacoes[posicao])
                         {
-                            Console.WriteLine("Deseja alterar o status da solicitação? 1) sim, 2) não");
+                            Console.WriteLine(solicitacoes[posicao]);
                             Console.WriteLine();
-                            int opt = int.Parse(Console.ReadLine());
-                            switch (opt)
+                            //Se o tipo de solicitação for RECEBIDA ou AnaliseSindico, faça
+                            if (solicitacoes[i].TipoSolicitacao == TipoSolicitacao.Zelador || solicitacoes[i].TipoSolicitacao == TipoSolicitacao.AnaliseZelador)
                             {
-                                case 1:
-                                    Console.Write("Digite o novo status da solicitação: 'Analise', 'Finalizado'");
-                                    solicitacoes[i].TipoSolicitacao = Enum.Parse<TipoSolicitacao>(Console.ReadLine());
-                                    break;
-                                case 2:
-                                    Console.WriteLine("Você optou pela não alteração do status.");
-                                    Console.WriteLine();
-                                    break;
+                                Console.WriteLine("Deseja alterar o status da solicitação? \n" +
+                                    "1) Sim \n" +
+                                    "2) Não");
+                                int opt = int.Parse(Console.ReadLine());
+                                Console.WriteLine();
+
+                                switch (opt)
+                                {
+                                    case 1:
+                                        Console.WriteLine("Digite o novo status da solicitação: 'AnaliseZelador: ");
+                                        solicitacoes[posicao].TipoSolicitacao = Enum.Parse<TipoSolicitacao>(Console.ReadLine());
+                                        break;
+                                    case 2:
+                                        Console.WriteLine("Você optou por não alterar o status.");
+                                        Console.WriteLine();
+                                        break;
+                                }
                             }
                         }
                     }
+
                     break;
                 case 3:
                     //Histórico de solicitações
