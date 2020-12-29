@@ -2,9 +2,7 @@
 using ProjetoInventti.Enums;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Globalization;
-using System.Text;
 
 namespace ProjetoInventti.Servicos
 {
@@ -22,6 +20,7 @@ namespace ProjetoInventti.Servicos
         //O argumento do método é uma lista que adiciona os dados do método chamado pelo objeto "cadastro"
 
         #region Menu do administrador
+        //Método para chamar as opções do administrador
         public void MenuAdministrador(List<Pessoa> usuariosSistema, List<Contas> contasAPagar, List<Contas> contasAReceber)
         {
             // CRIAR OPÇÕES DE ESCOLHA PARA O ADM
@@ -155,9 +154,13 @@ namespace ProjetoInventti.Servicos
                             //Se o tipo de solicitação for RECEBIDA ou AnaliseSindico, faça
                             if (solicitacoes[i].TipoSolicitacao == TipoSolicitacao.Recebido || solicitacoes[i].TipoSolicitacao == TipoSolicitacao.AnaliseSindico)
                             {
-                                Console.WriteLine("Deseja alterar o status da solicitação? \n" +
-                                    "1) Sim \n" +
-                                    "2) Não");
+
+                                Console.WriteLine("Escolha uma opção: " +
+                                    "1) Alterar status da solicitação, \n" +
+                                    "2) Adicionar observação, \n" +
+                                    "3) Excluir solicitação, \n " +
+                                    "4) Transferir para o zelador.");
+
                                 int opt = int.Parse(Console.ReadLine());
                                 Console.WriteLine();
 
@@ -168,8 +171,16 @@ namespace ProjetoInventti.Servicos
                                         solicitacoes[posicao].TipoSolicitacao = Enum.Parse<TipoSolicitacao>(Console.ReadLine());
                                         break;
                                     case 2:
-                                        Console.WriteLine("Você optou por não alterar o status.");
-                                        Console.WriteLine();
+                                        Console.WriteLine("Adicionar observação: ");
+                                        string observacao = Console.ReadLine();
+                                        break;
+                                    case 3:
+                                        Console.WriteLine("Excluir solicitação: ");
+                                        //Implementar
+                                        break;
+                                    case 4:
+                                        Console.WriteLine("Transferir para o zelador: ");
+                                        //Implementar
                                         break;
                                 }
                             }
@@ -331,7 +342,6 @@ namespace ProjetoInventti.Servicos
     internal class Cadastro
     {
         //Método de cadastrar administrador
-        //Neste método, observa-se o seguinte: 
         //É criado um objeto "pessoa" que recebe o cadastro realizado na chamada do método "GerarPessoa()"
         //Quando o cadastro é realizado, o método retorna um novo administrador com esses dados
         public Administrador CadastrarAdministrador()
