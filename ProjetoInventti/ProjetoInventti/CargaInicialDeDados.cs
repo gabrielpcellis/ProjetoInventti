@@ -1,7 +1,6 @@
 ﻿using ProjetoInventti.Entidades;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace ProjetoInventti
 {

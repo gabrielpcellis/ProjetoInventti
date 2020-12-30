@@ -21,10 +21,12 @@ namespace ProjetoInventti
             {
                 //Faça enquanto houver usuário inexistente
                 if (usuarioConectado == null)
+                {
                     ValidarUsuario(ref usuarioConectado, usuariosSistema, usuarioExistente);
-
+                }
                 //se houver, dará boas vindas mostrando apenas o nome do objeto 
                 Console.WriteLine("Olá '{0}', seja bem vindo!", usuarioConectado.NomeCompleto);
+                Console.WriteLine();
                 var menu = new Menu();
 
                 //Verifica o tipo de acesso do objeto atual para liberar o acesso ideal
@@ -32,7 +34,7 @@ namespace ProjetoInventti
                 {
                     case Enums.TipoNivelAcesso.Administrador:
                         // Chamar método responsável pelas funções do administrador
-                          menu.MenuAdministrador(usuariosSistema, contasAPagar, contasAReceber);
+                        menu.MenuAdministrador(usuariosSistema, contasAPagar, contasAReceber);
                         break;
                     case Enums.TipoNivelAcesso.Sindico:
                         // Chamar método responsável pelas funções do sindico
@@ -49,10 +51,22 @@ namespace ProjetoInventti
                     default:
                         break;
                 }
+                Console.WriteLine();
                 Console.WriteLine("Deseja sair do Programa ? 1 - Sim, 2 - Não");
                 sair = Console.ReadLine() == "1" ? true : false;
-                 
-                //desconectar o usuário
+
+                //Trocar usuário ao desconectar
+                if (sair != true)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Trocar de usuário: 1- Sim, 2- Não");
+                    int trocar = int.Parse(Console.ReadLine());
+                    if (trocar == 1)
+                    {
+                        usuarioConectado = null;
+                    }
+                }
+                
             } while (!sair);
         }
 
@@ -61,6 +75,10 @@ namespace ProjetoInventti
         {
             do
             {
+                Console.WriteLine("                             BEM VINDO, MEU COMPATRIÓTA!!!!!!!!!!!                           ");
+                Console.WriteLine();
+                Console.WriteLine("Para fazer login, informe os dados abaixo, por gentileza: ");
+                Console.WriteLine();
                 //Entrada de dados
                 Console.Write("Informe seu usuário: ");
                 var usuario = Console.ReadLine();
@@ -68,9 +86,9 @@ namespace ProjetoInventti
                 var senha = Console.ReadLine();
 
                 //Percorre a lista até o final à procura dos dados obtidos
+                //verifica se o objeto atual da posição "i" tem usuário e senha 
                 for (int i = 0; i < usuariosSistema.Count; i++)
                 {
-                    //verifica se o objeto atual da posição "i" tem usuário e senha 
                     //Caso tenha, adicionará o objeto da posição atual à variável "usuarioConectado" e retornará "true" para "usuarioExistente"
                     //depois encerrará a condicional
                     if (usuariosSistema[i].VerificarDadosDeAcesso(usuario, senha))
