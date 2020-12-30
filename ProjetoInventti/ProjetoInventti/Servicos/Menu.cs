@@ -48,34 +48,33 @@ namespace ProjetoInventti.Servicos
                 case 3:
                     //Contas a pagar
                     Console.WriteLine("CONTAS A PAGAR:");
-                    Console.WriteLine();
-                    for (int i = 0; i < contasAPagar.Count; i++)
+                    foreach(var obj in contasAPagar)
                     {
-                        Console.WriteLine(contasAPagar[i]);
+                        Console.WriteLine(obj);
                     }
                     break;
                 case 4:
                     //Contas a receber
                     Console.WriteLine("CONTAS A RECEBER:");
-                    Console.WriteLine();
-                    for (int i = 0; i < contasAReceber.Count; i++)
+                    foreach (var obj in contasAReceber)
                     {
-                        Console.WriteLine(contasAReceber[i]);
+                        Console.WriteLine(obj);
                     }
                     break;
                 case 5:
-                    //Historico de gastos
-                    //REVISAR
-                    Console.WriteLine("HISTÓRICO DE GASTOS");
-                    for (int i = 0; i < contasAPagar.Count; i++)
+                    //Historico Total de Gastos
+                    Console.WriteLine("HISTÓRICO DE GASTOS:");
+                    decimal totalGasto = 0.0m;
+                    foreach (var obj in contasAReceber)
                     {
-                        Console.WriteLine(contasAPagar[i]);
+                        totalGasto += obj.Valor;
                     }
+                    Console.WriteLine(totalGasto.ToString("F2", CultureInfo.InvariantCulture));
                     break;
                 case 6:
                     //Gerar conta a pagar
                     Console.WriteLine("NOVA CONTA A PAGAR: ");
-                    contasAPagar.Add(cadastro.GerarConta());
+                    contasAPagar.AddRange(cadastro.GerarConta()) ;
                     break;
                 default:
                     break;
@@ -297,43 +296,25 @@ namespace ProjetoInventti.Servicos
         //Quando o cadastro é realizado, o método retorna um novo administrador com esses dados
         public Administrador CadastrarAdministrador()
         {
-            Pessoa pessoa = GerarPessoa();
-
-            return new Administrador(pessoa);
+            return new Administrador(GerarPessoa());
         }
 
         //Método de cadastrar síndico
         public Sindico CadastrarSindico()
         {
-            Pessoa pessoa = GerarPessoa();
-
-            double salario = Salario();
-
-            Predio predio = GerarPredio();
-
-            return new Sindico(pessoa, predio, salario);
+            return new Sindico(GerarPessoa(), GerarPredio(), Salario());
         }
 
         //Método de cadastrar Zelador
         public Zelador CadastrarZelador()
         {
-            Pessoa pessoa = GerarPessoa();
-
-            double salario = Salario();
-
-            Predio predio = GerarPredio();
-
-            return new Zelador(pessoa, predio, salario);
+            return new Zelador(GerarPessoa(), GerarPredio(), Salario());
         }
 
         //Método de cadastrar Morador
         public Morador CadastrarMorador()
         {
-            Pessoa pessoa = GerarPessoa();
-
-            Predio predio = GerarPredio();
-
-            return new Morador(pessoa, predio);
+            return new Morador(GerarPessoa(), GerarPredio());
         }
 
         //Método para criar um objeto pessoa
@@ -390,45 +371,26 @@ namespace ProjetoInventti.Servicos
         }
 
         //Método para gerar nova conta a pagar
-        public Contas GerarConta()
+        public List<Contas> GerarConta()
         {
-            Contas conta = null;
+            List<Contas> conta = new List<Contas>();
 
             Console.Write("Digite a quantidade de novas contas a pagar: ");
             int quantidade = int.Parse(Console.ReadLine());
             for (int i = 0; i < quantidade; i++)
             {
-                conta = GerarContaAPagar();
+                Console.WriteLine("Contas a pagar: ");
+                Console.Write("Data da conta: ");
+                DateTime dataConta = DateTime.Parse(Console.ReadLine());
+                Console.WriteLine("Tipo de Conta: ");
+                TipoConta tipo = Enum.Parse<TipoConta>(Console.ReadLine());
+                Console.WriteLine("Valor da Conta: ");
+                decimal valor = decimal.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+
+                conta.Add(new Contas(dataConta, tipo, valor));
+
             }
             return conta;
-        }
-
-        private Contas GerarContaAPagar()
-        {
-            Console.WriteLine("Contas a pagar: ");
-            Console.Write("Data da conta: ");
-            DateTime dataConta = DateTime.Parse(Console.ReadLine());
-            Console.Write("Valor da energia: ");
-            double energia = double.Parse(Console.ReadLine().ToString(), CultureInfo.InvariantCulture);
-            Console.Write("Valor da luz: ");
-            double luz = double.Parse(Console.ReadLine().ToString(), CultureInfo.InvariantCulture);
-            Console.Write("Valor do gás: ");
-            double gas = double.Parse(Console.ReadLine().ToString(), CultureInfo.InvariantCulture);
-            Console.Write("Valor do jardineiro: ");
-            double jardineiro = double.Parse(Console.ReadLine().ToString(), CultureInfo.InvariantCulture);
-            Console.Write("Valo das despesar gerais: ");
-            double despesas = double.Parse(Console.ReadLine().ToString(), CultureInfo.InvariantCulture);
-            Console.Write("Valor da multa: ");
-            double multa = double.Parse(Console.ReadLine().ToString(), CultureInfo.InvariantCulture);
-            Console.Write("Valor do condomínio: ");
-            double condominio = double.Parse(Console.ReadLine().ToString(), CultureInfo.InvariantCulture);
-            Console.Write("Salário do zelador: ");
-            double zelador = double.Parse(Console.ReadLine().ToString(), CultureInfo.InvariantCulture);
-            Console.Write("Salário do síndico: ");
-            double sindico = double.Parse(Console.ReadLine().ToString(), CultureInfo.InvariantCulture);
-
-            Contas contaAPagar = new Contas(dataConta, energia, luz, gas, jardineiro, despesas, multa, condominio, zelador, sindico);
-            return contaAPagar;
         }
 
         //Criar método público para chamar o GerarSolicitacao()

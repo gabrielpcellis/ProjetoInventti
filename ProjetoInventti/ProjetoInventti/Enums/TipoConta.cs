@@ -2,7 +2,6 @@
 {
     public enum TipoConta
     {
-        //Classe ainda não utilizada
         Energia,
         Agua,
         Gas,
