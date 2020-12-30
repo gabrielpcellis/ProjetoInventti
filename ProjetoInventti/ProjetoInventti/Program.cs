@@ -51,7 +51,6 @@ namespace ProjetoInventti
                     default:
                         break;
                 }
-                Console.WriteLine();
                 Console.WriteLine("Deseja sair do Programa ? 1 - Sim, 2 - Não");
                 sair = Console.ReadLine() == "1" ? true : false;
 

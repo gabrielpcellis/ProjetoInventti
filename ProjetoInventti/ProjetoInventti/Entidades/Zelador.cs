@@ -10,7 +10,7 @@ namespace ProjetoInventti.Entidades
         public double Salario { get; set; }
 
         public Zelador(string nomeCompleto, DateTime dataNascimento, Carro carro, string telefone, string user, string senha, Predio predio, double salario)
-            : base(nomeCompleto, dataNascimento, carro, telefone, TipoNivelAcesso.Sindico, user, senha)
+            : base(nomeCompleto, dataNascimento, carro, telefone, TipoNivelAcesso.Zelador, user, senha)
         {
             PredioZelador = predio;
             Salario = salario;

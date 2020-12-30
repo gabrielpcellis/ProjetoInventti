@@ -155,11 +155,11 @@ namespace ProjetoInventti.Servicos
                             if (solicitacoes[i].TipoSolicitacao == TipoSolicitacao.Recebido || solicitacoes[i].TipoSolicitacao == TipoSolicitacao.AnaliseSindico)
                             {
 
-                                Console.WriteLine("Escolha uma opção: " +
-                                    "1) Alterar status da solicitação, \n" +
-                                    "2) Adicionar observação, \n" +
-                                    "3) Excluir solicitação, \n " +
-                                    "4) Transferir para o zelador.");
+                                Console.WriteLine("Escolha uma opção: \n" +
+                                    " 1) Alterar status da solicitação, \n" +
+                                    " 2) Adicionar observação, \n" +
+                                    " 3) Excluir solicitação, \n" +
+                                    " 4) Transferir para o zelador.");
 
                                 int opt = int.Parse(Console.ReadLine());
                                 Console.WriteLine();
@@ -173,6 +173,7 @@ namespace ProjetoInventti.Servicos
                                     case 2:
                                         Console.WriteLine("Adicionar observação: ");
                                         string observacao = Console.ReadLine();
+                                        solicitacoes[i].Observacao = observacao;
                                         break;
                                     case 3:
                                         Console.WriteLine("Excluir solicitação: ");
@@ -227,278 +228,304 @@ namespace ProjetoInventti.Servicos
                     usuarioAtual.AlterarSenha(novaSenha);
                     break;
                 case 2:
-                    //Solicitações pendentes
+                    //Percorrerá a lista toda mostrando apenas o título dela caso a solicitação respeite a condicional
                     Console.WriteLine("Solicitações pendentes: ");
                     Console.WriteLine();
 
-                    //Percorrerá a lista toda mostrando apenas o título dela
-                    for (int i = 0; i < solicitacoes.Count; i++)
+                    for (int j = 0; j < solicitacoes.Count; j++)
                     {
-                        Console.WriteLine(i + 1 + " - " + solicitacoes[i].Titulo);
-                    }
-
-                    Console.WriteLine();
-                    Console.WriteLine("Para visualizar uma solicitação, escolha um número de acordo com a solicitação desejada: ");
-                    int posicaoEscolhida = int.Parse(Console.ReadLine());
-                    int posicao = posicaoEscolhida - 1;
-                    Console.WriteLine();
-
-                    //Percorrerá a lista, mostrando apenas a posição escolhida
-                    for (int i = 0; i < solicitacoes.Count; i++)
-                    {
-                        if (solicitacoes[i] == solicitacoes[posicao])
+                        if (solicitacoes[j].TipoSolicitacao == TipoSolicitacao.Zelador || solicitacoes[j].TipoSolicitacao == TipoSolicitacao.AnaliseZelador)
                         {
-                            Console.WriteLine(solicitacoes[posicao]);
+                            //Solicitações pendentes
+                            Console.WriteLine(j + 1 + " - " + solicitacoes[j].Titulo);
+                        }
+                    }
+                    //A execução somente acabará quando percorrer toda a lista.
+                    for (int i = 0; i < solicitacoes.Count; i++)
+                    {
+                        if (solicitacoes[i].TipoSolicitacao == TipoSolicitacao.Zelador || solicitacoes[i].TipoSolicitacao == TipoSolicitacao.AnaliseZelador)
+                        {
                             Console.WriteLine();
-                            //Se o tipo de solicitação for RECEBIDA ou AnaliseSindico, faça
-                            if (solicitacoes[i].TipoSolicitacao == TipoSolicitacao.Zelador || solicitacoes[i].TipoSolicitacao == TipoSolicitacao.AnaliseZelador)
-                            {
-                                Console.WriteLine("Deseja alterar o status da solicitação? \n" +
-                                    "1) Sim \n" +
-                                    "2) Não");
-                                int opt = int.Parse(Console.ReadLine());
-                                Console.WriteLine();
+                            Console.WriteLine("Para visualizar uma solicitação, escolha um número de acordo com a solicitação desejada: ");
+                            int posicaoEscolhida = int.Parse(Console.ReadLine());
+                            int posicao = posicaoEscolhida - 1;
+                            Console.WriteLine();
 
-                                switch (opt)
+                            for (int j = 0; j < solicitacoes.Count; j++)
+                            {
+                                if (solicitacoes[j] == solicitacoes[posicao])
                                 {
-                                    case 1:
-                                        Console.WriteLine("Digite o novo status da solicitação: 'AnaliseZelador: ");
-                                        solicitacoes[posicao].TipoSolicitacao = Enum.Parse<TipoSolicitacao>(Console.ReadLine());
-                                        break;
-                                    case 2:
-                                        Console.WriteLine("Você optou por não alterar o status.");
-                                        Console.WriteLine();
-                                        break;
+                                    Console.WriteLine("Solicitação escolhida: \n" + solicitacoes[posicao]);
+                                    Console.WriteLine();
+                                    Console.WriteLine("Escolha uma opção: \n" +
+                                       " 1) Alterar status da solicitação, \n" +
+                                       " 2) Adicionar observação: ");
+                                    int opt = int.Parse(Console.ReadLine());
+                                    Console.WriteLine();
+
+                                    switch (opt)
+                                    {
+                                        case 1:
+                                            Console.WriteLine("Digite o novo status da solicitação: 'AnaliseZelador: ");
+                                            solicitacoes[posicao].TipoSolicitacao = Enum.Parse<TipoSolicitacao>(Console.ReadLine());
+                                            Console.WriteLine("Status atualizado: " + solicitacoes[posicao].TipoSolicitacao);
+                                            Console.WriteLine();
+                                            break;
+                                        case 2:
+                                            Console.WriteLine("Adicionar observação: ");
+                                            string observacao = Console.ReadLine();
+                                            solicitacoes[j].Observacao = observacao;
+                                            Console.WriteLine("Nova observação: " + solicitacoes[j].Observacao);
+                                            Console.WriteLine();
+                                            break;
+                                    }
                                 }
                             }
                         }
                     }
 
-                    break;
+
+            Console.WriteLine("Fim");
+            Console.WriteLine();
+            break;
                 case 3:
                     //Histórico de solicitações
                     Console.WriteLine("HISTÓRICO DE SOLICITAÇÕES:");
-                    Console.WriteLine();
-                    for (int i = 0; i < solicitacoes.Count; i++)
-                    {
-                        Console.WriteLine(solicitacoes[i]);
-                        Console.WriteLine();
-                    }
-                    Console.WriteLine();
-                    break;
-                default:
-                    break;
-            }
-        }
-        #endregion
-
-        #region Menu do morador
-        //Método para a chamada das opções do morador
-        public void MenuMorador(List<Solicitacoes> solicitacoes, Pessoa usuarioAtual)
-        {
-            Console.WriteLine("Escolha uma opção, por favor: ");
-            Console.WriteLine(
-                            " 1) Alterar senha, \n"
-                            + " 2) Abrir nova solicitação, \n"
-                            + " 3) Histórico de solicitações: ");
-
-            int opcao = int.Parse(Console.ReadLine());
-            switch (opcao)
+            Console.WriteLine();
+            for (int i = 0; i < solicitacoes.Count; i++)
             {
-                case 1:
-                    Console.WriteLine();
-                    Console.WriteLine("Para alterar sua senha, informe os dados abaixo: ");
-                    Console.Write("Digite a nova senha: ");
-                    string novaSenha = Console.ReadLine();
-                    usuarioAtual.AlterarSenha(novaSenha);
-                    break;
-                case 2:
-                    Console.WriteLine("Criar nova solicitação: ");
-                    if (usuarioAtual != null)
-                    {
-                        solicitacoes.Add(cadastro.GerarNovaSolicitacao(usuarioAtual));
-                    }
-                    break;
-                case 3:
-                    Console.WriteLine("HISTÓRICO DE SOLICITAÇÕES:");
-                    Console.WriteLine();
-                    for (int i = 0; i < solicitacoes.Count; i++)
-                    {
-                        Console.WriteLine(solicitacoes[i]);
-                        Console.WriteLine();
-                    }
-                    Console.WriteLine();
-                    break;
-                default:
-                    break;
+                Console.WriteLine(solicitacoes[i]);
+                Console.WriteLine();
             }
+            Console.WriteLine();
+            break;
+            default:
+                    break;
         }
-
     }
     #endregion
 
-
-    //Classe interna para cadastrar 
-    internal class Cadastro
+    #region Menu do morador
+    //Método para a chamada das opções do morador
+    public void MenuMorador(List<Solicitacoes> solicitacoes, Pessoa usuarioAtual)
     {
-        //Método de cadastrar administrador
-        //É criado um objeto "pessoa" que recebe o cadastro realizado na chamada do método "GerarPessoa()"
-        //Quando o cadastro é realizado, o método retorna um novo administrador com esses dados
-        public Administrador CadastrarAdministrador()
+        Console.WriteLine("Escolha uma opção, por favor: ");
+        Console.WriteLine();
+        Console.WriteLine(
+                        " 1) Alterar senha, \n"
+                        + " 2) Abrir nova solicitação, \n"
+                        + " 3) Histórico de solicitações: ");
+
+        int opcao = int.Parse(Console.ReadLine());
+        switch (opcao)
         {
-            Pessoa pessoa = GerarPessoa();
-
-            return new Administrador(pessoa);
-        }
-
-        //Método de cadastrar síndico
-        public Sindico CadastrarSindico()
-        {
-            Pessoa pessoa = GerarPessoa();
-
-            double salario = Salario();
-
-            Predio predio = GerarPredio();
-
-            return new Sindico(pessoa, predio, salario);
-        }
-
-        //Método de cadastrar Zelador
-        public Zelador CadastrarZelador()
-        {
-            Pessoa pessoa = GerarPessoa();
-
-            double salario = Salario();
-
-            Predio predio = GerarPredio();
-
-            return new Zelador(pessoa, predio, salario);
-        }
-
-        //Método de cadastrar Morador
-        public Morador CadastrarMorador()
-        {
-            Pessoa pessoa = GerarPessoa();
-
-            Predio predio = GerarPredio();
-
-            return new Morador(pessoa, predio);
-        }
-
-        //Método para criar um objeto pessoa
-        private Pessoa GerarPessoa()
-        {
-            Console.WriteLine("Entre com os dados abaixo: ");
-            Console.Write("Nome completo: ");
-            string nomeCompleto = Console.ReadLine();
-            Console.Write("Data de nascimento: ");
-            DateTime dataNascimento = DateTime.Parse(Console.ReadLine());
-            Console.Write("Telefone: ");
-            string telefone = Console.ReadLine();
-            Console.WriteLine();
-
-            Console.WriteLine("Dados do carro");
-            Console.Write("Placa do carro: ");
-            string placaCarro = (Console.ReadLine());
-            Console.Write("Modelo do carro: ");
-            string modeloCarro = Console.ReadLine();
-            Carro carro = new Carro(placaCarro, modeloCarro);
-
-            Console.WriteLine("Informe o nivel de Acesso : ");
-            var nivel = Enum.Parse<TipoNivelAcesso>(Console.ReadLine());
-
-            Console.WriteLine("Entre com os dados para login");
-            Console.Write("Escolha seu usuário de acesso:");
-            string user = Console.ReadLine();
-            Console.Write("Escolha sua senha de acesso: ");
-            string senha = Console.ReadLine();
-
-            return new Pessoa(nomeCompleto, dataNascimento, carro, telefone, nivel, user, senha);
-        }
-
-        // Método para criar um objeto prédio
-        private Predio GerarPredio()
-        {
-            Console.WriteLine("Dados do prédio: ");
-            Console.Write("Nome do prédio: ");
-            string nomePredio = Console.ReadLine();
-            Console.Write("Bloco: ");
-            string bloco = Console.ReadLine();
-            Console.Write("Apartamento: ");
-            int apartamento = int.Parse(Console.ReadLine());
-            Predio predio = new Predio(nomePredio, bloco, apartamento);
-            return predio;
-        }
-
-        //Método para criar criar um objeto salário
-        private double Salario()
-        {
-            Console.Write("Salário: ");
-            double salario = double.Parse(Console.ReadLine());
-            return salario;
-        }
-
-        //Método para gerar nova conta a pagar
-        public Contas GerarConta()
-        {
-            Contas conta = null;
-
-            Console.Write("Digite a quantidade de novas contas a pagar: ");
-            int quantidade = int.Parse(Console.ReadLine());
-            for (int i = 0; i < quantidade; i++)
-            {
-                conta = GerarContaAPagar();
-            }
-            return conta;
-        }
-
-        private Contas GerarContaAPagar()
-        {
-            Console.WriteLine("Contas a pagar: ");
-            Console.Write("Data da conta: ");
-            DateTime dataConta = DateTime.Parse(Console.ReadLine());
-            Console.Write("Valor da energia: ");
-            double energia = double.Parse(Console.ReadLine().ToString(), CultureInfo.InvariantCulture);
-            Console.Write("Valor da luz: ");
-            double luz = double.Parse(Console.ReadLine().ToString(), CultureInfo.InvariantCulture);
-            Console.Write("Valor do gás: ");
-            double gas = double.Parse(Console.ReadLine().ToString(), CultureInfo.InvariantCulture);
-            Console.Write("Valor do jardineiro: ");
-            double jardineiro = double.Parse(Console.ReadLine().ToString(), CultureInfo.InvariantCulture);
-            Console.Write("Valo das despesar gerais: ");
-            double despesas = double.Parse(Console.ReadLine().ToString(), CultureInfo.InvariantCulture);
-            Console.Write("Valor da multa: ");
-            double multa = double.Parse(Console.ReadLine().ToString(), CultureInfo.InvariantCulture);
-            Console.Write("Valor do condomínio: ");
-            double condominio = double.Parse(Console.ReadLine().ToString(), CultureInfo.InvariantCulture);
-            Console.Write("Salário do zelador: ");
-            double zelador = double.Parse(Console.ReadLine().ToString(), CultureInfo.InvariantCulture);
-            Console.Write("Salário do síndico: ");
-            double sindico = double.Parse(Console.ReadLine().ToString(), CultureInfo.InvariantCulture);
-
-            Contas contaAPagar = new Contas(dataConta, energia, luz, gas, jardineiro, despesas, multa, condominio, zelador, sindico);
-            return contaAPagar;
-        }
-
-        //Criar método público para chamar o GerarSolicitacao()
-        public Solicitacoes GerarNovaSolicitacao(Pessoa nome)
-        {
-            Solicitacoes solicitacao = GerarSolicitacao(nome);
-            return solicitacao;
-        }
-
-        //Método gerar solicitação recebendo o nome do usuário logado como nome do solicitante
-        private Solicitacoes GerarSolicitacao(Pessoa nome)
-        {
-            Console.WriteLine("Gerar solicitação: ");
-            DateTime data = DateTime.Now;
-            Console.Write("Informe o título da solicitação: ");
-            string titulo = Console.ReadLine();
-            Console.WriteLine("Informe a descriçao do problema, meu chapa: ");
-            string descricao = Console.ReadLine();
-
-            Solicitacoes solicitacao = new Solicitacoes(data, titulo, nome.NomeCompleto, descricao);
-            return solicitacao;
+            case 1:
+                Console.WriteLine();
+                Console.WriteLine("Para alterar sua senha, informe os dados abaixo: ");
+                Console.Write("Digite a nova senha: ");
+                string novaSenha = Console.ReadLine();
+                usuarioAtual.AlterarSenha(novaSenha);
+                break;
+            case 2:
+                if (usuarioAtual != null)
+                {
+                    solicitacoes.Add(cadastro.GerarNovaSolicitacao(usuarioAtual));
+                }
+                break;
+            case 3:
+                Console.WriteLine("HISTÓRICO DE SOLICITAÇÕES:");
+                Console.WriteLine();
+                for (int i = 0; i < solicitacoes.Count; i++)
+                {
+                    Console.WriteLine(solicitacoes[i]);
+                    Console.WriteLine();
+                }
+                break;
+            default:
+                break;
         }
     }
+
+}
+#endregion
+
+
+//Classe interna para cadastrar 
+internal class Cadastro
+{
+    //Método de cadastrar administrador
+    //É criado um objeto "pessoa" que recebe o cadastro realizado na chamada do método "GerarPessoa()"
+    //Quando o cadastro é realizado, o método retorna um novo administrador com esses dados
+    public Administrador CadastrarAdministrador()
+    {
+        Pessoa pessoa = GerarPessoa();
+
+        return new Administrador(pessoa);
+    }
+
+    //Método de cadastrar síndico
+    public Sindico CadastrarSindico()
+    {
+        Pessoa pessoa = GerarPessoa();
+
+        double salario = Salario();
+
+        Predio predio = GerarPredio();
+
+        return new Sindico(pessoa, predio, salario);
+    }
+
+    //Método de cadastrar Zelador
+    public Zelador CadastrarZelador()
+    {
+        Pessoa pessoa = GerarPessoa();
+
+        double salario = Salario();
+
+        Predio predio = GerarPredio();
+
+        return new Zelador(pessoa, predio, salario);
+    }
+
+    //Método de cadastrar Morador
+    public Morador CadastrarMorador()
+    {
+        Pessoa pessoa = GerarPessoa();
+
+        Predio predio = GerarPredio();
+
+        return new Morador(pessoa, predio);
+    }
+
+    //Método para criar um objeto pessoa
+    private Pessoa GerarPessoa()
+    {
+        Console.WriteLine("Entre com os dados abaixo: ");
+        Console.Write("Nome completo: ");
+        string nomeCompleto = Console.ReadLine();
+        Console.Write("Data de nascimento: ");
+        DateTime dataNascimento = DateTime.Parse(Console.ReadLine());
+        Console.Write("Telefone: ");
+        string telefone = Console.ReadLine();
+        Console.WriteLine();
+
+        Console.WriteLine("Dados do carro");
+        Console.Write("Placa do carro: ");
+        string placaCarro = (Console.ReadLine());
+        Console.Write("Modelo do carro: ");
+        string modeloCarro = Console.ReadLine();
+        Carro carro = new Carro(placaCarro, modeloCarro);
+
+        Console.WriteLine("Informe o nivel de Acesso : ");
+        var nivel = Enum.Parse<TipoNivelAcesso>(Console.ReadLine());
+
+        Console.WriteLine("Entre com os dados para login");
+        Console.Write("Escolha seu usuário de acesso:");
+        string user = Console.ReadLine();
+        Console.Write("Escolha sua senha de acesso: ");
+        string senha = Console.ReadLine();
+
+        return new Pessoa(nomeCompleto, dataNascimento, carro, telefone, nivel, user, senha);
+    }
+
+    // Método para criar um objeto prédio
+    private Predio GerarPredio()
+    {
+        Console.WriteLine("Dados do prédio: ");
+        Console.Write("Nome do prédio: ");
+        string nomePredio = Console.ReadLine();
+        Console.Write("Bloco: ");
+        string bloco = Console.ReadLine();
+        Console.Write("Apartamento: ");
+        int apartamento = int.Parse(Console.ReadLine());
+        Predio predio = new Predio(nomePredio, bloco, apartamento);
+        return predio;
+    }
+
+    //Método para criar criar um objeto salário
+    private double Salario()
+    {
+        Console.Write("Salário: ");
+        double salario = double.Parse(Console.ReadLine());
+        return salario;
+    }
+
+    //Método para gerar nova conta a pagar
+    public Contas GerarConta()
+    {
+        Contas conta = null;
+
+        Console.Write("Digite a quantidade de novas contas a pagar: ");
+        int quantidade = int.Parse(Console.ReadLine());
+        for (int i = 0; i < quantidade; i++)
+        {
+            conta = GerarContaAPagar();
+        }
+        return conta;
+    }
+
+    private Contas GerarContaAPagar()
+    {
+        Console.WriteLine("Contas a pagar: ");
+        Console.Write("Data da conta: ");
+        DateTime dataConta = DateTime.Parse(Console.ReadLine());
+        Console.Write("Valor da energia: ");
+        double energia = double.Parse(Console.ReadLine().ToString(), CultureInfo.InvariantCulture);
+        Console.Write("Valor da luz: ");
+        double luz = double.Parse(Console.ReadLine().ToString(), CultureInfo.InvariantCulture);
+        Console.Write("Valor do gás: ");
+        double gas = double.Parse(Console.ReadLine().ToString(), CultureInfo.InvariantCulture);
+        Console.Write("Valor do jardineiro: ");
+        double jardineiro = double.Parse(Console.ReadLine().ToString(), CultureInfo.InvariantCulture);
+        Console.Write("Valo das despesar gerais: ");
+        double despesas = double.Parse(Console.ReadLine().ToString(), CultureInfo.InvariantCulture);
+        Console.Write("Valor da multa: ");
+        double multa = double.Parse(Console.ReadLine().ToString(), CultureInfo.InvariantCulture);
+        Console.Write("Valor do condomínio: ");
+        double condominio = double.Parse(Console.ReadLine().ToString(), CultureInfo.InvariantCulture);
+        Console.Write("Salário do zelador: ");
+        double zelador = double.Parse(Console.ReadLine().ToString(), CultureInfo.InvariantCulture);
+        Console.Write("Salário do síndico: ");
+        double sindico = double.Parse(Console.ReadLine().ToString(), CultureInfo.InvariantCulture);
+
+        Contas contaAPagar = new Contas(dataConta, energia, luz, gas, jardineiro, despesas, multa, condominio, zelador, sindico);
+        return contaAPagar;
+    }
+
+    //Criar método público para chamar o GerarSolicitacao()
+    public Solicitacoes GerarNovaSolicitacao(Pessoa nome)
+    {
+        Solicitacoes solicitacao = GerarSolicitacao(nome);
+        return solicitacao;
+    }
+
+    //Método gerar solicitação recebendo o nome do usuário logado como nome do solicitante
+    private Solicitacoes GerarSolicitacao(Pessoa nome)
+    {
+        Console.WriteLine("Criando nova solicitação...");
+        DateTime data = DateTime.Now;
+        Console.Write("Informe o título da solicitação: ");
+        string titulo = Console.ReadLine();
+        Console.Write("Informe a descriçao do problema, meu chapa: ");
+        string descricao = Console.ReadLine();
+        Console.WriteLine();
+        Console.WriteLine("Deseja adicionar uma observação? 1- Sim, 2- Não");
+        int opt = int.Parse(Console.ReadLine());
+
+        string observacao = null;
+        if (opt == 1)
+        {
+            Console.Write("Observação: ");
+            observacao = Console.ReadLine();
+        }
+
+        Solicitacoes solicitacao = new Solicitacoes(data, titulo, nome.NomeCompleto, descricao, observacao);
+        Console.WriteLine();
+        Console.WriteLine("Solicitação criada: ");
+        Console.WriteLine();
+        Console.WriteLine(solicitacao);
+
+        return solicitacao;
+    }
+}
 }
