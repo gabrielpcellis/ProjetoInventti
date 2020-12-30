@@ -39,7 +39,7 @@ namespace ProjetoInventti
         {
             List<Contas> contasAPagar = new List<Contas>
             {
-                new Contas (DateTime.Now, 100, 100, 100, 100, 100, 100, 100, 100, 100)
+                new Contas (DateTime.Now, Enums.TipoConta.SalarioZelador, 2400.00m)
             };
             return contasAPagar;
         }
@@ -47,11 +47,11 @@ namespace ProjetoInventti
         //Carga inicial de contas a receber
         public static List<Contas> GerarContasAReceber()
         {
-            List<Contas> contasAPagar = new List<Contas>
+            List<Contas> contasAReceber = new List<Contas>
             {
-                new Contas (DateTime.Now, 260, 150, 60, 500, 110)
+                new Contas (DateTime.Now, Enums.TipoConta.Energia, 10000.00m)
             };
-            return contasAPagar;
+            return contasAReceber;
         }
 
         public static List<Solicitacoes> GerarSolicitacoes()
