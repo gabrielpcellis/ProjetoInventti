@@ -14,6 +14,8 @@ namespace ProjetoInventti
             List<Contas> contasAPagar = CargaInicialDeDados.GerarContasAPagar();
             List<Contas> contasAReceber = CargaInicialDeDados.GerarContasAReceber();
             List<Solicitacoes> solicitacoes = CargaInicialDeDados.GerarSolicitacoes();
+            List<Solicitacoes> solicitacoesZelador = new List<Solicitacoes>();
+
             bool usuarioExistente = false;
             bool sair;
 
@@ -38,11 +40,11 @@ namespace ProjetoInventti
                         break;
                     case Enums.TipoNivelAcesso.Sindico:
                         // Chamar método responsável pelas funções do sindico
-                        menu.MenuSindico(usuariosSistema, usuarioConectado, solicitacoes);
+                        menu.MenuSindico(usuariosSistema, usuarioConectado, solicitacoes, solicitacoesZelador);
                         break;
                     case Enums.TipoNivelAcesso.Zelador:
                         // Chamar método responsável pelas funções do zelador
-                        menu.MenuZelador(usuarioConectado, solicitacoes);
+                        menu.MenuZelador(usuarioConectado, solicitacoesZelador);
                         break;
                     case Enums.TipoNivelAcesso.Morador:
                         // Chamar método responsável pelas funções do morador
@@ -65,7 +67,7 @@ namespace ProjetoInventti
                         usuarioConectado = null;
                     }
                 }
-                
+
             } while (!sair);
         }
 
@@ -74,7 +76,7 @@ namespace ProjetoInventti
         {
             do
             {
-                Console.WriteLine("                             BEM VINDO, MEU COMPATRIÓTA!!!!!!!!!!!                           ");
+                Console.WriteLine("                                         BEM VINDO, MEU COMPATRIÓTA!!!!!!!!!!!                           ");
                 Console.WriteLine();
                 Console.WriteLine("Para fazer login, informe os dados abaixo, por gentileza: ");
                 Console.WriteLine();

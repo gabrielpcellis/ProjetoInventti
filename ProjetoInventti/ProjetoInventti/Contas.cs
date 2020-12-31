@@ -82,7 +82,7 @@ namespace ProjetoInventti
                 + "Salário do síndico: R$" + SalarioSindico.ToString("F2", CultureInfo.InvariantCulture)
                 + "\n";
             }
-            
+
         }
     }
 }

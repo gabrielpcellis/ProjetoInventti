@@ -13,13 +13,13 @@ namespace ProjetoInventti
         public string Observacao { get; set; }
 
         //Construtor solicitações
-        public Solicitacoes(DateTime dataSolicitacao, string titulo, string nome, string descricaozinha, string observacao)
+        public Solicitacoes(DateTime dataSolicitacao, string titulo, string nome, string descricaozinha, TipoSolicitacao tipoSolicitacao, string observacao)
         {
             DataSolicitacao = dataSolicitacao;
             Titulo = titulo;
             Nome = nome;
             Descricao = descricaozinha;
-            TipoSolicitacao = TipoSolicitacao.Zelador;
+            TipoSolicitacao = tipoSolicitacao;
             Observacao = observacao;
         }
 

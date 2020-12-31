@@ -58,8 +58,8 @@ namespace ProjetoInventti
         {
             List<Solicitacoes> solicitacoes = new List<Solicitacoes>
             {
-                new Solicitacoes (DateTime.Now, "Vizinho chato", "Fulano", "Vou descer a porrada nele", "observação 1"),
-                new Solicitacoes (DateTime.Now, "Problema no encanamento", "Beltrano", "Cano perfurado", "observação 2")
+                new Solicitacoes (DateTime.Now, "Vizinho chato", "Fulano", "Vou descer a porrada nele", Enums.TipoSolicitacao.Recebido, "observação 1"),
+                new Solicitacoes (DateTime.Now, "Problema no encanamento", "Beltrano", "Cano perfurado", Enums.TipoSolicitacao.Recebido, "observação 2")
             };
             return solicitacoes;
         }
