@@ -87,7 +87,6 @@ namespace ProjetoInventti.Servicos
         //Método para a chamada das opções do síndico
         public void MenuSindico(List<Pessoa> usuariosSistema, Pessoa usuarioAtual, List<Solicitacoes> solicitacoes, List<Solicitacoes> solicitacoesDoZelador)
         {
-
             Console.WriteLine("Escolha uma opção, por favor: ");
             Console.WriteLine(
                             " 1) Cadastrar novo Morador, \n"
@@ -132,29 +131,22 @@ namespace ProjetoInventti.Servicos
                     Console.WriteLine("Solicitações pendentes: ");
                     Console.WriteLine();
 
-                    //Percorrerá a lista toda mostrando apenas o título dela
-                    for (int i = 0; i < solicitacoes.Count; i++)
+                    if (solicitacoes.Count > 0)
                     {
-                        if (solicitacoes[i].TipoSolicitacao == TipoSolicitacao.Recebido || solicitacoes[i].TipoSolicitacao == TipoSolicitacao.AnaliseSindico)
+                        //Percorrerá a lista toda mostrando apenas o título dela
+                        for (int i = 0; i < solicitacoes.Count; i++)
                         {
                             Console.WriteLine(i + 1 + " - " + solicitacoes[i].Titulo);
                         }
-                    }
 
-                    //Procurar uma forma de mostrar este bloco apenas quando as solicitações forem do síndico
-                    Console.WriteLine();
-                    Console.WriteLine("Para visualizar uma solicitação, escolha um número de acordo com a solicitação desejada: ");
-                    int posicaoEscolhida = int.Parse(Console.ReadLine());
-                    int posicao = posicaoEscolhida - 1;
-                    Console.WriteLine();
+                        //Procurar uma forma de mostrar este bloco apenas quando as solicitações forem do síndico
+                        Console.WriteLine();
+                        Console.WriteLine("Para visualizar uma solicitação, escolha um número acima: ");
+                        int posicaoEscolhida = int.Parse(Console.ReadLine());
+                        int posicao = posicaoEscolhida - 1;
+                        Console.WriteLine();
 
-                    //ENCONTRAR UM MEIO DE EVITAR QUE O SÍNDICO POSSA VER A SOLICITAÇÃO DE OUTRO TIPO SENÃO O DELE.
-                    //ENCONTRAR UM MEIO DE EVITAR QUE O SÍNDICO POSSA VER A SOLICITAÇÃO DE OUTRO TIPO SENÃO O DELE.
-                    //ENCONTRAR UM MEIO DE EVITAR QUE O SÍNDICO POSSA VER A SOLICITAÇÃO DE OUTRO TIPO SENÃO O DELE.
-
-                    for (int i = 0; i < solicitacoes.Count; i++)
-                    {
-                        if (solicitacoes[i].TipoSolicitacao == TipoSolicitacao.Recebido || solicitacoes[i].TipoSolicitacao == TipoSolicitacao.AnaliseSindico)
+                        for (int i = 0; i < solicitacoes.Count; i++)
                         {
                             //Percorrerá a lista, mostrando apenas a posição escolhida
                             if (solicitacoes[i] == solicitacoes[posicao])
@@ -205,7 +197,10 @@ namespace ProjetoInventti.Servicos
                             }
                         }
                     }
-
+                    else
+                    {
+                        Console.WriteLine("Não solicitações pendentes");
+                    }
                     break;
                 case 6:
                     //Filtrar histórico por tipoNivelAcesso
@@ -246,23 +241,24 @@ namespace ProjetoInventti.Servicos
                     usuarioAtual.AlterarSenha(novaSenha);
                     break;
                 case 2:
-                    //Percorrerá a lista toda mostrando apenas o título dela caso a solicitação respeite a condicional
-                    Console.WriteLine("Solicitações pendentes: ");
-                    Console.WriteLine();
-
-                    for (int j = 0; j < solicitacoes.Count; j++)
+                    if (solicitacoes.Count > 0)
                     {
-                        //Solicitações pendentes
-                        Console.WriteLine(j + 1 + " - " + solicitacoes[j].Titulo);
-                    }
-                    //A execução somente acabará quando percorrer toda a lista.
-                    for (int i = 0; i < solicitacoes.Count; i++)
-                    {
+                        Console.WriteLine("Solicitações pendentes: ");
                         Console.WriteLine();
-                        Console.WriteLine("Para visualizar, escolha um número de acordo com a solicitação desejada: ");
+
+                        for (int i = 0; i < solicitacoes.Count; i++)
+                        {
+                            //Percorrerá a lista toda mostrando apenas o título dela caso a solicitação respeite a condicional
+                            Console.WriteLine(i + 1 + " - " + solicitacoes[i].Titulo);
+                        }
+
+                        Console.WriteLine();
+                        Console.WriteLine("Para visualizar uma solicitação, escolha um número acima: ");
                         int posicaoEscolhida = int.Parse(Console.ReadLine());
                         int posicao = posicaoEscolhida - 1;
                         Console.WriteLine();
+
+                        //A execução somente acabará quando percorrer toda a lista.
 
                         for (int j = 0; j < solicitacoes.Count; j++)
                         {
@@ -274,6 +270,7 @@ namespace ProjetoInventti.Servicos
                                    " 1) Alterar status da solicitação, \n" +
                                    " 2) Adicionar observação, \n" +
                                    " 3) Cancelar:");
+
                                 int opt = int.Parse(Console.ReadLine());
                                 Console.WriteLine();
 
@@ -300,18 +297,27 @@ namespace ProjetoInventti.Servicos
                             }
                         }
                     }
-
-                    Console.WriteLine("Fim");
+                    else
+                    {
+                        Console.WriteLine("Não há solicitações pendentes.");
+                    }
                     Console.WriteLine();
                     break;
                 case 3:
                     //Histórico de solicitações
-                    Console.WriteLine("HISTÓRICO DE SOLICITAÇÕES:");
-                    Console.WriteLine();
-                    for (int i = 0; i < solicitacoes.Count; i++)
+                    if (solicitacoes.Count > 0)
                     {
-                        Console.WriteLine(solicitacoes[i]);
+                        Console.WriteLine("HISTÓRICO DE SOLICITAÇÕES:");
                         Console.WriteLine();
+                        for (int i = 0; i < solicitacoes.Count; i++)
+                        {
+                            Console.WriteLine(solicitacoes[i]);
+                            Console.WriteLine();
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Não há nenhuma solicitação.");
                     }
                     Console.WriteLine();
                     break;
@@ -323,16 +329,16 @@ namespace ProjetoInventti.Servicos
 
         #region Menu do morador
         //Método para a chamada das opções do morador
-        public void MenuMorador(List<Solicitacoes> solicitacoes, Pessoa usuarioAtual)
+        public void MenuMorador(List<Solicitacoes> solicitacoes, Pessoa usuarioAtual, List<Solicitacoes> solicitacoesSindico)
         {
             Console.WriteLine("Escolha uma opção, por favor: ");
             Console.WriteLine();
-            Console.WriteLine(
-                            " 1) Alterar senha, \n"
+            Console.WriteLine(" 1) Alterar senha, \n"
                             + " 2) Abrir nova solicitação, \n"
                             + " 3) Histórico de solicitações: ");
 
             int opcao = int.Parse(Console.ReadLine());
+
             switch (opcao)
             {
                 case 1:
@@ -343,18 +349,28 @@ namespace ProjetoInventti.Servicos
                     usuarioAtual.AlterarSenha(novaSenha);
                     break;
                 case 2:
-                    if (usuarioAtual != null)
+                    //Criar nova solicitação e enviá-la para a lista do síndico
+                    solicitacoes.Add(cadastro.GerarNovaSolicitacao(usuarioAtual));
+                    for (int i = 0; i < solicitacoes.Count; i++)
                     {
-                        solicitacoes.Add(cadastro.GerarNovaSolicitacao(usuarioAtual));
+                        solicitacoesSindico.Add(solicitacoes[i]);
                     }
                     break;
                 case 3:
-                    Console.WriteLine("HISTÓRICO DE SOLICITAÇÕES:");
-                    Console.WriteLine();
-                    for (int i = 0; i < solicitacoes.Count; i++)
+                    //Se a lista for somente inicializada, não entrará no IF
+                    if (solicitacoes.Count > 0)
                     {
-                        Console.WriteLine(solicitacoes[i]);
+                        Console.WriteLine("HISTÓRICO DE SOLICITAÇÕES:");
                         Console.WriteLine();
+                        for (int i = 0; i < solicitacoes.Count; i++)
+                        {
+                            Console.WriteLine(solicitacoes[i]);
+                            Console.WriteLine();
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Não há nenhuma solicitação no histórico");
                     }
                     break;
                 default:
@@ -540,6 +556,7 @@ namespace ProjetoInventti.Servicos
             Console.WriteLine("Solicitação criada: ");
             Console.WriteLine();
             Console.WriteLine(solicitacao);
+            Console.WriteLine();
 
             return solicitacao;
         }

@@ -13,8 +13,9 @@ namespace ProjetoInventti
             List<Pessoa> usuariosSistema = CargaInicialDeDados.GerarCarga();
             List<Contas> contasAPagar = CargaInicialDeDados.GerarContasAPagar();
             List<Contas> contasAReceber = CargaInicialDeDados.GerarContasAReceber();
-            List<Solicitacoes> solicitacoes = CargaInicialDeDados.GerarSolicitacoes();
+            List<Solicitacoes> solicitacoesSindico = CargaInicialDeDados.GerarSolicitacoes();
             List<Solicitacoes> solicitacoesZelador = new List<Solicitacoes>();
+            List<Solicitacoes> solicitacoesMorador = new List<Solicitacoes>();
 
             bool usuarioExistente = false;
             bool sair;
@@ -40,7 +41,7 @@ namespace ProjetoInventti
                         break;
                     case Enums.TipoNivelAcesso.Sindico:
                         // Chamar método responsável pelas funções do sindico
-                        menu.MenuSindico(usuariosSistema, usuarioConectado, solicitacoes, solicitacoesZelador);
+                        menu.MenuSindico(usuariosSistema, usuarioConectado, solicitacoesSindico, solicitacoesZelador);
                         break;
                     case Enums.TipoNivelAcesso.Zelador:
                         // Chamar método responsável pelas funções do zelador
@@ -48,7 +49,7 @@ namespace ProjetoInventti
                         break;
                     case Enums.TipoNivelAcesso.Morador:
                         // Chamar método responsável pelas funções do morador
-                        menu.MenuMorador(solicitacoes, usuarioConectado);
+                        menu.MenuMorador(solicitacoesMorador, usuarioConectado, solicitacoesSindico);
                         break;
                     default:
                         break;

@@ -1,11 +1,10 @@
 # Projeto
 
-
-30/12/2020
+31/12/2020
 
 #Adicionado
 Zelador: Adicionar observação, alterar status (GP-15)
-Sindico: Adicionar observação (GP-15)
+Sindico: Adicionar observação, transferir solicitação, excluir solicitação (GP-15)
 
 #Alterado
 Opção de solicitação pendente do Síndico e Zelador (GP-15)
@@ -13,7 +12,6 @@ Opção de solicitação pendente do Síndico e Zelador (GP-15)
 #Corrigido
 
 ==================================================
-
 29/12/2020
 
 #Adicionado
