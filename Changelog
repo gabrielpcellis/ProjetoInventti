@@ -1,5 +1,17 @@
 # Projeto
 
+31/12/2020
+
+#Adicionado
+Zelador: Adicionar observação, alterar status (GP-15)
+Sindico: Adicionar observação, transferir solicitação, excluir solicitação (GP-15)
+
+#Alterado
+Opção de solicitação pendente do Síndico e Zelador (GP-15)
+
+#Corrigido
+
+==================================================
 29/12/2020
 
 #Adicionado
@@ -53,7 +65,7 @@ Classe Contas (GP-10)
 Novos métodos adicionados às classes "Menu" e "Pessoa" (GP-09)
 
 #Alterado
-Pequenas alterações em parâmetros de entrada
+Pequenas alterações em parâmetros de entrada (GP-09)
 
 #Corrigido
 
@@ -87,10 +99,11 @@ Injeção de valores nas listas. (GP-06)
 Comentário contendo código para uso posterior (GP-06)
 
 #Alterado
-Leves alterações nas variáveis das classes entidade.
-Alterações nos métodos da classe cadastro.
+Leves alterações nas variáveis das classes entidade. (GP-06)
+Alterações nos métodos da classe cadastro. (GP-06)
 
 #Corrigido
+Ordem das versões corrigida
 
 ==================================================
 14/12/2020

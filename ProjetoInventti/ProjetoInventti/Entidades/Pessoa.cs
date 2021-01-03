@@ -46,6 +46,7 @@ namespace ProjetoInventti.Entidades
         {
             SenhaAcesso = senha;
             Console.WriteLine("Nova senha: " + SenhaAcesso);
+            Console.WriteLine();
         }
 
         //Formatação do objeto para mostrar em tela
