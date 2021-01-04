@@ -15,7 +15,7 @@ namespace ProjetoInventti.Entidades
             Salario = salario;
         }
 
-        public Sindico (Pessoa pessoa, Predio predio, double salario) : base (pessoa.NomeCompleto, pessoa.DataNascimento, pessoa.Carro, pessoa.Telefone, TipoNivelAcesso.Sindico,
+        public Sindico(Pessoa pessoa, Predio predio, double salario) : base(pessoa.NomeCompleto, pessoa.DataNascimento, pessoa.Carro, pessoa.Telefone, TipoNivelAcesso.Sindico,
             pessoa.UsuarioAcesso, pessoa.SenhaAcesso)
         {
             PredioSindico = predio;

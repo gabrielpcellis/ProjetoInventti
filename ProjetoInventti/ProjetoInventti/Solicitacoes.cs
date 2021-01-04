@@ -10,15 +10,17 @@ namespace ProjetoInventti
         public string Nome { get; set; }
         public string Descricao { get; set; }
         public TipoSolicitacao TipoSolicitacao { get; set; }
+        public string Observacao { get; set; }
 
         //Construtor solicitações
-        public Solicitacoes(DateTime dataSolicitacao, string titulo, string nome, string descricaozinha)
+        public Solicitacoes(DateTime dataSolicitacao, string titulo, string nome, string descricaozinha, TipoSolicitacao tipoSolicitacao, string observacao)
         {
             DataSolicitacao = dataSolicitacao;
             Titulo = titulo;
             Nome = nome;
             Descricao = descricaozinha;
-            TipoSolicitacao = TipoSolicitacao.Recebido;
+            TipoSolicitacao = tipoSolicitacao;
+            Observacao = observacao;
         }
 
         //Formatação do objeto
@@ -32,8 +34,10 @@ namespace ProjetoInventti
                 + Descricao + "\n"
                 + "NOME: "
                 + Nome + "\n"
-                + "STATUS: " 
-                + TipoSolicitacao;
+                + "STATUS: "
+                + TipoSolicitacao + "\n"
+                + "OBSERVAÇÃO: "
+                + Observacao;
         }
     }
 }
