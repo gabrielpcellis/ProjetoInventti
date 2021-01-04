@@ -1,4 +1,5 @@
-﻿using ProjetoInventti.Enums;
+﻿using ProjetoInventti.Entidades;
+using ProjetoInventti.Enums;
 using System;
 
 namespace ProjetoInventti
@@ -9,11 +10,13 @@ namespace ProjetoInventti
         public string Titulo { get; set; }
         public string Nome { get; set; }
         public string Descricao { get; set; }
-        public TipoSolicitacao TipoSolicitacao { get; set; }
+        public StatusSolicitacao TipoSolicitacao { get; set; }
         public string Observacao { get; set; }
+        public Predio Predio { get; set; }
+
 
         //Construtor solicitações
-        public Solicitacoes(DateTime dataSolicitacao, string titulo, string nome, string descricaozinha, TipoSolicitacao tipoSolicitacao, string observacao)
+        public Solicitacoes(DateTime dataSolicitacao, string titulo, string nome, string descricaozinha, StatusSolicitacao tipoSolicitacao, string observacao, Predio predio)
         {
             DataSolicitacao = dataSolicitacao;
             Titulo = titulo;
@@ -21,6 +24,7 @@ namespace ProjetoInventti
             Descricao = descricaozinha;
             TipoSolicitacao = tipoSolicitacao;
             Observacao = observacao;
+            Predio = predio;
         }
 
         //Formatação do objeto
