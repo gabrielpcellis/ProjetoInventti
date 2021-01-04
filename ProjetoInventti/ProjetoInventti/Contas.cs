@@ -1,12 +1,6 @@
-<<<<<<< HEAD
-﻿using System;
-using System.Globalization;
-=======
-﻿using ProjetoInventti.Enums;
+using ProjetoInventti.Enums;
 using System;
 using System.Globalization;
-
->>>>>>> revisao
 
 namespace ProjetoInventti
 {

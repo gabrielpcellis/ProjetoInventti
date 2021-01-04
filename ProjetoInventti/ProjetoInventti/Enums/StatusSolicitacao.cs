@@ -1,6 +1,6 @@
 ﻿namespace ProjetoInventti.Enums
 {
-    public enum TipoSolicitacao : int
+    public enum StatusSolicitacao : int
     {
         Recebido = 0,
         Analise = 1,

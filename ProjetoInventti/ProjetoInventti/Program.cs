@@ -11,14 +11,15 @@ namespace ProjetoInventti
         {
             Pessoa usuarioConectado = null;
             List<Pessoa> usuariosSistema = CargaInicialDeDados.GerarCarga();
-            List<Contas> contasAPagar = CargaInicialDeDados.GerarContasAPagar();
-            List<Contas> contasAReceber = CargaInicialDeDados.GerarContasAReceber();
+            List<Predio> predios = CargaInicialDeDados.GerarPredio();
+            List<Contas> contas = CargaInicialDeDados.GerarContasAPagar();
             List<Solicitacoes> solicitacoesSindico = CargaInicialDeDados.GerarSolicitacoes();
             List<Solicitacoes> solicitacoesZelador = new List<Solicitacoes>();
             List<Solicitacoes> solicitacoesMorador = new List<Solicitacoes>();
 
             bool usuarioExistente = false;
             bool sair;
+
 
             do
             {
@@ -37,11 +38,11 @@ namespace ProjetoInventti
                 {
                     case Enums.TipoNivelAcesso.Administrador:
                         // Chamar método responsável pelas funções do administrador
-                        menu.MenuAdministrador(usuariosSistema, contasAPagar, contasAReceber);
+                        menu.MenuAdministrador(usuariosSistema, contas, predios);
                         break;
                     case Enums.TipoNivelAcesso.Sindico:
                         // Chamar método responsável pelas funções do sindico
-                        menu.MenuSindico(usuariosSistema, usuarioConectado, solicitacoesSindico, solicitacoesZelador);
+                        menu.MenuSindico(usuariosSistema, usuarioConectado, solicitacoesSindico, predios);
                         break;
                     case Enums.TipoNivelAcesso.Zelador:
                         // Chamar método responsável pelas funções do zelador

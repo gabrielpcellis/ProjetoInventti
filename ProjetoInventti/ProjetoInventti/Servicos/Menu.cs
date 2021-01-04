@@ -1,5 +1,6 @@
 ﻿using ProjetoInventti.Entidades;
 using ProjetoInventti.Enums;
+using ProjetoInventti.Servicos.Geradores;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -13,7 +14,10 @@ namespace ProjetoInventti.Servicos
 
     public class Menu
     {
-        Cadastro cadastro = new Cadastro();
+        GeradorPessoa geradorPessoa = new GeradorPessoa();
+        GeradorConta geradorConta = new GeradorConta();
+        GeradorSolicitacao geradorSolicitacao = new GeradorSolicitacao();
+
 
         //Menus
         //Método para a chamada das opções do administrador
@@ -21,7 +25,7 @@ namespace ProjetoInventti.Servicos
 
         #region Menu do administrador
         //Método para chamar as opções do administrador
-        public void MenuAdministrador(List<Pessoa> usuariosSistema, List<Contas> contasAPagar, List<Contas> contasAReceber)
+        public void MenuAdministrador(List<Pessoa> usuariosSistema, List<Contas> contas, List<Predio> predios)
         {
             // CRIAR OPÇÕES DE ESCOLHA PARA O ADM
             Console.WriteLine("Escolha uma opção, por favor:");
@@ -38,33 +42,35 @@ namespace ProjetoInventti.Servicos
             {
                 case 1:
                     //Cadastrar administrador
-                    usuariosSistema.Add(cadastro.CadastrarAdministrador());
+                    usuariosSistema.Add(geradorPessoa.CadastrarAdministrador());
                     break;
                 case 2:
                     //Cadastrar Síndico
-                    usuariosSistema.Add(cadastro.CadastrarSindico());
+                    usuariosSistema.Add(geradorPessoa.CadastrarSindico(predios));
                     break;
                 case 3:
                     //Contas a pagar
                     Console.WriteLine("CONTAS A PAGAR:");
-                    foreach(var obj in contasAPagar)
+                    foreach (var obj in contas)
                     {
-                        Console.WriteLine(obj);
+                        if (obj.TipoConta == TipoConta.Pagar)
+                            Console.WriteLine(obj);
                     }
                     break;
                 case 4:
                     //Contas a receber
                     Console.WriteLine("CONTAS A RECEBER:");
-                    foreach (var obj in contasAReceber)
+                    foreach (var obj in contas)
                     {
-                        Console.WriteLine(obj);
+                        if (obj.TipoConta == TipoConta.Receber)
+                            Console.WriteLine(obj);
                     }
                     break;
                 case 5:
                     //Historico Total de Gastos
                     Console.WriteLine("HISTÓRICO DE GASTOS:");
                     decimal totalGasto = 0.0m;
-                    foreach (var obj in contasAReceber)
+                    foreach (var obj in contas)
                     {
                         totalGasto += obj.Valor;
                     }
@@ -73,7 +79,7 @@ namespace ProjetoInventti.Servicos
                 case 6:
                     //Gerar conta a pagar
                     Console.WriteLine("NOVA CONTA A PAGAR: ");
-                    contasAPagar.AddRange(cadastro.GerarConta()) ;
+                    contas.AddRange(geradorConta.GerarConta());
                     break;
                 default:
                     break;
@@ -84,7 +90,7 @@ namespace ProjetoInventti.Servicos
 
         #region Menu do síndico
         //Método para a chamada das opções do síndico
-        public void MenuSindico(List<Pessoa> usuariosSistema, Pessoa usuarioAtual, List<Solicitacoes> solicitacoes, List<Solicitacoes> solicitacoesDoZelador)
+        public void MenuSindico(List<Pessoa> usuariosSistema, Pessoa usuarioAtual, List<Solicitacoes> solicitacoes, List<Predio> predios)
         {
             Console.WriteLine("Escolha uma opção, por favor: ");
             Console.WriteLine(
@@ -99,10 +105,10 @@ namespace ProjetoInventti.Servicos
             switch (opcao)
             {
                 case 1:
-                    usuariosSistema.Add(cadastro.CadastrarMorador());
+                    usuariosSistema.Add(geradorPessoa.CadastrarMorador(predios));
                     break;
                 case 2:
-                    usuariosSistema.Add(cadastro.CadastrarZelador());
+                    usuariosSistema.Add(geradorPessoa.CadastrarZelador(predios));
                     break;
                 case 3:
                     Console.WriteLine();
@@ -126,79 +132,13 @@ namespace ProjetoInventti.Servicos
                     }
                     break;
                 case 5:
-                    //Solicitações pendentes
-                    Console.WriteLine("Solicitações pendentes: ");
-                    Console.WriteLine();
-
-                    if (solicitacoes.Count > 0)
+                    Console.WriteLine("Solicitações Recebidas: ");
+                    Sindico sindico = (Sindico)usuarioAtual; 
+                    List<Solicitacoes> solicitacoesRecebidas = solicitacoes.FindAll(x => x.Predio.NomePredio == sindico.PredioSindico.NomePredio);
+                    foreach(var obj in solicitacoesRecebidas)
                     {
-                        //Percorrerá a lista toda mostrando apenas o título dela
-                        for (int i = 0; i < solicitacoes.Count; i++)
-                        {
-                            Console.WriteLine(i + 1 + " - " + solicitacoes[i].Titulo);
-                        }
-
-                        //Procurar uma forma de mostrar este bloco apenas quando as solicitações forem do síndico
+                        Console.WriteLine(obj.ToString());
                         Console.WriteLine();
-                        Console.WriteLine("Para visualizar uma solicitação, escolha um número acima: ");
-                        int posicaoEscolhida = int.Parse(Console.ReadLine());
-                        int posicao = posicaoEscolhida - 1;
-                        Console.WriteLine();
-
-                        for (int i = 0; i < solicitacoes.Count; i++)
-                        {
-                            //Percorrerá a lista, mostrando apenas a posição escolhida
-                            if (solicitacoes[i] == solicitacoes[posicao])
-                            {
-                                Console.WriteLine(solicitacoes[i]);
-                                Console.WriteLine();
-                                //Se o tipo de solicitação for Recebida ou AnaliseSindico, faça
-
-                                Console.WriteLine("Escolha uma opção: \n" +
-                                    " 1) Alterar status da solicitação, \n" +
-                                    " 2) Adicionar observação, \n" +
-                                    " 3) Excluir solicitação, \n" +
-                                    " 4) Transferir para o zelador, \n" +
-                                    " 5) Cancelar:");
-
-                                int opt = int.Parse(Console.ReadLine());
-                                Console.WriteLine();
-
-                                switch (opt)
-                                {
-                                    case 1:
-                                        Console.WriteLine("Digite o novo status da solicitação: 'AnaliseSindico', 'Finalizado', 'Zelador', AnaliseZelador: ");
-                                        solicitacoes[i].TipoSolicitacao = Enum.Parse<TipoSolicitacao>(Console.ReadLine());
-                                        break;
-                                    case 2:
-                                        Console.Write("Adicionar observação: ");
-                                        string observacao = Console.ReadLine();
-                                        solicitacoes[i].Observacao = observacao;
-                                        Console.WriteLine("Nova observação: " + solicitacoes[i].Observacao);
-                                        Console.WriteLine();
-                                        break;
-                                    case 3:
-                                        solicitacoes.RemoveAt(i);
-                                        Console.WriteLine("A solicitação foi excluída.");
-                                        Console.WriteLine();
-                                        break;
-                                    case 4:
-                                        solicitacoesDoZelador.Add(solicitacoes[i]);
-                                        solicitacoes.RemoveAt(i);
-                                        Console.WriteLine("Solicitação transferida.");
-                                        Console.WriteLine();
-                                        break;
-                                    case 5:
-                                        Console.WriteLine("Cancelando...");
-                                        Console.WriteLine();
-                                        break;
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Não solicitações pendentes");
                     }
                     break;
                 case 6:
@@ -277,7 +217,7 @@ namespace ProjetoInventti.Servicos
                                 {
                                     case 1:
                                         Console.WriteLine("Digite o novo status da solicitação: 'AnaliseZelador: ");
-                                        solicitacoes[posicao].TipoSolicitacao = Enum.Parse<TipoSolicitacao>(Console.ReadLine());
+                                        solicitacoes[posicao].TipoSolicitacao = Enum.Parse<StatusSolicitacao>(Console.ReadLine());
                                         Console.WriteLine("Status atualizado: " + solicitacoes[posicao].TipoSolicitacao);
                                         Console.WriteLine();
                                         break;
@@ -349,11 +289,7 @@ namespace ProjetoInventti.Servicos
                     break;
                 case 2:
                     //Criar nova solicitação e enviá-la para a lista do síndico
-                    solicitacoes.Add(cadastro.GerarNovaSolicitacao(usuarioAtual));
-                    for (int i = 0; i < solicitacoes.Count; i++)
-                    {
-                        solicitacoesSindico.Add(solicitacoes[i]);
-                    }
+                    solicitacoes.Add(geradorSolicitacao.GerarNovaSolicitacao(usuarioAtual));
                     break;
                 case 3:
                     //Se a lista for somente inicializada, não entrará no IF
@@ -378,149 +314,6 @@ namespace ProjetoInventti.Servicos
         }
 
     }
+
     #endregion
-
-
-    //Classe interna para cadastrar 
-    internal class Cadastro
-    {
-        //Método de cadastrar administrador
-        //É criado um objeto "pessoa" que recebe o cadastro realizado na chamada do método "GerarPessoa()"
-        //Quando o cadastro é realizado, o método retorna um novo administrador com esses dados
-        public Administrador CadastrarAdministrador()
-        {
-            return new Administrador(GerarPessoa());
-        }
-
-        //Método de cadastrar síndico
-        public Sindico CadastrarSindico()
-        {
-            return new Sindico(GerarPessoa(), GerarPredio(), Salario());
-        }
-
-        //Método de cadastrar Zelador
-        public Zelador CadastrarZelador()
-        {
-            return new Zelador(GerarPessoa(), GerarPredio(), Salario());
-        }
-
-        //Método de cadastrar Morador
-        public Morador CadastrarMorador()
-        {
-            return new Morador(GerarPessoa(), GerarPredio());
-        }
-
-        //Método para criar um objeto pessoa
-        private Pessoa GerarPessoa()
-        {
-            Console.WriteLine("Entre com os dados abaixo: ");
-            Console.Write("Nome completo: ");
-            string nomeCompleto = Console.ReadLine();
-            Console.Write("Data de nascimento: ");
-            DateTime dataNascimento = DateTime.Parse(Console.ReadLine());
-            Console.Write("Telefone: ");
-            string telefone = Console.ReadLine();
-            Console.WriteLine();
-
-            Console.WriteLine("Dados do carro");
-            Console.Write("Placa do carro: ");
-            string placaCarro = (Console.ReadLine());
-            Console.Write("Modelo do carro: ");
-            string modeloCarro = Console.ReadLine();
-            Carro carro = new Carro(placaCarro, modeloCarro);
-
-            Console.WriteLine("Informe o nivel de Acesso : ");
-            var nivel = Enum.Parse<TipoNivelAcesso>(Console.ReadLine());
-
-            Console.WriteLine("Entre com os dados para login");
-            Console.Write("Escolha seu usuário de acesso:");
-            string user = Console.ReadLine();
-            Console.Write("Escolha sua senha de acesso: ");
-            string senha = Console.ReadLine();
-
-            return new Pessoa(nomeCompleto, dataNascimento, carro, telefone, nivel, user, senha);
-        }
-
-        // Método para criar um objeto prédio
-        private Predio GerarPredio()
-        {
-            Console.WriteLine("Dados do prédio: ");
-            Console.Write("Nome do prédio: ");
-            string nomePredio = Console.ReadLine();
-            Console.Write("Bloco: ");
-            string bloco = Console.ReadLine();
-            Console.Write("Apartamento: ");
-            int apartamento = int.Parse(Console.ReadLine());
-            Predio predio = new Predio(nomePredio, bloco, apartamento);
-            return predio;
-        }
-
-        //Método para criar criar um objeto salário
-        private double Salario()
-        {
-            Console.Write("Salário: ");
-            double salario = double.Parse(Console.ReadLine());
-            return salario;
-        }
-
-        //Método para gerar nova conta a pagar
-        public List<Contas> GerarConta()
-        {
-            List<Contas> conta = new List<Contas>();
-
-            Console.Write("Digite a quantidade de novas contas a pagar: ");
-            int quantidade = int.Parse(Console.ReadLine());
-            for (int i = 0; i < quantidade; i++)
-            {
-                Console.WriteLine("Contas a pagar: ");
-                Console.Write("Data da conta: ");
-                DateTime dataConta = DateTime.Parse(Console.ReadLine());
-                Console.WriteLine("Tipo de Conta: ");
-                TipoConta tipo = Enum.Parse<TipoConta>(Console.ReadLine());
-                Console.WriteLine("Valor da Conta: ");
-                decimal valor = decimal.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
-
-                conta.Add(new Contas(dataConta, tipo, valor));
-
-            }
-            return conta;
-        }
-
-        //Criar método público para chamar o GerarSolicitacao()
-        public Solicitacoes GerarNovaSolicitacao(Pessoa nome)
-        {
-            Solicitacoes solicitacao = GerarSolicitacao(nome);
-            return solicitacao;
-        }
-
-        //Método gerar solicitação recebendo o nome do usuário logado como nome do solicitante
-        private Solicitacoes GerarSolicitacao(Pessoa nome)
-        {
-            Console.WriteLine("Criando nova solicitação...");
-            DateTime data = DateTime.Now;
-            Console.Write("Informe o título da solicitação: ");
-            string titulo = Console.ReadLine();
-            Console.Write("Informe a descriçao do problema, meu chapa: ");
-            string descricao = Console.ReadLine();
-            Console.WriteLine();
-            Console.WriteLine("Deseja adicionar uma observação? 1- Sim, 2- Não");
-            int opt = int.Parse(Console.ReadLine());
-
-            string observacao = null;
-            if (opt == 1)
-            {
-                Console.Write("Observação: ");
-                observacao = Console.ReadLine();
-            }
-
-            Solicitacoes solicitacao = new Solicitacoes(data, titulo, nome.NomeCompleto, descricao, TipoSolicitacao.Recebido, observacao);
-            Console.WriteLine();
-            Console.WriteLine("Solicitação criada: ");
-            Console.WriteLine();
-            Console.WriteLine(solicitacao);
-            Console.WriteLine();
-
-            return solicitacao;
-        }
-    }
 }
