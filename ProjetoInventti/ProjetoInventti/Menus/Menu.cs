@@ -1,11 +1,12 @@
 ﻿using ProjetoInventti.Entidades;
 using ProjetoInventti.Enums;
+using ProjetoInventti.Servicos;
 using ProjetoInventti.Servicos.Geradores;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 
-namespace ProjetoInventti.Servicos
+namespace ProjetoInventti.Menus
 {
     /* Descrição da classe Menu:
      * Esta classe contém os métodos necessários para fazer a chamada das opções de menu de cada tipo de pessoa 
@@ -18,19 +19,16 @@ namespace ProjetoInventti.Servicos
         GeradorConta geradorConta = new GeradorConta();
         GeradorSolicitacao geradorSolicitacao = new GeradorSolicitacao();
 
-
         //Menus
-        //Método para a chamada das opções do administrador
-        //O argumento do método é uma lista que adiciona os dados do método chamado pelo objeto "cadastro"
 
         #region Menu do administrador
-        //Método para chamar as opções do administrador
+        //Método para chamar as opções do administrador 
+        //Finalizado
         public void MenuAdministrador(List<Pessoa> usuariosSistema, List<Contas> contas, List<Predio> predios)
         {
             // CRIAR OPÇÕES DE ESCOLHA PARA O ADM
             Console.WriteLine("Escolha uma opção, por favor:");
-            Console.WriteLine(
-                            " 1) Cadastrar novo Administrador, \n"
+            Console.WriteLine(" 1) Cadastrar novo Administrador, \n"
                             + " 2) Cadastrar novo Síndico, \n"
                             + " 3) Contas a pagar, \n"
                             + " 4) Contas a receber, \n"
@@ -74,6 +72,8 @@ namespace ProjetoInventti.Servicos
                     {
                         totalGasto += obj.Valor;
                     }
+                    Console.WriteLine();
+                    Console.Write("Total: ");
                     Console.WriteLine(totalGasto.ToString("F2", CultureInfo.InvariantCulture));
                     break;
                 case 6:
@@ -90,11 +90,10 @@ namespace ProjetoInventti.Servicos
 
         #region Menu do síndico
         //Método para a chamada das opções do síndico
-        public void MenuSindico(List<Pessoa> usuariosSistema, Pessoa usuarioAtual, List<Solicitacoes> solicitacoes, List<Predio> predios)
+        public void MenuSindico(List<Pessoa> usuariosSistema, Pessoa usuarioAtual, List<Solicitacoes> solicitacoes, List<Predio> predios, List<Solicitacoes> solicitacoesDoZelador)
         {
             Console.WriteLine("Escolha uma opção, por favor: ");
-            Console.WriteLine(
-                            " 1) Cadastrar novo Morador, \n"
+            Console.WriteLine(" 1) Cadastrar novo Morador, \n"
                             + " 2) Cadastrar novo Zelador, \n"
                             + " 3) Alterar senha, \n"
                             + " 4) Lista de moradores, \n"
@@ -129,10 +128,12 @@ namespace ProjetoInventti.Servicos
                             //Mostrando os dados formatados do objeto atual
                             Console.WriteLine(usuariosSistema[i]);
                         }
+                        Console.WriteLine();
                     }
                     break;
                 case 5:
-                    Console.WriteLine("Solicitações Recebidas: ");
+                    Console.WriteLine("Solicitações pendentes: ");
+                    Console.WriteLine();
                     Sindico sindico = (Sindico)usuarioAtual; 
                     List<Solicitacoes> solicitacoesRecebidas = solicitacoes.FindAll(x => x.Predio.NomePredio == sindico.PredioSindico.NomePredio);
                     foreach(var obj in solicitacoesRecebidas)
@@ -140,6 +141,7 @@ namespace ProjetoInventti.Servicos
                         Console.WriteLine(obj.ToString());
                         Console.WriteLine();
                     }
+                    Submenu.SubmenuSindico(solicitacoesRecebidas, solicitacoesDoZelador);
                     break;
                 case 6:
                     //Filtrar histórico por tipoNivelAcesso
@@ -216,7 +218,7 @@ namespace ProjetoInventti.Servicos
                                 switch (opt)
                                 {
                                     case 1:
-                                        Console.WriteLine("Digite o novo status da solicitação: 'AnaliseZelador: ");
+                                        Console.WriteLine("Digite o novo status da solicitação: 'Analise', 'Finalizado': ");
                                         solicitacoes[posicao].TipoSolicitacao = Enum.Parse<StatusSolicitacao>(Console.ReadLine());
                                         Console.WriteLine("Status atualizado: " + solicitacoes[posicao].TipoSolicitacao);
                                         Console.WriteLine();
@@ -306,6 +308,7 @@ namespace ProjetoInventti.Servicos
                     else
                     {
                         Console.WriteLine("Não há nenhuma solicitação no histórico");
+                        Console.WriteLine();
                     }
                     break;
                 default:

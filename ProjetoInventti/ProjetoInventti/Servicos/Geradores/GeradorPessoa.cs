@@ -6,8 +6,7 @@ using System.Globalization;
 
 namespace ProjetoInventti.Servicos
 {
-   
-    //Classe interna para cadastrar 
+    //Classe para cadastrar 
     internal class GeradorPessoa
     {
         //Método de cadastrar administrador
@@ -43,6 +42,7 @@ namespace ProjetoInventti.Servicos
         {
             Console.WriteLine("Escolha o prédio pelo nome: ");
             predios.ForEach(p => Console.WriteLine(p.NomePredio));
+            Console.WriteLine("Prédio: ");
             string nome = Console.ReadLine();
             Predio predio = predios.Find(f => f.NomePredio == nome);
             return new Morador(GerarPessoa(), predio);
@@ -51,6 +51,7 @@ namespace ProjetoInventti.Servicos
         //Método para criar um objeto pessoa
         private Pessoa GerarPessoa()
         {
+            Console.WriteLine();
             Console.WriteLine("Entre com os dados abaixo: ");
             Console.Write("Nome completo: ");
             string nomeCompleto = Console.ReadLine();
@@ -67,9 +68,10 @@ namespace ProjetoInventti.Servicos
             string modeloCarro = Console.ReadLine();
             Carro carro = new Carro(placaCarro, modeloCarro);
 
-            Console.WriteLine("Informe o nivel de Acesso : ");
+            Console.Write("Informe o nivel de Acesso: ");
             var nivel = Enum.Parse<TipoNivelAcesso>(Console.ReadLine());
-
+            
+            Console.WriteLine();
             Console.WriteLine("Entre com os dados para login");
             Console.Write("Escolha seu usuário de acesso:");
             string user = Console.ReadLine();
@@ -82,6 +84,7 @@ namespace ProjetoInventti.Servicos
         //Método para criar criar um objeto salário
         private double Salario()
         {
+            Console.WriteLine();
             Console.Write("Salário: ");
             double salario = double.Parse(Console.ReadLine());
             return salario;

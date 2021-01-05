@@ -13,7 +13,6 @@ namespace ProjetoInventti
             { 
                 new Predio("Anemona", "Bloco A", 10, 40, new DateTime(2007, 08, 28)),
                 new Predio("Alpinea Rosa", "Bloco A", 10, 40, new DateTime(2007, 08, 28)) 
-            
             };
 
             return predio;
@@ -58,7 +57,7 @@ namespace ProjetoInventti
             };
             return contasAPagar;
         }
-
+        //Carga inicial de solicitações
         public static List<Solicitacoes> GerarSolicitacoes()
         {
             var predio = GerarPredio();

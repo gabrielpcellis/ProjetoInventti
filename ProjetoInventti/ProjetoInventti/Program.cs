@@ -1,5 +1,5 @@
 ﻿using ProjetoInventti.Entidades;
-using ProjetoInventti.Servicos;
+using ProjetoInventti.Menus;
 using System;
 using System.Collections.Generic;
 
@@ -14,12 +14,11 @@ namespace ProjetoInventti
             List<Predio> predios = CargaInicialDeDados.GerarPredio();
             List<Contas> contas = CargaInicialDeDados.GerarContasAPagar();
             List<Solicitacoes> solicitacoesSindico = CargaInicialDeDados.GerarSolicitacoes();
-            List<Solicitacoes> solicitacoesZelador = new List<Solicitacoes>();
+            List<Solicitacoes> solicitacoesZelador = CargaInicialDeDados.GerarSolicitacoes();
             List<Solicitacoes> solicitacoesMorador = new List<Solicitacoes>();
 
             bool usuarioExistente = false;
             bool sair;
-
 
             do
             {
@@ -42,7 +41,7 @@ namespace ProjetoInventti
                         break;
                     case Enums.TipoNivelAcesso.Sindico:
                         // Chamar método responsável pelas funções do sindico
-                        menu.MenuSindico(usuariosSistema, usuarioConectado, solicitacoesSindico, predios);
+                        menu.MenuSindico(usuariosSistema, usuarioConectado, solicitacoesSindico, predios, solicitacoesSindico);
                         break;
                     case Enums.TipoNivelAcesso.Zelador:
                         // Chamar método responsável pelas funções do zelador
@@ -78,7 +77,7 @@ namespace ProjetoInventti
         {
             do
             {
-                Console.WriteLine("                                         BEM VINDO, MEU COMPATRIÓTA!!!!!!!!!!!                           ");
+                Console.WriteLine("                                      BEM VINDO, MEU COMPATRIÓTAAAAAAAAAAAAAAA!!!!!!!!!!!                           ");
                 Console.WriteLine();
                 Console.WriteLine("Para fazer login, informe os dados abaixo, por gentileza: ");
                 Console.WriteLine();
