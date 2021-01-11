@@ -115,21 +115,20 @@ namespace ProjetoInventti.Menus
                     Console.WriteLine("Para alterar sua senha, informe os dados abaixo: ");
                     Console.Write("Digite a nova senha: ");
                     string novaSenha = Console.ReadLine();
+
                     usuarioAtual.AlterarSenha(novaSenha);
                     break;
                 case 4:
                     //Mostrar a lista com as alterações feitas
                     Console.WriteLine("Lista de moradores: ");
                     Console.WriteLine();
-                    foreach (var item in usuariosSistema)
+
+                    //Lista filtrada
+                    List<Pessoa> moradores = usuariosSistema.FindAll(x => x.TipoNivelAcesso == TipoNivelAcesso.Morador);
+                    foreach (var item in moradores)
                     {
-                        //Condicional para mostrar apenas moradores
-                        //Verifica se o tipo de nível de acesso do objeto atual é igual ao tipo de nível de acesso de morador
-                        if (item.TipoNivelAcesso == TipoNivelAcesso.Morador)
-                        {
-                            //Mostrando os dados formatados do objeto atual
-                            Console.WriteLine(item);
-                        }
+                        //Mostrando os dados formatados do objeto atual
+                        Console.WriteLine(item);
                     }
                     Console.WriteLine();
                     break;
@@ -137,7 +136,10 @@ namespace ProjetoInventti.Menus
                     Console.WriteLine("Solicitações pendentes: ");
                     Console.WriteLine();
                     Sindico sindico = (Sindico)usuarioAtual;
+
+                    //Lista filtrada
                     List<Solicitacoes> solicitacoesRecebidas = solicitacoes.FindAll(x => x.Predio.NomePredio == sindico.PredioSindico.NomePredio);
+
                     //Submenu do síndico
                     Submenu.SubMenuSindico(solicitacoesRecebidas, solicitacoesDoZelador);
                     break;
@@ -154,17 +156,21 @@ namespace ProjetoInventti.Menus
                 case 7:
                     Console.WriteLine("Escolha o morador que deseja excluir: ");
                     Console.WriteLine();
-                    for (int i = 0; i < usuariosSistema.Count; i++)
+
+                    //Lista filtrada
+                    moradores = usuariosSistema.FindAll(x => x.TipoNivelAcesso == TipoNivelAcesso.Morador);
+
+                    //Mostrar a lista
+                    for (int i = 0; i < moradores.Count; i++)
                     {
-                        if (usuariosSistema[i].TipoNivelAcesso == TipoNivelAcesso.Morador)
-                        {
-                            Console.WriteLine(i + 1 + ": " + usuariosSistema[i]);
-                        }
+                        Console.WriteLine(i + 1 + ": " + moradores[i]);
                     }
                     Console.WriteLine();
                     Console.Write("Informe uma posição: ");
                     int posicaoNaLista = int.Parse(Console.ReadLine());
-                    usuariosSistema.RemoveAt(posicaoNaLista);
+
+                    moradores.RemoveAt(posicaoNaLista - 1);
+                    usuariosSistema.RemoveAt(posicaoNaLista - 1);
                     Console.WriteLine("Morador excluído.");
                     Console.WriteLine();
                     break;
@@ -204,8 +210,9 @@ namespace ProjetoInventti.Menus
                         for (int i = 0; i < solicitacoes.Count; i++)
                         {
                             //Percorrerá a lista toda mostrando apenas o título dela caso a solicitação respeite a condicional
-                            Console.WriteLine(i + 1 + " - " + solicitacoes[i].Titulo);
+                            Console.WriteLine(i + 1 + "- " + solicitacoes[i].Titulo);
                         }
+
                         //Submenu do zelador
                         Submenu.SubMenuZelador(solicitacoes);
                     }
