@@ -16,6 +16,8 @@ namespace ProjetoInventti.Menus
         {
             SubmenuZelador(solicitacoes);
         }
+
+        #region Submenus
         //Submenu do síndico para opção 5 do menu (Solicitações pendentes)
         private static void SubmenuSindico(List<Solicitacoes> solicitacoes, List<Solicitacoes> solicitacoesDoZelador)
         {
@@ -128,6 +130,6 @@ namespace ProjetoInventti.Menus
                 }
             }
         }
-
+        #endregion
     }
 }

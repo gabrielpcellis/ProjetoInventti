@@ -164,13 +164,7 @@ namespace ProjetoInventti.Menus
                     Console.WriteLine();
                     Console.Write("Informe uma posição: ");
                     int posicaoNaLista = int.Parse(Console.ReadLine());
-                    for (int i = 0; i < usuariosSistema.Count; i++)
-                    {
-                        if (usuariosSistema[i] == usuariosSistema[posicaoNaLista])
-                        {
-                            usuariosSistema.RemoveAt(i);
-                        }
-                    }
+                    usuariosSistema.RemoveAt(posicaoNaLista);
                     Console.WriteLine("Morador excluído.");
                     Console.WriteLine();
                     break;
@@ -227,9 +221,9 @@ namespace ProjetoInventti.Menus
                     {
                         Console.WriteLine("HISTÓRICO DE SOLICITAÇÕES:");
                         Console.WriteLine();
-                        for (int i = 0; i < solicitacoes.Count; i++)
+                        foreach (var item in solicitacoes)
                         {
-                            Console.WriteLine(solicitacoes[i]);
+                            Console.WriteLine(item);
                             Console.WriteLine();
                         }
                     }
