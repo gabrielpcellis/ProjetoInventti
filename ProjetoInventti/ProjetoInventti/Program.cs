@@ -2,6 +2,7 @@
 using ProjetoInventti.Menus;
 using System;
 using System.Collections.Generic;
+using ProjetoInventti.Enums;
 
 namespace ProjetoInventti
 {
@@ -35,19 +36,19 @@ namespace ProjetoInventti
                 //Verifica o tipo de acesso do objeto atual para liberar o acesso ideal
                 switch (usuarioConectado.TipoNivelAcesso)
                 {
-                    case Enums.TipoNivelAcesso.Administrador:
+                    case TipoNivelAcesso.Administrador:
                         // Chamar método responsável pelas funções do administrador
                         menu.MenuAdministrador(usuariosSistema, contas, predios);
                         break;
-                    case Enums.TipoNivelAcesso.Sindico:
+                    case TipoNivelAcesso.Sindico:
                         // Chamar método responsável pelas funções do sindico
                         menu.MenuSindico(usuariosSistema, usuarioConectado, solicitacoesSindico, predios, solicitacoesSindico);
                         break;
-                    case Enums.TipoNivelAcesso.Zelador:
+                    case TipoNivelAcesso.Zelador:
                         // Chamar método responsável pelas funções do zelador
                         menu.MenuZelador(usuarioConectado, solicitacoesZelador);
                         break;
-                    case Enums.TipoNivelAcesso.Morador:
+                    case TipoNivelAcesso.Morador:
                         // Chamar método responsável pelas funções do morador
                         menu.MenuMorador(solicitacoesMorador, usuarioConectado, solicitacoesSindico);
                         break;
@@ -55,6 +56,7 @@ namespace ProjetoInventti
                         break;
                 }
                 Console.WriteLine("Deseja sair do Programa ? 1 - Sim, 2 - Não");
+                //Expressão condicional ternária <3
                 sair = Console.ReadLine() == "1" ? true : false;
 
                 //Trocar usuário ao desconectar

@@ -1,6 +1,6 @@
 ﻿namespace ProjetoInventti.Enums
 {
-    public enum TipoConta
+    public enum TipoConta : int
     {
         Pagar,
         Receber
