@@ -170,7 +170,7 @@ namespace ProjetoInventti.Menus
                     int posicaoNaLista = int.Parse(Console.ReadLine());
 
                     moradores.RemoveAt(posicaoNaLista - 1);
-                    //REFATORAR
+                    //Encontrar solução para a lista de usuários
                     usuariosSistema.RemoveAt(posicaoNaLista - 1);
                     Console.WriteLine("Morador excluído.");
                     Console.WriteLine();
