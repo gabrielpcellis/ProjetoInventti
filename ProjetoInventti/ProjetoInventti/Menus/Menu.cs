@@ -154,26 +154,9 @@ namespace ProjetoInventti.Menus
                     Console.WriteLine();
                     break;
                 case 7:
-                    Console.WriteLine("Escolha o morador que deseja excluir: ");
-                    Console.WriteLine();
-
                     //Lista filtrada
                     moradores = usuariosSistema.FindAll(x => x.TipoNivelAcesso == TipoNivelAcesso.Morador);
-
-                    //Mostrar a lista
-                    for (int i = 0; i < moradores.Count; i++)
-                    {
-                        Console.WriteLine(i + 1 + ": " + moradores[i]);
-                    }
-                    Console.WriteLine();
-                    Console.Write("Informe uma posição: ");
-                    int posicaoNaLista = int.Parse(Console.ReadLine());
-
-                    moradores.RemoveAt(posicaoNaLista - 1);
-                    //Encontrar solução para a lista de usuários
-                    usuariosSistema.RemoveAt(posicaoNaLista - 1);
-                    Console.WriteLine("Morador excluído.");
-                    Console.WriteLine();
+                    GeradorPessoa.RemoverMorador(moradores, usuariosSistema);
                     break;
                 default:
                     break;

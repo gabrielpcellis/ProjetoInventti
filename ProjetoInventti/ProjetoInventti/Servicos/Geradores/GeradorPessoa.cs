@@ -69,7 +69,7 @@ namespace ProjetoInventti.Servicos
 
             Console.Write("Informe o nivel de Acesso: ");
             var nivel = Enum.Parse<TipoNivelAcesso>(Console.ReadLine());
-            
+
             Console.WriteLine();
             Console.WriteLine("Entre com os dados para login");
             Console.Write("Escolha seu usuário de acesso:");
@@ -88,7 +88,32 @@ namespace ProjetoInventti.Servicos
             double salario = double.Parse(Console.ReadLine());
             return salario;
         }
+        //Chamada do método ExcluirMorador
+        public static void RemoverMorador(List<Pessoa> moradores, List<Pessoa> usuariosSistema)
+        {
+            ExcluirMorador(moradores, usuariosSistema);
+        }
 
-     
+        //Método para excluir um morador
+        static private void ExcluirMorador(List<Pessoa> moradores, List<Pessoa> usuariosSistema)
+        {
+            Console.WriteLine("Escolha o morador que deseja excluir: ");
+            Console.WriteLine();
+
+            //Mostrar a lista
+            for (int i = 0; i < moradores.Count; i++)
+            {
+                Console.WriteLine(i + 1 + ": " + moradores[i]);
+            }
+            Console.WriteLine();
+            Console.Write("Informe uma posição: ");
+            int posicaoNaLista = int.Parse(Console.ReadLine());
+
+            moradores.RemoveAt(posicaoNaLista - 1);
+            //Encontrar solução para a lista de usuários
+            usuariosSistema.RemoveAt(posicaoNaLista - 1);
+            Console.WriteLine("Morador excluído.");
+            Console.WriteLine();
+        }
     }
 }
