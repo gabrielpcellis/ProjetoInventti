@@ -149,7 +149,6 @@ namespace ProjetoInventti.Menus
                         Console.WriteLine(solicitacoes[i]);
                         Console.WriteLine();
                     }
-                    Console.WriteLine();
                     break;
                 case 7:
                     //Lista filtrada
