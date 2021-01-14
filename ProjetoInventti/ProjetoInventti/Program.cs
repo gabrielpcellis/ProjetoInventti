@@ -42,7 +42,7 @@ namespace ProjetoInventti
                         break;
                     case TipoNivelAcesso.Sindico:
                         // Chamar método responsável pelas funções do sindico
-                        menu.MenuSindico(usuariosSistema, usuarioConectado, solicitacoesSindico, predios, solicitacoesSindico);
+                        menu.MenuSindico(usuariosSistema, usuarioConectado,ref solicitacoesSindico, predios, solicitacoesZelador);
                         break;
                     case TipoNivelAcesso.Zelador:
                         // Chamar método responsável pelas funções do zelador

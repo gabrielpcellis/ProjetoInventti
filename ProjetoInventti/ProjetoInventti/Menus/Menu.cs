@@ -18,7 +18,6 @@ namespace ProjetoInventti.Menus
         GeradorPessoa geradorPessoa = new GeradorPessoa();
         GeradorConta geradorConta = new GeradorConta();
         GeradorSolicitacao geradorSolicitacao = new GeradorSolicitacao();
-
         //Menus
 
         #region Menu do administrador
@@ -90,7 +89,7 @@ namespace ProjetoInventti.Menus
 
         #region Menu do síndico
         //Método para a chamada das opções do síndico
-        public void MenuSindico(List<Pessoa> usuariosSistema, Pessoa usuarioAtual, List<Solicitacoes> solicitacoes, List<Predio> predios, List<Solicitacoes> solicitacoesDoZelador)
+        public void MenuSindico(List<Pessoa> usuariosSistema, Pessoa usuarioAtual,ref List<Solicitacoes> solicitacoes, List<Predio> predios, List<Solicitacoes> solicitacoesDoZelador)
         {
             Console.WriteLine("Escolha uma opção, por favor: ");
             Console.WriteLine(" 1) Cadastrar novo Morador, \n"
@@ -114,8 +113,8 @@ namespace ProjetoInventti.Menus
                     Console.WriteLine();
                     Console.WriteLine("Para alterar sua senha, informe os dados abaixo: ");
                     Console.Write("Digite a nova senha: ");
-                    string novaSenha = Console.ReadLine();
 
+                    string novaSenha = Console.ReadLine();
                     usuarioAtual.AlterarSenha(novaSenha);
                     break;
                 case 4:
@@ -133,15 +132,14 @@ namespace ProjetoInventti.Menus
                     Console.WriteLine();
                     break;
                 case 5:
-                    Console.WriteLine("Solicitações pendentes: ");
-                    Console.WriteLine();
+                    //Solicitações pendentes
                     Sindico sindico = (Sindico)usuarioAtual;
-
                     //Lista filtrada
-                    List<Solicitacoes> solicitacoesRecebidas = solicitacoes.FindAll(x => x.Predio.NomePredio == sindico.PredioSindico.NomePredio);
-
+                    List<Solicitacoes> solicitacoesPendentes = solicitacoes.FindAll(x => x.Predio.NomePredio == sindico.PredioSindico.NomePredio);
+                    solicitacoes = solicitacoesPendentes;
+                   
                     //Submenu do síndico
-                    Submenu.SubMenuSindico(solicitacoesRecebidas, solicitacoesDoZelador);
+                    Submenu.SubMenuSindico(solicitacoesPendentes, solicitacoesDoZelador);
                     break;
                 case 6:
                     Console.WriteLine("HISTÓRICO DE SOLICITAÇÕES:");

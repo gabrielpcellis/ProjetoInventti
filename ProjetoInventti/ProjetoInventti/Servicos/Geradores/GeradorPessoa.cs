@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace ProjetoInventti.Servicos
 {
     //Classe para cadastrar 
-    internal class GeradorPessoa
+    public class GeradorPessoa
     {
         //Método de cadastrar administrador
         //É criado um objeto "pessoa" que recebe o cadastro realizado na chamada do método "GerarPessoa()"
@@ -32,6 +32,7 @@ namespace ProjetoInventti.Servicos
             Console.WriteLine("Escolha o prédio pelo nome: ");
             predios.ForEach(p => Console.WriteLine(p.NomePredio));
             string nome = Console.ReadLine();
+            Console.Write("Prédio: ");
             Predio predio = predios.Find(f => f.NomePredio == nome);
             return new Zelador(GerarPessoa(), predio, Salario());
         }
@@ -41,7 +42,7 @@ namespace ProjetoInventti.Servicos
         {
             Console.WriteLine("Escolha o prédio pelo nome: ");
             predios.ForEach(p => Console.WriteLine(p.NomePredio));
-            Console.WriteLine("Prédio: ");
+            Console.Write("Prédio: ");
             string nome = Console.ReadLine();
             Predio predio = predios.Find(f => f.NomePredio == nome);
             return new Morador(GerarPessoa(), predio);
@@ -67,8 +68,8 @@ namespace ProjetoInventti.Servicos
             string modeloCarro = Console.ReadLine();
             Carro carro = new Carro(placaCarro, modeloCarro);
 
-            Console.Write("Informe o nivel de Acesso: ");
-            var nivel = Enum.Parse<TipoNivelAcesso>(Console.ReadLine());
+            Console.Write("Informe o nivel de acesso (Administrador, Sindico, Zelador, Morador): ");
+            TipoNivelAcesso nivel = Enum.Parse<TipoNivelAcesso>(Console.ReadLine());
 
             Console.WriteLine();
             Console.WriteLine("Entre com os dados para login");

@@ -7,9 +7,9 @@ namespace ProjetoInventti.Menus
     class Submenu
     {
         //Chamar submenu do síndico
-        public static void SubMenuSindico(List<Solicitacoes> solicitacoes, List<Solicitacoes> solicitacoesDoZelador)
+        public static void SubMenuSindico(List<Solicitacoes> solicitacoesPendentes, List<Solicitacoes> solicitacoesDoZelador)
         {
-            SubmenuSindico(solicitacoes, solicitacoesDoZelador);
+            SubmenuSindico(solicitacoesPendentes, solicitacoesDoZelador);
         }
         //Chamar submenu do zelador
         public static void SubMenuZelador(List<Solicitacoes> solicitacoes)
@@ -21,59 +21,58 @@ namespace ProjetoInventti.Menus
         //Submenu do síndico para opção 5 do menu (Solicitações pendentes)
         private static void SubmenuSindico(List<Solicitacoes> solicitacoes, List<Solicitacoes> solicitacoesDoZelador)
         {
-            //Percorrerá a lista toda mostrando apenas o título dos objetos
-            for (int i = 0; i < solicitacoes.Count; i++)
+            Console.WriteLine("Solicitações pendentes: ");
+            Console.WriteLine();
+            //Percorrerá a lista toda mostrando apenas o título dos objetos caso não esteja vazia
+            if (solicitacoes.Count > 0)
             {
-                Console.WriteLine(i + 1 + "- " + solicitacoes[i].Titulo);
+                for (int i = 0; i < solicitacoes.Count; i++)
+                {
+                    Console.WriteLine(i + 1 + "- " + solicitacoes[i].Titulo);
+                }
+
+                Console.WriteLine();
+                Console.WriteLine("Para visualizar uma solicitação, escolha um número acima: ");
+                int posicaoEscolhida = int.Parse(Console.ReadLine());
+                int posicao = posicaoEscolhida - 1;
+                Console.WriteLine();
+
+                Console.WriteLine(solicitacoes[posicao]);
+                Console.WriteLine();
+
+                Console.WriteLine("Escolha uma opção: \n" +
+                    " 1) Alterar status da solicitação, \n" +
+                    " 2) Adicionar observação, \n" +
+                    " 3) Excluir solicitação, \n" +
+                    " 4) Transferir para o zelador, \n" +
+                    " 5) Cancelar:");
+
+                int opt = int.Parse(Console.ReadLine());
+                Console.WriteLine();
+
+                switch (opt)
+                {
+                    case 1:
+                        solicitacoes[posicao].AlterarStatus(solicitacoes, posicao);
+                        break;
+                    case 2:
+                        solicitacoes[posicao].AdicionarObservacao(solicitacoes, posicao);
+                        break;
+                    case 3:
+                        solicitacoes[posicao].RemoverSolicitacao(solicitacoes, posicao);
+                        break;
+                    case 4:
+                        solicitacoes[posicao].TransferirSolicitacao(solicitacoesDoZelador, solicitacoes, posicao);
+                        break;
+                    case 5:
+                        Console.WriteLine("Cancelando...");
+                        Console.WriteLine();
+                        break;
+                }
             }
-
-            Console.WriteLine();
-            Console.WriteLine("Para visualizar uma solicitação, escolha um número acima: ");
-            int posicaoEscolhida = int.Parse(Console.ReadLine());
-            int posicao = posicaoEscolhida - 1;
-            Console.WriteLine();
-
-            Console.WriteLine(solicitacoes[posicao]);
-            Console.WriteLine();
-
-            Console.WriteLine("Escolha uma opção: \n" +
-                " 1) Alterar status da solicitação, \n" +
-                " 2) Adicionar observação, \n" +
-                " 3) Excluir solicitação, \n" +
-                " 4) Transferir para o zelador, \n" +
-                " 5) Cancelar:");
-
-            int opt = int.Parse(Console.ReadLine());
-            Console.WriteLine();
-
-            switch (opt)
+            else
             {
-                case 1:
-                    Console.WriteLine("Digite o novo status da solicitação: 'Analise', 'Finalizado': ");
-                    solicitacoes[posicao].TipoSolicitacao = Enum.Parse<StatusSolicitacao>(Console.ReadLine());
-                    break;
-                case 2:
-                    Console.Write("Adicionar observação: ");
-                    string observacao = Console.ReadLine();
-                    solicitacoes[posicao].Observacao = observacao;
-                    Console.Write("Nova observação: " + solicitacoes[posicao].Observacao);
-                    Console.WriteLine();
-                    break;
-                case 3:
-                    solicitacoes.RemoveAt(posicao);
-                    Console.WriteLine("A solicitação foi excluída.");
-                    Console.WriteLine();
-                    break;
-                case 4:
-                    solicitacoesDoZelador.Insert(0, solicitacoes[posicao]);
-                    solicitacoes.RemoveAt(posicao);
-                    Console.WriteLine("Solicitação transferida.");
-                    Console.WriteLine();
-                    break;
-                case 5:
-                    Console.WriteLine("Cancelando...");
-                    Console.WriteLine();
-                    break;
+                Console.WriteLine("Não há solicitações pendentes no momento.");
             }
         }
         //Submenu do zelador
@@ -98,17 +97,10 @@ namespace ProjetoInventti.Menus
             switch (opt)
             {
                 case 1:
-                    Console.WriteLine("Digite o novo status da solicitação: 'Analise', 'Finalizado': ");
-                    solicitacoes[posicao].TipoSolicitacao = Enum.Parse<StatusSolicitacao>(Console.ReadLine());
-                    Console.WriteLine("Status atualizado: " + solicitacoes[posicao].TipoSolicitacao);
-                    Console.WriteLine();
+                    solicitacoes[posicao].AlterarStatus(solicitacoes, posicao);
                     break;
                 case 2:
-                    Console.Write("Adicionar observação: ");
-                    string observacao = Console.ReadLine();
-                    solicitacoes[posicao].Observacao = observacao;
-                    Console.WriteLine("Nova observação: " + solicitacoes[posicao].Observacao);
-                    Console.WriteLine();
+                    solicitacoes[posicao].AdicionarObservacao(solicitacoes, posicao);
                     break;
                 case 3:
                     Console.WriteLine("Cancelando...");
