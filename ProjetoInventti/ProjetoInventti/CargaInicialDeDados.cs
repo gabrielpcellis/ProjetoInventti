@@ -6,7 +6,6 @@ namespace ProjetoInventti
 {
     public static class CargaInicialDeDados
     {
-
         public static List<Predio> GerarPredio()
         {
             List<Predio> predio = new List<Predio> 
