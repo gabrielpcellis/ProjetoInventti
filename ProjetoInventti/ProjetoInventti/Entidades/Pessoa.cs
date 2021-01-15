@@ -2,6 +2,7 @@
 using ProjetoInventti.Servicos;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace ProjetoInventti.Entidades
 {
@@ -52,13 +53,15 @@ namespace ProjetoInventti.Entidades
         //Formatação do objeto para mostrar em tela
         public override string ToString()
         {
-            return NomeCompleto + ", "
-                + DataNascimento + ", "
-                + Carro.ModeloCarro + ", "
-                + Carro.PlacaCarro + ", "
-                + Telefone + ", "
-                + UsuarioAcesso + ", "
-                + SenhaAcesso;
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(NomeCompleto);
+            sb.AppendLine(DataNascimento.ToString("dd/MM/yyyy HH:mm:ss"));
+            sb.AppendLine(Carro.ModeloCarro);
+            sb.AppendLine(Carro.PlacaCarro);
+            sb.AppendLine(Telefone);
+            sb.AppendLine(UsuarioAcesso);
+            sb.AppendLine(SenhaAcesso);
+            return sb.ToString();
         }
     }
 }

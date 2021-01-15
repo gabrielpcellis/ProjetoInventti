@@ -1,6 +1,7 @@
 using ProjetoInventti.Enums;
 using System;
 using System.Globalization;
+using System.Text;
 
 namespace ProjetoInventti
 {
@@ -16,7 +17,6 @@ namespace ProjetoInventti
             TipoConta = tipoConta;
             Valor = valor;
         }
-
         public override string ToString()
         {
             return "Data da Conta: " + DataConta.ToLocalTime() + " Tipo da Conta: " + TipoConta.ToString() + " Valor: " + Valor.ToString("F2", CultureInfo.InvariantCulture);

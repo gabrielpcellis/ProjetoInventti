@@ -135,7 +135,7 @@ namespace ProjetoInventti.Menus
                     //Solicitações pendentes
                     Sindico sindico = (Sindico)usuarioAtual;
                     //Lista filtrada
-                    List<Solicitacoes> solicitacoesPendentes = solicitacoes.FindAll(x => x.Predio.NomePredio == sindico.PredioSindico.NomePredio);
+                    List<Solicitacoes> solicitacoesPendentes = solicitacoes.FindAll(x => x.Predio.NomePredio == sindico.Predio.NomePredio);
                     solicitacoes = solicitacoesPendentes;
                    
                     //Submenu do síndico

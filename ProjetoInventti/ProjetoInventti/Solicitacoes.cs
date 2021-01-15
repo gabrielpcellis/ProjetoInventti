@@ -2,6 +2,7 @@
 using ProjetoInventti.Enums;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace ProjetoInventti
 {
@@ -11,7 +12,7 @@ namespace ProjetoInventti
         public string Titulo { get; set; }
         public string Nome { get; set; }
         public string Descricao { get; set; }
-        public StatusSolicitacao TipoSolicitacao { get; set; }
+        public StatusSolicitacao StatusSolicitacao { get; set; }
         public string Observacao { get; set; }
         public Predio Predio { get; set; }
 
@@ -22,7 +23,7 @@ namespace ProjetoInventti
             Titulo = titulo;
             Nome = nome;
             Descricao = descricaozinha;
-            TipoSolicitacao = tipoSolicitacao;
+            StatusSolicitacao = tipoSolicitacao;
             Observacao = observacao;
             Predio = predio;
         }
@@ -54,23 +55,25 @@ namespace ProjetoInventti
         public void AlterarStatus(List<Solicitacoes> solicitacoes, int posicao)
         {
             Console.WriteLine("Digite o novo status da solicitação: 'Analise', 'Finalizado': ");
-            solicitacoes[posicao].TipoSolicitacao = Enum.Parse<StatusSolicitacao>(Console.ReadLine());
+            solicitacoes[posicao].StatusSolicitacao = Enum.Parse<StatusSolicitacao>(Console.ReadLine());
         }
         //Formatação do objeto
         public override string ToString()
         {
-            return "DATA: "
-                + DataSolicitacao + "\n"
-                + "TÍTULO: "
-                + Titulo + "\n"
-                + "DESCRIÇÃO: "
-                + Descricao + "\n"
-                + "NOME: "
-                + Nome + "\n"
-                + "STATUS: "
-                + TipoSolicitacao + "\n"
-                + "OBSERVAÇÃO: "
-                + Observacao;
+            StringBuilder sb = new StringBuilder();
+            sb.Append("DATA:");
+            sb.AppendLine(DataSolicitacao.ToString("dd/MM/yyyy HH:mm:ss"));
+            sb.Append("TÍTULO: ");
+            sb.AppendLine(Titulo);
+            sb.AppendLine("DESCRIÇÃO: ");
+            sb.AppendLine(Descricao);
+            sb.Append("NOME: ");
+            sb.AppendLine(Nome);
+            sb.Append("STATUS: ");
+            sb.AppendLine(StatusSolicitacao.ToString());
+            sb.Append("OBSERVAÇÃO: ");
+            sb.AppendLine(Observacao);
+            return sb.ToString();
         }
     }
 }

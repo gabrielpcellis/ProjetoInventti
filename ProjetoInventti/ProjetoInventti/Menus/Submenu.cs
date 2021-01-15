@@ -1,4 +1,4 @@
-﻿using ProjetoInventti.Enums;
+﻿using ProjetoInventti.Entidades;
 using System;
 using System.Collections.Generic;
 
@@ -7,16 +7,15 @@ namespace ProjetoInventti.Menus
     class Submenu
     {
         //Chamar submenu do síndico
-        public static void SubMenuSindico(List<Solicitacoes> solicitacoesPendentes, List<Solicitacoes> solicitacoesDoZelador)
+        public static void SubMenuSindico(List<Solicitacoes> solicitacoes, List<Solicitacoes> solicitacoesDoZelador)
         {
-            SubmenuSindico(solicitacoesPendentes, solicitacoesDoZelador);
+            SubmenuSindico(solicitacoes, solicitacoesDoZelador);
         }
         //Chamar submenu do zelador
         public static void SubMenuZelador(List<Solicitacoes> solicitacoes)
         {
             SubmenuZelador(solicitacoes);
         }
-
         #region Submenus
         //Submenu do síndico para opção 5 do menu (Solicitações pendentes)
         private static void SubmenuSindico(List<Solicitacoes> solicitacoes, List<Solicitacoes> solicitacoesDoZelador)
@@ -73,6 +72,7 @@ namespace ProjetoInventti.Menus
             else
             {
                 Console.WriteLine("Não há solicitações pendentes no momento.");
+                Console.WriteLine();
             }
         }
         //Submenu do zelador
