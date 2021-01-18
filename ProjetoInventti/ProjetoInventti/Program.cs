@@ -17,6 +17,7 @@ namespace ProjetoInventti
             List<Solicitacoes> solicitacoesSindico = CargaInicialDeDados.GerarSolicitacoes();
             List<Solicitacoes> solicitacoesZelador = CargaInicialDeDados.GerarSolicitacoes();
             List<Solicitacoes> solicitacoesMorador = new List<Solicitacoes>();
+            List<Historico> historicoDeAcoes = new List<Historico>();
 
             bool usuarioExistente = false;
             bool sair;
@@ -42,7 +43,7 @@ namespace ProjetoInventti
                         break;
                     case TipoNivelAcesso.Sindico:
                         // Chamar método responsável pelas funções do sindico
-                        menu.MenuSindico(usuariosSistema, usuarioConectado,ref solicitacoesSindico, predios, solicitacoesZelador);
+                        menu.MenuSindico(usuariosSistema, usuarioConectado, ref solicitacoesSindico, predios, solicitacoesZelador, historicoDeAcoes);
                         break;
                     case TipoNivelAcesso.Zelador:
                         // Chamar método responsável pelas funções do zelador

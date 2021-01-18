@@ -19,7 +19,11 @@ namespace ProjetoInventti
         }
         public override string ToString()
         {
-            return "Data da Conta: " + DataConta.ToLocalTime() + " Tipo da Conta: " + TipoConta.ToString() + " Valor: " + Valor.ToString("F2", CultureInfo.InvariantCulture);
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Data da conta: " + DataConta.ToString("dd/MM/yyyy HH:mm:ss"));
+            sb.AppendLine("Tipo da conta: " + TipoConta.ToString());
+            sb.AppendLine("Valor: " + Valor.ToString("F2", CultureInfo.InvariantCulture));
+            return sb.ToString();
         }
 
     }

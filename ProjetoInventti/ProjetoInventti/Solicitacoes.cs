@@ -61,18 +61,12 @@ namespace ProjetoInventti
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("DATA:");
-            sb.AppendLine(DataSolicitacao.ToString("dd/MM/yyyy HH:mm:ss"));
-            sb.Append("TÍTULO: ");
-            sb.AppendLine(Titulo);
-            sb.AppendLine("DESCRIÇÃO: ");
-            sb.AppendLine(Descricao);
-            sb.Append("NOME: ");
-            sb.AppendLine(Nome);
-            sb.Append("STATUS: ");
-            sb.AppendLine(StatusSolicitacao.ToString());
-            sb.Append("OBSERVAÇÃO: ");
-            sb.AppendLine(Observacao);
+            sb.AppendLine("DATA:" + DataSolicitacao.ToString("dd/MM/yyyy HH:mm:ss"));
+            sb.AppendLine("TÍTULO: " + Titulo);
+            sb.AppendLine("DESCRIÇÃO: " + Descricao);
+            sb.AppendLine("NOME: " + Nome);
+            sb.AppendLine("STATUS: " + StatusSolicitacao.ToString());
+            sb.AppendLine("OBSERVAÇÃO: " + Observacao);
             return sb.ToString();
         }
     }

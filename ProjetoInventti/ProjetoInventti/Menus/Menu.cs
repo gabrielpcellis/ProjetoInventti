@@ -89,7 +89,7 @@ namespace ProjetoInventti.Menus
 
         #region Menu do síndico
         //Método para a chamada das opções do síndico
-        public void MenuSindico(List<Pessoa> usuariosSistema, Pessoa usuarioAtual,ref List<Solicitacoes> solicitacoes, List<Predio> predios, List<Solicitacoes> solicitacoesDoZelador)
+        public void MenuSindico(List<Pessoa> usuariosSistema, Pessoa usuarioAtual,ref List<Solicitacoes> solicitacoes, List<Predio> predios, List<Solicitacoes> solicitacoesDoZelador, List<Historico> historico)
         {
             Console.WriteLine("Escolha uma opção, por favor: ");
             Console.WriteLine(" 1) Cadastrar novo Morador, \n"
@@ -139,14 +139,26 @@ namespace ProjetoInventti.Menus
                     solicitacoes = solicitacoesPendentes;
                    
                     //Submenu do síndico
-                    Submenu.SubMenuSindico(solicitacoesPendentes, solicitacoesDoZelador);
+                    Submenu.SubMenuSindico(solicitacoesPendentes, solicitacoesDoZelador, historico);
                     break;
                 case 6:
                     Console.WriteLine("HISTÓRICO DE SOLICITAÇÕES:");
                     Console.WriteLine();
-                    for (int i = 0; i < solicitacoes.Count; i++)
+
+                    sindico = (Sindico)usuarioAtual;
+                    solicitacoesPendentes = solicitacoes.FindAll(x => x.Predio.NomePredio == sindico.Predio.NomePredio);
+
+                    if (solicitacoesPendentes.Count > 0)
                     {
-                        Console.WriteLine(solicitacoes[i]);
+                        for (int i = 0; i < solicitacoesPendentes.Count; i++)
+                        {
+                            Console.WriteLine(solicitacoesPendentes[i]);
+                            Console.WriteLine();
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Histórico vazio.");
                         Console.WriteLine();
                     }
                     break;
