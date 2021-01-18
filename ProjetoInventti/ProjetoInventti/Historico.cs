@@ -21,10 +21,6 @@ namespace ProjetoInventti
             Momento = momento;
             Texto2 = texto1;
         }
-        public void AdicionarAoHistorico(Historico historico)
-        {
-            HistoricoDeAcoes.Add(historico);
-        }
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();

@@ -62,7 +62,6 @@ namespace ProjetoInventti.Menus
                     case 2:
                         solicitacoes[posicao].AdicionarObservacao(solicitacoes, posicao);
                         historico = new Historico("Observação adicionada à solicitação '", solicitacoes[posicao].Titulo, "' na data ", DateTime.Now);
-                        historico.AdicionarAoHistorico(historico);
                         historicoDeAcoes.Add(historico);
                         break;
                     case 3:
