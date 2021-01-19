@@ -1,17 +1,20 @@
 ﻿using ProjetoInventti.Enums;
+using ProjetoInventti.Servicos;
 using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace ProjetoInventti.Entidades
 {
     public class Pessoa
     {
-        public string NomeCompleto { get; set; }
-        public DateTime DataNascimento { get; set; }
-        public Carro Carro { get; set; }
-        public string Telefone { get; set; }
-        public TipoNivelAcesso TipoNivelAcesso { get; set; }
-        public string UsuarioAcesso { get; set; }
-        public string SenhaAcesso { get; set; }
+        public string NomeCompleto { get; private set; }
+        public DateTime DataNascimento { get; private set; }
+        public Carro Carro { get; private set; }
+        public string Telefone { get; private set; }
+        public TipoNivelAcesso TipoNivelAcesso { get; private set; }
+        public string UsuarioAcesso { get; private set; }
+        public string SenhaAcesso { get; private set; }
 
         //Construtor geral
         public Pessoa(string nomeCompleto, DateTime dataNascimento, Carro carro, string telefone, TipoNivelAcesso tipoNivelAcesso, string user, string senha)
@@ -25,10 +28,10 @@ namespace ProjetoInventti.Entidades
             SenhaAcesso = senha;
         }
         //Construtor para o método gerar solicitação
-        public Pessoa(string nome)
-        {
-            NomeCompleto = nome;
-        }
+        //public Pessoa(string nome)
+        //{
+        //    NomeCompleto = nome;
+        //}
 
         //Método verificador de acesso
         public bool VerificarDadosDeAcesso(string usuario, string senha)
@@ -40,7 +43,6 @@ namespace ProjetoInventti.Entidades
 
             return usuario == UsuarioAcesso && senha == SenhaAcesso;
         }
-
         //Método para alterar a senha
         public void AlterarSenha(string senha)
         {
@@ -48,17 +50,18 @@ namespace ProjetoInventti.Entidades
             Console.WriteLine("Nova senha: " + SenhaAcesso);
             Console.WriteLine();
         }
-
         //Formatação do objeto para mostrar em tela
         public override string ToString()
         {
-            return NomeCompleto + ", "
-                + DataNascimento + ", "
-                + Carro.ModeloCarro + ", "
-                + Carro.PlacaCarro + ", "
-                + Telefone + ", "
-                + UsuarioAcesso + ", "
-                + SenhaAcesso;
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(NomeCompleto);
+            sb.AppendLine(DataNascimento.ToString("dd/MM/yyyy HH:mm:ss"));
+            sb.AppendLine(Carro.ModeloCarro);
+            sb.AppendLine(Carro.PlacaCarro);
+            sb.AppendLine(Telefone);
+            sb.AppendLine(UsuarioAcesso);
+            sb.AppendLine(SenhaAcesso);
+            return sb.ToString();
         }
     }
 }

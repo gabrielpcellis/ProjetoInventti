@@ -6,7 +6,6 @@ namespace ProjetoInventti.Entidades
 {
     public class Carro
     {
-
         public string PlacaCarro { get; set; }
         public string ModeloCarro { get; set; }
 

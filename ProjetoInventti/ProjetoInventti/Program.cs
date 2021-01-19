@@ -1,7 +1,8 @@
 ﻿using ProjetoInventti.Entidades;
-using ProjetoInventti.Servicos;
+using ProjetoInventti.Menus;
 using System;
 using System.Collections.Generic;
+using ProjetoInventti.Enums;
 
 namespace ProjetoInventti
 {
@@ -14,12 +15,12 @@ namespace ProjetoInventti
             List<Predio> predios = CargaInicialDeDados.GerarPredio();
             List<Contas> contas = CargaInicialDeDados.GerarContasAPagar();
             List<Solicitacoes> solicitacoesSindico = CargaInicialDeDados.GerarSolicitacoes();
-            List<Solicitacoes> solicitacoesZelador = new List<Solicitacoes>();
+            List<Solicitacoes> solicitacoesZelador = CargaInicialDeDados.GerarSolicitacoes();
             List<Solicitacoes> solicitacoesMorador = new List<Solicitacoes>();
+            List<Historico> historicoDeAcoes = new List<Historico>();
 
             bool usuarioExistente = false;
             bool sair;
-
 
             do
             {
@@ -36,19 +37,19 @@ namespace ProjetoInventti
                 //Verifica o tipo de acesso do objeto atual para liberar o acesso ideal
                 switch (usuarioConectado.TipoNivelAcesso)
                 {
-                    case Enums.TipoNivelAcesso.Administrador:
+                    case TipoNivelAcesso.Administrador:
                         // Chamar método responsável pelas funções do administrador
                         menu.MenuAdministrador(usuariosSistema, contas, predios);
                         break;
-                    case Enums.TipoNivelAcesso.Sindico:
+                    case TipoNivelAcesso.Sindico:
                         // Chamar método responsável pelas funções do sindico
-                        menu.MenuSindico(usuariosSistema, usuarioConectado, solicitacoesSindico, predios);
+                        menu.MenuSindico(usuariosSistema, usuarioConectado, ref solicitacoesSindico, predios, solicitacoesZelador, historicoDeAcoes);
                         break;
-                    case Enums.TipoNivelAcesso.Zelador:
+                    case TipoNivelAcesso.Zelador:
                         // Chamar método responsável pelas funções do zelador
                         menu.MenuZelador(usuarioConectado, solicitacoesZelador);
                         break;
-                    case Enums.TipoNivelAcesso.Morador:
+                    case TipoNivelAcesso.Morador:
                         // Chamar método responsável pelas funções do morador
                         menu.MenuMorador(solicitacoesMorador, usuarioConectado, solicitacoesSindico);
                         break;
@@ -56,6 +57,7 @@ namespace ProjetoInventti
                         break;
                 }
                 Console.WriteLine("Deseja sair do Programa ? 1 - Sim, 2 - Não");
+                //Expressão condicional ternária <3
                 sair = Console.ReadLine() == "1" ? true : false;
 
                 //Trocar usuário ao desconectar
@@ -78,7 +80,7 @@ namespace ProjetoInventti
         {
             do
             {
-                Console.WriteLine("                                         BEM VINDO, MEU COMPATRIÓTA!!!!!!!!!!!                           ");
+                Console.WriteLine("                                      BEM VINDO, MEU COMPATRIÓTAAAAAAAAAAAAAAA!!!!!!!!!!!                           ");
                 Console.WriteLine();
                 Console.WriteLine("Para fazer login, informe os dados abaixo, por gentileza: ");
                 Console.WriteLine();

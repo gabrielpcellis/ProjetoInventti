@@ -2,13 +2,11 @@
 using ProjetoInventti.Enums;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 
 namespace ProjetoInventti.Servicos
 {
-   
-    //Classe interna para cadastrar 
-    internal class GeradorPessoa
+    //Classe para cadastrar 
+    public class GeradorPessoa
     {
         //Método de cadastrar administrador
         //É criado um objeto "pessoa" que recebe o cadastro realizado na chamada do método "GerarPessoa()"
@@ -34,6 +32,7 @@ namespace ProjetoInventti.Servicos
             Console.WriteLine("Escolha o prédio pelo nome: ");
             predios.ForEach(p => Console.WriteLine(p.NomePredio));
             string nome = Console.ReadLine();
+            Console.Write("Prédio: ");
             Predio predio = predios.Find(f => f.NomePredio == nome);
             return new Zelador(GerarPessoa(), predio, Salario());
         }
@@ -43,6 +42,7 @@ namespace ProjetoInventti.Servicos
         {
             Console.WriteLine("Escolha o prédio pelo nome: ");
             predios.ForEach(p => Console.WriteLine(p.NomePredio));
+            Console.Write("Prédio: ");
             string nome = Console.ReadLine();
             Predio predio = predios.Find(f => f.NomePredio == nome);
             return new Morador(GerarPessoa(), predio);
@@ -51,6 +51,7 @@ namespace ProjetoInventti.Servicos
         //Método para criar um objeto pessoa
         private Pessoa GerarPessoa()
         {
+            Console.WriteLine();
             Console.WriteLine("Entre com os dados abaixo: ");
             Console.Write("Nome completo: ");
             string nomeCompleto = Console.ReadLine();
@@ -67,9 +68,10 @@ namespace ProjetoInventti.Servicos
             string modeloCarro = Console.ReadLine();
             Carro carro = new Carro(placaCarro, modeloCarro);
 
-            Console.WriteLine("Informe o nivel de Acesso : ");
-            var nivel = Enum.Parse<TipoNivelAcesso>(Console.ReadLine());
+            Console.Write("Informe o nivel de acesso (Administrador, Sindico, Zelador, Morador): ");
+            TipoNivelAcesso nivel = Enum.Parse<TipoNivelAcesso>(Console.ReadLine());
 
+            Console.WriteLine();
             Console.WriteLine("Entre com os dados para login");
             Console.Write("Escolha seu usuário de acesso:");
             string user = Console.ReadLine();
@@ -82,11 +84,37 @@ namespace ProjetoInventti.Servicos
         //Método para criar criar um objeto salário
         private double Salario()
         {
+            Console.WriteLine();
             Console.Write("Salário: ");
             double salario = double.Parse(Console.ReadLine());
             return salario;
         }
+        //Chamada do método ExcluirMorador
+        public static void RemoverMorador(List<Pessoa> moradores, List<Pessoa> usuariosSistema)
+        {
+            ExcluirMorador(moradores, usuariosSistema);
+        }
 
-     
+        //Método para excluir um morador
+        static private void ExcluirMorador(List<Pessoa> moradores, List<Pessoa> usuariosSistema)
+        {
+            Console.WriteLine("Escolha o morador que deseja excluir: ");
+            Console.WriteLine();
+
+            //Mostrar a lista
+            for (int i = 0; i < moradores.Count; i++)
+            {
+                Console.WriteLine(i + 1 + ": " + moradores[i]);
+            }
+            Console.WriteLine();
+            Console.Write("Informe uma posição: ");
+            int posicaoNaLista = int.Parse(Console.ReadLine());
+
+            moradores.RemoveAt(posicaoNaLista - 1);
+            //Encontrar solução para a lista de usuários
+            usuariosSistema.RemoveAt(posicaoNaLista - 1);
+            Console.WriteLine("Morador excluído.");
+            Console.WriteLine();
+        }
     }
 }
