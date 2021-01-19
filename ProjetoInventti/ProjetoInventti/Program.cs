@@ -63,15 +63,22 @@ namespace ProjetoInventti
                 //Trocar usuário ao desconectar
                 if (sair != true)
                 {
-                    Console.WriteLine();
-                    Console.WriteLine("Trocar de usuário: 1- Sim, 2- Não");
-                    int trocar = int.Parse(Console.ReadLine());
-                    if (trocar == 1)
+                    try
                     {
-                        usuarioConectado = null;
+                        Console.WriteLine();
+                        Console.WriteLine("Trocar de usuário: 1- Sim, 2- Não");
+                        int trocar = int.Parse(Console.ReadLine());
+                        if (trocar == 1)
+                        {
+                            usuarioConectado = null;
+                        }
+                    }
+                    catch (FormatException)
+                    {
+                        Console.WriteLine("Formato de texto inválido! Você será redirecionado de volta ao menu!");
+                        Console.WriteLine();
                     }
                 }
-
             } while (!sair);
         }
 

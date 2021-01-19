@@ -54,13 +54,13 @@ namespace ProjetoInventti.Entidades
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine(NomeCompleto);
-            sb.AppendLine(DataNascimento.ToString("dd/MM/yyyy HH:mm:ss"));
-            sb.AppendLine(Carro.ModeloCarro);
-            sb.AppendLine(Carro.PlacaCarro);
-            sb.AppendLine(Telefone);
-            sb.AppendLine(UsuarioAcesso);
-            sb.AppendLine(SenhaAcesso);
+            sb.Append(NomeCompleto + ", ");
+            sb.Append(DataNascimento.ToString("dd/MM/yyyy HH:mm:ss") + ", ");
+            sb.Append(Carro.ModeloCarro + ", ");
+            sb.Append(Carro.PlacaCarro + ", ");
+            sb.Append(Telefone + ", ");
+            sb.Append(UsuarioAcesso + ", ");
+            sb.Append(SenhaAcesso);
             return sb.ToString();
         }
     }
