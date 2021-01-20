@@ -6,23 +6,19 @@ namespace ProjetoInventti.Menus
 {
     class Submenu
     {
-        //Chamar submenu do síndico
         public static void SubMenuSindico(List<Solicitacoes> solicitacoes, List<Solicitacoes> solicitacoesDoZelador, List<Historico> historico)
         {
             SubmenuSindico(solicitacoes, solicitacoesDoZelador, historico);
         }
-        //Chamar submenu do zelador
         public static void SubMenuZelador(List<Solicitacoes> solicitacoes)
         {
             SubmenuZelador(solicitacoes);
         }
         #region Submenus
-        //Submenu do síndico para opção 5 do menu (Solicitações pendentes)
         private static void SubmenuSindico(List<Solicitacoes> solicitacoes, List<Solicitacoes> solicitacoesDoZelador, List<Historico> historicoDeAcoes)
         {
             Console.WriteLine("Solicitações pendentes: ");
             Console.WriteLine();
-            //Percorrerá a lista toda mostrando apenas o título dos objetos caso não esteja vazia
             if (solicitacoes.Count > 0)
             {
                 try
@@ -107,7 +103,6 @@ namespace ProjetoInventti.Menus
                 Console.WriteLine();
             }
         }
-        //Submenu do zelador
         private static void SubmenuZelador(List<Solicitacoes> solicitacoes)
         {
             try
@@ -117,7 +112,6 @@ namespace ProjetoInventti.Menus
 
                 for (int i = 0; i < solicitacoes.Count; i++)
                 {
-                    //Percorrerá a lista toda mostrando apenas o título dela caso a solicitação respeite a condicional
                     Console.WriteLine(i + 1 + "- " + solicitacoes[i].Titulo);
                 }
 

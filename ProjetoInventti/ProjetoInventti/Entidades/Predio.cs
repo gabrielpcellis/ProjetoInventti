@@ -12,7 +12,6 @@ namespace ProjetoInventti.Entidades {
         public DateTime DataConstrucao { get; set; }
         public int NumeroApartamento { get; set; }
 
-        //Construtor cadastro prédio
         public Predio(string nomePredio, string blocoPredio, int quantidadeAndares, int quantidadeApartamentos, DateTime dataConstrucao)
         {
             NomePredio = nomePredio;
@@ -22,7 +21,6 @@ namespace ProjetoInventti.Entidades {
             DataConstrucao = dataConstrucao;
         }
 
-        //Construtor prédio para pessoa
         public Predio(string nomePredio, string blocoPredio, int numeroApartamento)
         {
             NomePredio = nomePredio;

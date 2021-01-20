@@ -8,14 +8,12 @@ namespace ProjetoInventti.Servicos.Geradores
 {
     internal class GeradorSolicitacao
     {
-        //Criar método público para chamar o GerarSolicitacao()
         public Solicitacoes GerarNovaSolicitacao(Pessoa usuario)
         {
             Solicitacoes solicitacao = GerarSolicitacao((Morador)usuario);
             return solicitacao;
         }
 
-        //Método gerar solicitação recebendo o nome do usuário logado como nome do solicitante
         private Solicitacoes GerarSolicitacao(Morador usuario)
         {
             Console.WriteLine("Criando nova solicitação...");

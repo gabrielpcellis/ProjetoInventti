@@ -27,14 +27,12 @@ namespace ProjetoInventti
             Observacao = observacao;
             Predio = predio;
         }
-        //Excluir solicitação
         public void RemoverSolicitacao(List<Solicitacoes> solicitacao, int posicao)
         {
             solicitacao.RemoveAt(posicao);
             Console.WriteLine("A solicitação foi excluída.");
             Console.WriteLine();
         }
-        //Transferir solicitação
         public void TransferirSolicitacao(List<Solicitacoes> solicitacaoZelador, List<Solicitacoes> solicitacaoSindico, int posicao)
         {
             solicitacaoZelador.Insert(0, solicitacaoSindico[posicao]);
@@ -42,7 +40,6 @@ namespace ProjetoInventti
             Console.WriteLine("Solicitação transferida.");
             Console.WriteLine();
         }
-        //Adicionar observação ao objeto
         public void AdicionarObservacao(List<Solicitacoes> solicitacoes, int posicao)
         {
             Console.Write("Adicionar observação: ");
@@ -51,13 +48,30 @@ namespace ProjetoInventti
             Console.Write("Nova observação: " + solicitacoes[posicao].Observacao);
             Console.WriteLine();
         }
-        //Alterar status solicitação
         public void AlterarStatus(List<Solicitacoes> solicitacoes, int posicao)
         {
             Console.WriteLine("Digite o novo status da solicitação: 'Analise', 'Finalizado': ");
             solicitacoes[posicao].StatusSolicitacao = Enum.Parse<StatusSolicitacao>(Console.ReadLine());
         }
-        //Formatação do objeto
+        public static void VisualizarHistoricoDeSolicitacoes(List<Solicitacoes> solicitacoes)
+        {
+            if (solicitacoes.Count > 0)
+            {
+                Console.WriteLine("HISTÓRICO DE SOLICITAÇÕES:");
+                Console.WriteLine();
+                foreach (var item in solicitacoes)
+                {
+                    Console.WriteLine(item);
+                    Console.WriteLine();
+                }
+            }
+            else
+            {
+                Console.WriteLine("Histórico vazio!");
+                Console.WriteLine();
+            }
+            
+        }
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();

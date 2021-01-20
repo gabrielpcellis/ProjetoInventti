@@ -8,46 +8,36 @@ using System.Globalization;
 
 namespace ProjetoInventti.Menus
 {
-    /* Descrição da classe Menu:
-     * Esta classe contém os métodos necessários para fazer a chamada das opções de menu de cada tipo de pessoa 
-     * Os métodos desta classe serão usados para chamar os métodos da classe cadastro e demais classes + métodos
-    */
-
     public class Menu
     {
         GeradorPessoa geradorPessoa = new GeradorPessoa();
         GeradorConta geradorConta = new GeradorConta();
         GeradorSolicitacao geradorSolicitacao = new GeradorSolicitacao();
-        //Menus
 
         #region Menu do administrador
-        //Método para chamar as opções do administrador 
-        //Finalizado
-        public void MenuAdministrador(List<Pessoa> usuariosSistema, List<Contas> contas, List<Predio> predios)
+        public void MenuAdministrador(List<Pessoa> usuariosSistema, List<Contas> contas, List<Predio> predios, ref bool opcaoSair, ref Pessoa usuarioConectado)
         {
-            // CRIAR OPÇÕES DE ESCOLHA PARA O ADM
             Console.WriteLine("Escolha uma opção, por favor:");
             Console.WriteLine(" 1) Cadastrar novo Administrador, \n"
                             + " 2) Cadastrar novo Síndico, \n"
                             + " 3) Contas a pagar, \n"
                             + " 4) Contas a receber, \n"
                             + " 5) Histórico de gastos, \n"
-                            + " 6) Nova conta a pagar: ");
+                            + " 6) Nova conta a pagar, \n"
+                            + " 7) Trocar usuário, \n"
+                            + " 8) Sair: ");
             try
             {
                 int opcao = int.Parse(Console.ReadLine());
                 switch (opcao)
                 {
                     case 1:
-                        //Cadastrar administrador
                         usuariosSistema.Add(geradorPessoa.CadastrarAdministrador());
                         break;
                     case 2:
-                        //Cadastrar Síndico
                         usuariosSistema.Add(geradorPessoa.CadastrarSindico(predios));
                         break;
                     case 3:
-                        //Contas a pagar
                         Console.WriteLine("CONTAS A PAGAR:");
                         foreach (var obj in contas)
                         {
@@ -56,7 +46,6 @@ namespace ProjetoInventti.Menus
                         }
                         break;
                     case 4:
-                        //Contas a receber
                         Console.WriteLine("CONTAS A RECEBER:");
                         foreach (var obj in contas)
                         {
@@ -65,7 +54,6 @@ namespace ProjetoInventti.Menus
                         }
                         break;
                     case 5:
-                        //Historico Total de Gastos
                         Console.WriteLine("HISTÓRICO DE GASTOS:");
                         decimal totalGasto = 0.0m;
                         foreach (var obj in contas)
@@ -77,9 +65,13 @@ namespace ProjetoInventti.Menus
                         Console.WriteLine(totalGasto.ToString("F2", CultureInfo.InvariantCulture));
                         break;
                     case 6:
-                        //Gerar conta a pagar
-                        Console.WriteLine("NOVA CONTA A PAGAR: ");
                         contas.AddRange(geradorConta.GerarConta());
+                        break;
+                    case 7:
+                        Deslogar(ref usuarioConectado);
+                        break;
+                    case 8:
+                        Sair(ref opcaoSair);
                         break;
                     default:
                         break;
@@ -94,8 +86,8 @@ namespace ProjetoInventti.Menus
         #endregion
 
         #region Menu do síndico
-        //Método para a chamada das opções do síndico
-        public void MenuSindico(List<Pessoa> usuariosSistema, Pessoa usuarioAtual, ref List<Solicitacoes> solicitacoes, List<Predio> predios, List<Solicitacoes> solicitacoesDoZelador, List<Historico> historico)
+        public void MenuSindico(List<Pessoa> usuariosSistema, Pessoa usuarioAtual, ref List<Solicitacoes> solicitacoes, List<Predio> predios,
+            List<Solicitacoes> solicitacoesDoZelador, List<Historico> historico, ref bool opcaoSair, ref Pessoa usuarioConectado)
         {
             Console.WriteLine("Escolha uma opção, por favor: ");
             Console.WriteLine(" 1) Cadastrar novo Morador, \n"
@@ -104,7 +96,9 @@ namespace ProjetoInventti.Menus
                             + " 4) Lista de moradores, \n"
                             + " 5) Solicitações pendentes, \n"
                             + " 6) Histórico de solicitações, \n"
-                            + " 7) Excluir morador: ");
+                            + " 7) Excluir morador, \n" 
+                            + " 8) Trocar usuário, \n" 
+                            + " 9) Sair: ");
             try
             {
                 int opcao = int.Parse(Console.ReadLine());
@@ -125,12 +119,9 @@ namespace ProjetoInventti.Menus
                         usuarioAtual.AlterarSenha(novaSenha);
                         break;
                     case 4:
-                        //Mostrar a lista com as alterações feitas
-                        Console.WriteLine("Lista de moradores: ");
-                        Console.WriteLine();
+                        Console.WriteLine("Lista de moradores: \n");
 
                         Console.WriteLine("Nome completo,  Data de nascimento,  Modelo,  Placa,    Telefone,  Usuário,  Senha");
-                        //Lista filtrada
                         List<Pessoa> moradores = usuariosSistema.FindAll(x => x.TipoNivelAcesso == TipoNivelAcesso.Morador);
                         foreach (var item in moradores)
                         {
@@ -139,18 +130,14 @@ namespace ProjetoInventti.Menus
                         Console.WriteLine();
                         break;
                     case 5:
-                        //Solicitações pendentes
                         Sindico sindico = (Sindico)usuarioAtual;
-                        //Lista filtrada
                         List<Solicitacoes> solicitacoesPendentes = solicitacoes.FindAll(x => x.Predio.NomePredio == sindico.Predio.NomePredio);
                         solicitacoes = solicitacoesPendentes;
 
-                        //Submenu do síndico
                         Submenu.SubMenuSindico(solicitacoesPendentes, solicitacoesDoZelador, historico);
                         break;
                     case 6:
-                        Console.WriteLine("HISTÓRICO DE SOLICITAÇÕES:");
-                        Console.WriteLine();
+                        Console.WriteLine("HISTÓRICO DE SOLICITAÇÕES: \n");
 
                         sindico = (Sindico)usuarioAtual;
                         solicitacoesPendentes = solicitacoes.FindAll(x => x.Predio.NomePredio == sindico.Predio.NomePredio);
@@ -159,20 +146,23 @@ namespace ProjetoInventti.Menus
                         {
                             for (int i = 0; i < solicitacoesPendentes.Count; i++)
                             {
-                                Console.WriteLine(solicitacoesPendentes[i]);
-                                Console.WriteLine();
+                                Console.WriteLine(solicitacoesPendentes[i] + "\n");
                             }
                         }
                         else
                         {
-                            Console.WriteLine("Histórico vazio.");
-                            Console.WriteLine();
+                            Console.WriteLine("Histórico vazio. \n");
                         }
                         break;
                     case 7:
-                        //Lista filtrada
                         moradores = usuariosSistema.FindAll(x => x.TipoNivelAcesso == TipoNivelAcesso.Morador);
                         GeradorPessoa.RemoverMorador(moradores, usuariosSistema);
+                        break;
+                    case 8:
+                        Deslogar(ref usuarioConectado);
+                        break;
+                    case 9:
+                        Sair(ref opcaoSair);
                         break;
                     default:
                         break;
@@ -180,20 +170,21 @@ namespace ProjetoInventti.Menus
             }
             catch (FormatException)
             {
-                Console.WriteLine("Formato de texto inválido!");
+                Console.WriteLine("Formato de texto inválido! \n");
             }
         }
         #endregion
 
         #region Menu do zelador
-        //Método para a chamada das opções do zelador
-        public void MenuZelador(Pessoa usuarioAtual, List<Solicitacoes> solicitacoes)
+        public void MenuZelador(Pessoa usuarioAtual, List<Solicitacoes> solicitacoes, ref bool opcaoSair, ref Pessoa UsuarioConectado)
         {
             Console.WriteLine("Escolha uma opção, por favor: ");
             Console.WriteLine(
                             " 1) Alterar senha, \n"
                             + " 2) Solicitações pendentes, \n"
-                            + " 3) Histórico de solicitações: ");
+                            + " 3) Histórico de solicitações \n"
+                            + " 4) Trocar usuário, \n"
+                            + " 5) Sair: ");
 
             try
             {
@@ -211,7 +202,6 @@ namespace ProjetoInventti.Menus
                     case 2:
                         if (solicitacoes.Count > 0)
                         {
-                            //Submenu do zelador
                             Submenu.SubMenuZelador(solicitacoes);
                         }
                         else
@@ -221,7 +211,6 @@ namespace ProjetoInventti.Menus
                         Console.WriteLine();
                         break;
                     case 3:
-                        //Histórico de solicitações
                         if (solicitacoes.Count > 0)
                         {
                             Console.WriteLine("HISTÓRICO DE SOLICITAÇÕES:");
@@ -238,6 +227,12 @@ namespace ProjetoInventti.Menus
                         }
                         Console.WriteLine();
                         break;
+                    case 4:
+                        Deslogar(ref usuarioAtual);
+                        break;
+                    case 5:
+                        Sair(ref opcaoSair);
+                        break;
                     default:
                         break;
                 }
@@ -250,8 +245,7 @@ namespace ProjetoInventti.Menus
         #endregion
 
         #region Menu do morador
-        //Método para a chamada das opções do morador
-        public void MenuMorador(List<Solicitacoes> solicitacoes, Pessoa usuarioAtual, List<Solicitacoes> solicitacoesSindico)
+        public void MenuMorador(List<Solicitacoes> solicitacoes,ref Pessoa usuarioAtual, List<Solicitacoes> solicitacoesSindico, ref bool opcaoSair)
         {
             try
             {
@@ -259,7 +253,9 @@ namespace ProjetoInventti.Menus
                 Console.WriteLine();
                 Console.WriteLine(" 1) Alterar senha, \n"
                                 + " 2) Abrir nova solicitação, \n"
-                                + " 3) Histórico de solicitações: ");
+                                + " 3) Histórico de solicitações, \n"
+                                + " 4) Trocar usuário, \n"
+                                + " 5) Sair: ");
 
                 int opcao = int.Parse(Console.ReadLine());
 
@@ -273,26 +269,17 @@ namespace ProjetoInventti.Menus
                         usuarioAtual.AlterarSenha(novaSenha);
                         break;
                     case 2:
-                        //Criar nova solicitação e enviá-la para a lista do síndico na primeira posição
                         solicitacoesSindico.Insert(0, geradorSolicitacao.GerarNovaSolicitacao(usuarioAtual));
+                        solicitacoes.Insert(0, solicitacoesSindico[0]);
                         break;
                     case 3:
-                        //Se a lista for somente inicializada, não entrará no IF
-                        if (solicitacoes.Count > 0)
-                        {
-                            Console.WriteLine("HISTÓRICO DE SOLICITAÇÕES:");
-                            Console.WriteLine();
-                            for (int i = 0; i < solicitacoes.Count; i++)
-                            {
-                                Console.WriteLine(solicitacoes[i]);
-                                Console.WriteLine();
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine("Não há nenhuma solicitação no histórico");
-                            Console.WriteLine();
-                        }
+                        Solicitacoes.VisualizarHistoricoDeSolicitacoes(solicitacoes);
+                        break;
+                    case 4:
+                        Deslogar(ref usuarioAtual);
+                        break;
+                    case 5:
+                        Sair(ref opcaoSair);
                         break;
                     default:
                         break;
@@ -304,7 +291,27 @@ namespace ProjetoInventti.Menus
             }
         }
 
-    }
+        #endregion
 
-    #endregion
+        public void Deslogar(ref Pessoa usuarioConectado)
+        {
+            Console.WriteLine("Tem certeza que deseja trocar de usuário (S ou N)?");
+            char confirmacao = char.Parse(Console.ReadLine());
+            if (confirmacao == 'S' || confirmacao == 's')
+            {
+                usuarioConectado = null;
+            }
+        }
+        public void Sair(ref bool opcaoSair)
+        {
+            Console.Write("Tem certeza que deseja sair (S ou N)? ");
+            char confirmacao = char.Parse(Console.ReadLine());
+            if (confirmacao == 'S' || confirmacao == 's')
+            {
+                opcaoSair = true;
+                Console.WriteLine("Saindo...");
+            }
+        }
+
+    }
 }
