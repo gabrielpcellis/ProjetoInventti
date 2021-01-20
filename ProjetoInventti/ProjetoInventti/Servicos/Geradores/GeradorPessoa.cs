@@ -5,18 +5,12 @@ using System.Collections.Generic;
 
 namespace ProjetoInventti.Servicos
 {
-    //Classe para cadastrar 
     public class GeradorPessoa
     {
-        //Método de cadastrar administrador
-        //É criado um objeto "pessoa" que recebe o cadastro realizado na chamada do método "GerarPessoa()"
-        //Quando o cadastro é realizado, o método retorna um novo administrador com esses dados
         public Administrador CadastrarAdministrador()
         {
             return new Administrador(GerarPessoa());
         }
-
-        //Método de cadastrar síndico
         public Sindico CadastrarSindico(List<Predio> predios)
         {
             Console.WriteLine("Escolha o prédio pelo nome: ");
@@ -25,8 +19,6 @@ namespace ProjetoInventti.Servicos
             Predio predio = predios.Find(f => f.NomePredio == nome);
             return new Sindico(GerarPessoa(), predio, Salario());
         }
-
-        //Método de cadastrar Zelador
         public Zelador CadastrarZelador(List<Predio> predios)
         {
             Console.WriteLine("Escolha o prédio pelo nome: ");
@@ -36,8 +28,6 @@ namespace ProjetoInventti.Servicos
             Predio predio = predios.Find(f => f.NomePredio == nome);
             return new Zelador(GerarPessoa(), predio, Salario());
         }
-
-        //Método de cadastrar Morador
         public Morador CadastrarMorador(List<Predio> predios)
         {
             Console.WriteLine("Escolha o prédio pelo nome: ");
@@ -47,15 +37,13 @@ namespace ProjetoInventti.Servicos
             Predio predio = predios.Find(f => f.NomePredio == nome);
             return new Morador(GerarPessoa(), predio);
         }
-
-        //Método para criar um objeto pessoa
         private Pessoa GerarPessoa()
         {
             Console.WriteLine();
             Console.WriteLine("Entre com os dados abaixo: ");
             Console.Write("Nome completo: ");
             string nomeCompleto = Console.ReadLine();
-            Console.Write("Data de nascimento: ");
+            Console.Write("Data de nascimento (dd/MM/yyyy): ");
             DateTime dataNascimento = DateTime.Parse(Console.ReadLine());
             Console.Write("Telefone: ");
             string telefone = Console.ReadLine();
@@ -80,8 +68,6 @@ namespace ProjetoInventti.Servicos
 
             return new Pessoa(nomeCompleto, dataNascimento, carro, telefone, nivel, user, senha);
         }
-
-        //Método para criar criar um objeto salário
         private double Salario()
         {
             Console.WriteLine();
@@ -89,19 +75,15 @@ namespace ProjetoInventti.Servicos
             double salario = double.Parse(Console.ReadLine());
             return salario;
         }
-        //Chamada do método ExcluirMorador
         public static void RemoverMorador(List<Pessoa> moradores, List<Pessoa> usuariosSistema)
         {
             ExcluirMorador(moradores, usuariosSistema);
         }
-
-        //Método para excluir um morador
         static private void ExcluirMorador(List<Pessoa> moradores, List<Pessoa> usuariosSistema)
         {
             Console.WriteLine("Escolha o morador que deseja excluir: ");
             Console.WriteLine();
 
-            //Mostrar a lista
             for (int i = 0; i < moradores.Count; i++)
             {
                 Console.WriteLine(i + 1 + ": " + moradores[i]);
@@ -111,7 +93,6 @@ namespace ProjetoInventti.Servicos
             int posicaoNaLista = int.Parse(Console.ReadLine());
 
             moradores.RemoveAt(posicaoNaLista - 1);
-            //Encontrar solução para a lista de usuários
             usuariosSistema.RemoveAt(posicaoNaLista - 1);
             Console.WriteLine("Morador excluído.");
             Console.WriteLine();

@@ -19,11 +19,9 @@ namespace ProjetoInventti
 
         public static List<Pessoa> GerarCarga()
         {
-            //São apenas 2 objetos para todos os usuários (Possível alteração)
             Carro carro = new Carro("placa 1", "modelo 1");
             var predio = GerarPredio();
 
-            //Carga inicial de pessoas (incluindo todas as entidades)
             List<Pessoa> lista = new List<Pessoa>
             {
                 new Morador("morador 1", DateTime.Now, carro, "telefone 1", "usuario 1", "senha 1", predio[0]),
@@ -45,7 +43,6 @@ namespace ProjetoInventti
 
             return lista;
         }
-        //Carga inicial de contas a pagar
         public static List<Contas> GerarContasAPagar()
         {
             List<Contas> contasAPagar = new List<Contas>
@@ -56,7 +53,6 @@ namespace ProjetoInventti
             };
             return contasAPagar;
         }
-        //Carga inicial de solicitações
         public static List<Solicitacoes> GerarSolicitacoes()
         {
             var predio = GerarPredio();
