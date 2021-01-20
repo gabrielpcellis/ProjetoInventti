@@ -1,5 +1,17 @@
 # Projeto
 
+20/01/2021
+
+#Adicionado
+Adicionadas operações para sair e deslogar do menu(GP-17)
+
+#Alterado
+Melhorias em algumas funções (GP-17)
+Exclusão dos comentários (GP-17)
+
+#Corrigido
+Correção de código para maior eficiência do programa, refatoração (GP-17)
+==================================================
 18/01/2021
 
 #Adicionado

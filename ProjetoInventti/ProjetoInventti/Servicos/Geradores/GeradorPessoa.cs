@@ -11,7 +11,6 @@ namespace ProjetoInventti.Servicos
         {
             return new Administrador(GerarPessoa());
         }
-
         public Sindico CadastrarSindico(List<Predio> predios)
         {
             Console.WriteLine("Escolha o prédio pelo nome: ");
@@ -20,7 +19,6 @@ namespace ProjetoInventti.Servicos
             Predio predio = predios.Find(f => f.NomePredio == nome);
             return new Sindico(GerarPessoa(), predio, Salario());
         }
-
         public Zelador CadastrarZelador(List<Predio> predios)
         {
             Console.WriteLine("Escolha o prédio pelo nome: ");
@@ -30,7 +28,6 @@ namespace ProjetoInventti.Servicos
             Predio predio = predios.Find(f => f.NomePredio == nome);
             return new Zelador(GerarPessoa(), predio, Salario());
         }
-
         public Morador CadastrarMorador(List<Predio> predios)
         {
             Console.WriteLine("Escolha o prédio pelo nome: ");
@@ -40,14 +37,13 @@ namespace ProjetoInventti.Servicos
             Predio predio = predios.Find(f => f.NomePredio == nome);
             return new Morador(GerarPessoa(), predio);
         }
-
         private Pessoa GerarPessoa()
         {
             Console.WriteLine();
             Console.WriteLine("Entre com os dados abaixo: ");
             Console.Write("Nome completo: ");
             string nomeCompleto = Console.ReadLine();
-            Console.Write("Data de nascimento: ");
+            Console.Write("Data de nascimento (dd/MM/yyyy): ");
             DateTime dataNascimento = DateTime.Parse(Console.ReadLine());
             Console.Write("Telefone: ");
             string telefone = Console.ReadLine();
@@ -72,7 +68,6 @@ namespace ProjetoInventti.Servicos
 
             return new Pessoa(nomeCompleto, dataNascimento, carro, telefone, nivel, user, senha);
         }
-
         private double Salario()
         {
             Console.WriteLine();
@@ -84,7 +79,6 @@ namespace ProjetoInventti.Servicos
         {
             ExcluirMorador(moradores, usuariosSistema);
         }
-
         static private void ExcluirMorador(List<Pessoa> moradores, List<Pessoa> usuariosSistema)
         {
             Console.WriteLine("Escolha o morador que deseja excluir: ");
