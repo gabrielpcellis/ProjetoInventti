@@ -81,8 +81,7 @@ namespace ProjetoInventti.Servicos
         }
         static private void ExcluirMorador(List<Pessoa> moradores, List<Pessoa> usuariosSistema)
         {
-            Console.WriteLine("Escolha o morador que deseja excluir: ");
-            Console.WriteLine();
+            Console.WriteLine("Escolha o morador que deseja excluir: \n");
 
             for (int i = 0; i < moradores.Count; i++)
             {
@@ -97,5 +96,16 @@ namespace ProjetoInventti.Servicos
             Console.WriteLine("Morador excluído.");
             Console.WriteLine();
         }
+        public static void VisualizarListaDeMoradores(List<Pessoa> usuariosSistema)
+        {
+            Console.WriteLine("Lista de moradores: \n");
+            Console.WriteLine("Nome completo,  Data de nascimento,  Modelo,  Placa,    Telefone,  Usuário,  Senha");
+            List<Pessoa> moradores = usuariosSistema.FindAll(x => x.TipoNivelAcesso == TipoNivelAcesso.Morador);
+            foreach (var item in moradores)
+            {
+                Console.WriteLine(item + "\n");
+            }
+        }
+
     }
 }
