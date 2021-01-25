@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjetoInventti.Excecoes.DomainExceptions;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,7 +11,7 @@ namespace ProjetoInventti
         public string Texto2 { get; set; }
         public string Solicitacao { get; set; }
         public DateTime Momento { get; set; }
-        public List<Historico> HistoricoDeAcoes { get; set; } = new List<Historico>();
+        public static List<Historico> HistoricoDeAcoes { get; set; } = new List<Historico>();
         public Historico()
         {
         }
@@ -20,6 +21,22 @@ namespace ProjetoInventti
             Solicitacao = solicitacao;
             Momento = momento;
             Texto2 = texto1;
+        }
+        public void AdicionarAoHistorico(Historico historico)
+        {
+            HistoricoDeAcoes.Insert(0, historico);
+        }
+        public static void VisualizarHistoricoDeAcoes()
+        {
+            if (HistoricoDeAcoes.Count <= 0)
+            {
+                throw new DomainExceptions("Histórico de ações vazio!");
+            }
+            Console.WriteLine("Histórico de ações: ");
+            foreach (var item in HistoricoDeAcoes)
+            {
+                Console.WriteLine(item);
+            }
         }
         public override string ToString()
         {

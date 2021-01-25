@@ -16,7 +16,6 @@ namespace ProjetoInventti
 
             return predio;
         }
-
         public static List<Pessoa> GerarCarga()
         {
             Carro carro = new Carro("placa 1", "modelo 1");
@@ -40,7 +39,6 @@ namespace ProjetoInventti
                 new Zelador("zelador 2", DateTime.Now, carro, "telefone 2", "usuario 11", "senha 11", predio[0], 1000.00),
                 new Zelador("zelador 3", DateTime.Now, carro, "telefone 3", "usuario 12", "senha 12", predio[0], 1000.00)
             };
-
             return lista;
         }
         public static List<Contas> GerarContasAPagar()
@@ -60,7 +58,7 @@ namespace ProjetoInventti
             List<Solicitacoes> solicitacoes = new List<Solicitacoes>
             {
                 new Solicitacoes (DateTime.Now, "Vizinho chato", "Fulano", "Vou descer a porrada nele", Enums.StatusSolicitacao.Recebido, "observação 1", predio[0]),
-                new Solicitacoes (DateTime.Now, "Problema no encanamento", "Beltrano", "Cano perfurado", Enums.StatusSolicitacao.Recebido, "observação 2", predio[1])
+                new Solicitacoes (DateTime.Now, "Problema no encanamento", "Beltrano", "Cano perfurado", Enums.StatusSolicitacao.Recebido, "observação 2", predio[0])
             };
             return solicitacoes;
         }

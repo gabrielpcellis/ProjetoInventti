@@ -30,11 +30,15 @@ namespace ProjetoInventti.Entidades
         {
             return usuario == UsuarioAcesso && senha == SenhaAcesso;
         }
-        public void AlterarSenha(string senha)
+        public void AlterarSenha()
         {
-            SenhaAcesso = senha;
-            Console.WriteLine("Nova senha: " + SenhaAcesso);
             Console.WriteLine();
+            Console.WriteLine("Para alterar sua senha, informe os dados abaixo: ");
+            Console.Write("Digite a nova senha: ");
+
+            string novaSenha = Console.ReadLine();
+            SenhaAcesso = novaSenha;
+            Console.WriteLine("Nova senha: " + SenhaAcesso + "\n");
         }
         public override string ToString()
         {

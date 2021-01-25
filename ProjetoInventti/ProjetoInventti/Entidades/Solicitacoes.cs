@@ -1,5 +1,6 @@
 ﻿using ProjetoInventti.Entidades;
 using ProjetoInventti.Enums;
+using ProjetoInventti.Excecoes.DomainExceptions;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,7 +17,6 @@ namespace ProjetoInventti
         public string Observacao { get; set; }
         public Predio Predio { get; set; }
 
-        //Construtor solicitações
         public Solicitacoes(DateTime dataSolicitacao, string titulo, string nome, string descricaozinha, StatusSolicitacao tipoSolicitacao, string observacao, Predio predio)
         {
             DataSolicitacao = dataSolicitacao;
@@ -30,23 +30,20 @@ namespace ProjetoInventti
         public void RemoverSolicitacao(List<Solicitacoes> solicitacao, int posicao)
         {
             solicitacao.RemoveAt(posicao);
-            Console.WriteLine("A solicitação foi excluída.");
-            Console.WriteLine();
+            Console.WriteLine("A solicitação foi excluída. \n");
         }
         public void TransferirSolicitacao(List<Solicitacoes> solicitacaoZelador, List<Solicitacoes> solicitacaoSindico, int posicao)
         {
             solicitacaoZelador.Insert(0, solicitacaoSindico[posicao]);
             solicitacaoSindico.RemoveAt(posicao);
-            Console.WriteLine("Solicitação transferida.");
-            Console.WriteLine();
+            Console.WriteLine("Solicitação transferida. \n");
         }
         public void AdicionarObservacao(List<Solicitacoes> solicitacoes, int posicao)
         {
             Console.Write("Adicionar observação: ");
             string observacao = Console.ReadLine();
             solicitacoes[posicao].Observacao = observacao;
-            Console.Write("Nova observação: " + solicitacoes[posicao].Observacao);
-            Console.WriteLine();
+            Console.Write("Nova observação: " + solicitacoes[posicao].Observacao + "\n");
         }
         public void AlterarStatus(List<Solicitacoes> solicitacoes, int posicao)
         {
@@ -55,22 +52,29 @@ namespace ProjetoInventti
         }
         public static void VisualizarHistoricoDeSolicitacoes(List<Solicitacoes> solicitacoes)
         {
-            if (solicitacoes.Count > 0)
+            if (solicitacoes.Count <= 0)
             {
-                Console.WriteLine("HISTÓRICO DE SOLICITAÇÕES:");
-                Console.WriteLine();
-                foreach (var item in solicitacoes)
-                {
-                    Console.WriteLine(item);
-                    Console.WriteLine();
-                }
+                throw new DomainExceptions("O histórico está vazio! \n");
             }
-            else
+            Console.WriteLine("HISTÓRICO DE SOLICITAÇÕES:");
+            Console.WriteLine();
+            foreach (var item in solicitacoes)
             {
-                Console.WriteLine("Histórico vazio!");
-                Console.WriteLine();
+                Console.WriteLine(item + "\n");
             }
-            
+        }
+        public static void VisualizarSolicitacoesPendentes(List<Solicitacoes> solicitacoes)
+        {
+            if (solicitacoes.Count <= 0)
+            {
+                throw new DomainExceptions("Não há solicitações pendentes no momento. \n");
+            }
+
+            Console.WriteLine("Solicitações pendentes: \n");
+            for (int i = 0; i < solicitacoes.Count; i++)
+            {
+                Console.WriteLine(i + 1 + "- " + solicitacoes[i].Titulo);
+            }
         }
         public override string ToString()
         {
