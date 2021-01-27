@@ -1,5 +1,5 @@
 ﻿using ProjetoInventti.Enums;
-using ProjetoInventti.Servicos;
+using ProjetoInventti.Excecoes.DomainExceptions;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -39,6 +39,35 @@ namespace ProjetoInventti.Entidades
             string novaSenha = Console.ReadLine();
             SenhaAcesso = novaSenha;
             Console.WriteLine("Nova senha: " + SenhaAcesso + "\n");
+        }
+        public static string[] CadastrarUsuarioESenha(List<Pessoa> usuarios)
+        {
+            Console.WriteLine();
+            Console.WriteLine("Entre com os dados para login");
+            Console.Write("Usuário: ");
+            string usuario = Console.ReadLine();
+            Console.Write("Senha: ");
+            string senha = Console.ReadLine();
+
+            bool find = true;
+            string[] usuarioSenha = new string[2];
+            do
+            {
+                find = usuarios.Exists(f => f.UsuarioAcesso == usuario);
+                if (find)
+                {
+                    Console.WriteLine("Usuário já existente, tente novamente. \n");
+                    Console.Write("Usuário: ");
+                    usuario = Console.ReadLine();
+                    Console.Write("Senha: ");
+                    senha = Console.ReadLine();
+                }
+            } while (find);
+
+            usuarioSenha[0] = usuario;
+            usuarioSenha[1] = senha;
+
+            return usuarioSenha;
         }
         public override string ToString()
         {

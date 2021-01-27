@@ -1,5 +1,16 @@
 # Projeto
 
+27/01/2021
+
+#Adicionado
+Métodos para melhor semântica do código (GP-18.1)
+
+#Alterado
+Refatoração para melhoria do código (GP-18.1)
+
+#Corrigido
+Bugs que podiam influcienciar no lançamento de exceções indesejadas (GP-18.1)
+==================================================
 22/01/2021
 
 #Adicionado

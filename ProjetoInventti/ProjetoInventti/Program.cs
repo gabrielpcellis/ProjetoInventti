@@ -17,6 +17,7 @@ namespace ProjetoInventti
             List<Solicitacoes> solicitacoesSindico = CargaInicialDeDados.GerarSolicitacoes();
             List<Solicitacoes> solicitacoesZelador = CargaInicialDeDados.GerarSolicitacoes();
             List<Solicitacoes> solicitacoesMorador = new List<Solicitacoes>();
+            List<Solicitacoes> historico = solicitacoesSindico;
 
             bool usuarioExistente = false;
             bool sair = false;
@@ -29,14 +30,14 @@ namespace ProjetoInventti
                 }
                 Console.WriteLine("Olá '{0}', seja bem vindo! \n", usuarioConectado.NomeCompleto);
                 Menu menu = new Menu();
-
+                
                 switch (usuarioConectado.TipoNivelAcesso)
                 {
                     case TipoNivelAcesso.Administrador:
                         menu.MenuAdministrador(usuariosSistema, contas, predios, ref sair, ref usuarioConectado);
                         break;
                     case TipoNivelAcesso.Sindico:
-                        menu.MenuSindico(usuariosSistema, usuarioConectado, ref solicitacoesSindico, predios, solicitacoesZelador, ref sair, ref usuarioConectado);
+                        menu.MenuSindico(usuariosSistema, usuarioConectado, ref solicitacoesSindico, predios, solicitacoesZelador, ref sair, ref usuarioConectado, historico);
                         break;
                     case TipoNivelAcesso.Zelador:
                         menu.MenuZelador(ref usuarioConectado, solicitacoesZelador, ref sair);
