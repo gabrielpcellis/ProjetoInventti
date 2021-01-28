@@ -1,2 +1,2 @@
 # ProjetoInventti
-Projeto para fins educativos
+Projeto para fins acadêmicos
