@@ -1,43 +1,41 @@
 ﻿using ProjetoInventti.Entidades;
 using ProjetoInventti.Enums;
+using ProjetoInventti.Excecoes.DomainExceptions;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace ProjetoInventti.Servicos
 {
     public class GeradorPessoa
     {
-        public Administrador CadastrarAdministrador()
+        public Administrador CadastrarAdministrador(List<Pessoa> usuarios)
         {
-            return new Administrador(GerarPessoa());
+            TipoNivelAcesso nivel = TipoNivelAcesso.Administrador;
+            return new Administrador(GerarPessoa(nivel, usuarios));
         }
-        public Sindico CadastrarSindico(List<Predio> predios)
+        public Sindico CadastrarSindico(List<Predio> predios, List<Pessoa> usuarios)
         {
-            Console.WriteLine("Escolha o prédio pelo nome: ");
-            predios.ForEach(p => Console.WriteLine(p.NomePredio));
-            string nome = Console.ReadLine();
-            Predio predio = predios.Find(f => f.NomePredio == nome);
-            return new Sindico(GerarPessoa(), predio, Salario());
+            Predio predio = new Predio();
+            predio.EscolherPredio(predio, predios);
+            TipoNivelAcesso nivel = TipoNivelAcesso.Sindico;
+            return new Sindico(GerarPessoa(nivel, usuarios), predio, Salario());
         }
-        public Zelador CadastrarZelador(List<Predio> predios)
+        public Zelador CadastrarZelador(List<Predio> predios, List<Pessoa> usuarios)
         {
-            Console.WriteLine("Escolha o prédio pelo nome: ");
-            predios.ForEach(p => Console.WriteLine(p.NomePredio));
-            string nome = Console.ReadLine();
-            Console.Write("Prédio: ");
-            Predio predio = predios.Find(f => f.NomePredio == nome);
-            return new Zelador(GerarPessoa(), predio, Salario());
+            Predio predio = new Predio();
+            predio.EscolherPredio(predio, predios);
+            TipoNivelAcesso nivel = TipoNivelAcesso.Zelador;
+            return new Zelador(GerarPessoa(nivel, usuarios), predio, Salario());
         }
-        public Morador CadastrarMorador(List<Predio> predios)
+        public Morador CadastrarMorador(List<Predio> predios, List<Pessoa> usuarios)
         {
-            Console.WriteLine("Escolha o prédio pelo nome: ");
-            predios.ForEach(p => Console.WriteLine(p.NomePredio));
-            Console.Write("Prédio: ");
-            string nome = Console.ReadLine();
-            Predio predio = predios.Find(f => f.NomePredio == nome);
-            return new Morador(GerarPessoa(), predio);
+            Predio predio = new Predio();
+            predio.EscolherPredio(predio, predios);
+            TipoNivelAcesso nivel = TipoNivelAcesso.Morador;
+            return new Morador(GerarPessoa(nivel, usuarios), predio);
         }
-        private Pessoa GerarPessoa()
+        private Pessoa GerarPessoa(TipoNivelAcesso nivel, List<Pessoa> usuariosDoSistema)
         {
             Console.WriteLine();
             Console.WriteLine("Entre com os dados abaixo: ");
@@ -48,7 +46,6 @@ namespace ProjetoInventti.Servicos
             Console.Write("Telefone: ");
             string telefone = Console.ReadLine();
             Console.WriteLine();
-
             Console.WriteLine("Dados do carro");
             Console.Write("Placa do carro: ");
             string placaCarro = (Console.ReadLine());
@@ -56,23 +53,14 @@ namespace ProjetoInventti.Servicos
             string modeloCarro = Console.ReadLine();
             Carro carro = new Carro(placaCarro, modeloCarro);
 
-            Console.Write("Informe o nivel de acesso (Administrador, Sindico, Zelador, Morador): ");
-            TipoNivelAcesso nivel = Enum.Parse<TipoNivelAcesso>(Console.ReadLine());
-
-            Console.WriteLine();
-            Console.WriteLine("Entre com os dados para login");
-            Console.Write("Escolha seu usuário de acesso:");
-            string user = Console.ReadLine();
-            Console.Write("Escolha sua senha de acesso: ");
-            string senha = Console.ReadLine();
-
-            return new Pessoa(nomeCompleto, dataNascimento, carro, telefone, nivel, user, senha);
+            string[] usuarioSenha = Pessoa.CadastrarUsuarioESenha(usuariosDoSistema);
+            return new Pessoa(nomeCompleto, dataNascimento, carro, telefone, nivel, usuarioSenha[0], usuarioSenha[1]);
         }
         private double Salario()
         {
             Console.WriteLine();
             Console.Write("Salário: ");
-            double salario = double.Parse(Console.ReadLine());
+            double salario = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
             return salario;
         }
         public static void RemoverMorador(List<Pessoa> moradores, List<Pessoa> usuariosSistema)

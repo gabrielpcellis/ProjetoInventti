@@ -13,7 +13,6 @@ namespace ProjetoInventti.Menus
     {
         GeradorPessoa geradorPessoa = new GeradorPessoa();
         GeradorConta geradorConta = new GeradorConta();
-        GeradorSolicitacao geradorSolicitacao = new GeradorSolicitacao();
 
         #region Menu do administrador
         public void MenuAdministrador(List<Pessoa> usuariosSistema, List<Contas> contas, List<Predio> predios, ref bool opcaoSair, ref Pessoa usuarioConectado)
@@ -29,16 +28,16 @@ namespace ProjetoInventti.Menus
                             + " 8) Sair: ");
             try
             {
-                int opcao = int.Parse(Console.ReadLine());
+                string opcao = Console.ReadLine();
                 switch (opcao)
                 {
-                    case 1:
-                        usuariosSistema.Add(geradorPessoa.CadastrarAdministrador());
+                    case "1":
+                        usuariosSistema.Add(geradorPessoa.CadastrarAdministrador(usuariosSistema));
                         break;
-                    case 2:
-                        usuariosSistema.Add(geradorPessoa.CadastrarSindico(predios));
+                    case "2":
+                        usuariosSistema.Add(geradorPessoa.CadastrarSindico(predios, usuariosSistema));
                         break;
-                    case 3:
+                    case "3":
                         Console.WriteLine("CONTAS A PAGAR:");
                         foreach (var obj in contas)
                         {
@@ -46,7 +45,7 @@ namespace ProjetoInventti.Menus
                                 Console.WriteLine(obj);
                         }
                         break;
-                    case 4:
+                    case "4":
                         Console.WriteLine("CONTAS A RECEBER:");
                         foreach (var obj in contas)
                         {
@@ -54,7 +53,7 @@ namespace ProjetoInventti.Menus
                                 Console.WriteLine(obj);
                         }
                         break;
-                    case 5:
+                    case "5":
                         Console.WriteLine("HISTÓRICO DE GASTOS:");
                         decimal totalGasto = 0.0m;
                         foreach (var obj in contas)
@@ -65,22 +64,19 @@ namespace ProjetoInventti.Menus
                         Console.Write("Total: ");
                         Console.WriteLine(totalGasto.ToString("F2", CultureInfo.InvariantCulture));
                         break;
-                    case 6:
+                    case "6":
                         contas.AddRange(geradorConta.GerarConta());
                         break;
-                    case 7:
+                    case "7":
                         Deslogar(ref usuarioConectado);
                         break;
-                    case 8:
+                    case "8":
                         Sair(ref opcaoSair);
                         break;
                     default:
+                        Console.WriteLine("Insira um número de acordo com o menu!");
                         break;
                 }
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Formato de texto inválido!");
             }
             catch (Exception e)
             {
@@ -91,8 +87,8 @@ namespace ProjetoInventti.Menus
         #endregion
 
         #region Menu do síndico
-        public void MenuSindico(List<Pessoa> usuariosSistema, Pessoa usuarioAtual, ref List<Solicitacoes> solicitacoes, List<Predio> predios,
-            List<Solicitacoes> solicitacoesDoZelador, ref bool opcaoSair, ref Pessoa usuarioConectado)
+        public void MenuSindico(List<Pessoa> usuariosSistema, Pessoa usuarioAtual, ref List<Solicitacoes> SolicitacoesDoSindico, List<Predio> predios,
+            List<Solicitacoes> solicitacoesDoZelador, ref bool opcaoSair, ref Pessoa usuarioConectado, List<Solicitacoes> historico)
         {
             Console.WriteLine("Escolha uma opção, por favor: ");
             Console.WriteLine(" 1) Cadastrar novo Morador, \n"
@@ -106,55 +102,48 @@ namespace ProjetoInventti.Menus
                             + " 9) Sair: ");
             try
             {
-                int opcao = int.Parse(Console.ReadLine());
+                string opcao = Console.ReadLine();
                 switch (opcao)
                 {
-                    case 1:
-                        usuariosSistema.Add(geradorPessoa.CadastrarMorador(predios));
+                    case "1":
+                        usuariosSistema.Add(geradorPessoa.CadastrarMorador(predios, usuariosSistema));
                         break;
-                    case 2:
-                        usuariosSistema.Add(geradorPessoa.CadastrarZelador(predios));
+                    case "2":
+                        usuariosSistema.Add(geradorPessoa.CadastrarZelador(predios, usuariosSistema));
                         break;
-                    case 3:
+                    case "3":
                         usuarioAtual.AlterarSenha();
                         break;
-                    case 4:
+                    case "4":
                         GeradorPessoa.VisualizarListaDeMoradores(usuariosSistema);
                         break;
-                    case 5:
+                    case "5":
                         Sindico sindico = (Sindico)usuarioAtual;
-                        List<Solicitacoes> solicitacoesPendentes = solicitacoes.FindAll(x => x.Predio.NomePredio == sindico.Predio.NomePredio);
-                        solicitacoes = solicitacoesPendentes;
-
+                        List<Solicitacoes> solicitacoesPendentes = SolicitacoesDoSindico.FindAll(x => x.Predio.NomePredio == sindico.Predio.NomePredio);
+                        SolicitacoesDoSindico = solicitacoesPendentes;
                         Submenu.SubMenuSindico(solicitacoesPendentes, solicitacoesDoZelador);
                         break;
-                    case 6:
-                        sindico = (Sindico)usuarioAtual;
-                        solicitacoesPendentes = solicitacoes.FindAll(x => x.Predio.NomePredio == sindico.Predio.NomePredio);
-
-                        Solicitacoes.VisualizarHistoricoDeSolicitacoes(solicitacoesPendentes);
+                    case "6":
+                        Solicitacoes.VisualizarHistoricoDeSolicitacoes(historico);
                         break;
-                    case 7:
+                    case "7":
                         List<Pessoa> moradores = usuariosSistema.FindAll(x => x.TipoNivelAcesso == TipoNivelAcesso.Morador);
                         GeradorPessoa.RemoverMorador(moradores, usuariosSistema);
                         break;
-                    case 8:
+                    case "8":
                         Deslogar(ref usuarioConectado);
                         break;
-                    case 9:
+                    case "9":
                         Sair(ref opcaoSair);
                         break;
                     default:
+                        Console.WriteLine("Insira um número de acordo com o menu!");
                         break;
                 }
             }
-            catch (FormatException)
-            {
-                Console.WriteLine("Formato de texto inválido! \n");
-            }
             catch (DomainExceptions e)
             {
-                Console.WriteLine("Erro encontrado: " + e.Message);
+                Console.WriteLine(e.Message);
             }
             catch (Exception e)
             {
@@ -164,7 +153,7 @@ namespace ProjetoInventti.Menus
         #endregion
 
         #region Menu do zelador
-        public void MenuZelador(ref Pessoa usuarioAtual, List<Solicitacoes> solicitacoes, ref bool opcaoSair)
+        public void MenuZelador(ref Pessoa usuarioAtual, List<Solicitacoes> SolicitacoesDoZelador, ref bool opcaoSair)
         {
             Console.WriteLine("Escolha uma opção, por favor: ");
             Console.WriteLine(
@@ -173,39 +162,35 @@ namespace ProjetoInventti.Menus
                             + " 3) Histórico de solicitações \n"
                             + " 4) Trocar usuário, \n"
                             + " 5) Sair: ");
-
             try
             {
-                int opcao = int.Parse(Console.ReadLine());
+                string opcao = Console.ReadLine();
 
                 switch (opcao)
                 {
-                    case 1:
+                    case "1":
                         usuarioAtual.AlterarSenha();
                         break;
-                    case 2:
+                    case "2":
                         Zelador zelador = (Zelador)usuarioAtual;
-                        List<Solicitacoes> solicitacoesPendentes = solicitacoes.FindAll(x => x.Predio.NomePredio == zelador.Predio.NomePredio);
+                        List<Solicitacoes> solicitacoesPendentes = SolicitacoesDoZelador.FindAll(x => x.Predio.NomePredio == zelador.Predio.NomePredio);
                         Submenu.SubMenuZelador(solicitacoesPendentes);
                         break;
-                    case 3:
+                    case "3":
                         zelador = (Zelador)usuarioAtual;
-                        solicitacoesPendentes = solicitacoes.FindAll(x => x.Predio.NomePredio == zelador.Predio.NomePredio);
-                        Solicitacoes.VisualizarHistoricoDeSolicitacoes(solicitacoes);
+                        solicitacoesPendentes = SolicitacoesDoZelador.FindAll(x => x.Predio.NomePredio == zelador.Predio.NomePredio);
+                        Solicitacoes.VisualizarHistoricoDeSolicitacoes(solicitacoesPendentes);
                         break;
-                    case 4:
+                    case "4":
                         Deslogar(ref usuarioAtual);
                         break;
-                    case 5:
+                    case "5":
                         Sair(ref opcaoSair);
                         break;
                     default:
+                        Console.WriteLine("Insira um número de acordo com o menu!");
                         break;
                 }
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Formato de texto inválido!");
             }
             catch (DomainExceptions e)
             {
@@ -219,7 +204,7 @@ namespace ProjetoInventti.Menus
         #endregion
 
         #region Menu do morador
-        public void MenuMorador(List<Solicitacoes> solicitacoes, ref Pessoa usuarioAtual, List<Solicitacoes> solicitacoesSindico, ref bool opcaoSair)
+        public void MenuMorador(List<Solicitacoes> solicitacoesMorador, ref Pessoa usuarioAtual, List<Solicitacoes> solicitacoesSindico, ref bool opcaoSair)
         {
             try
             {
@@ -231,33 +216,29 @@ namespace ProjetoInventti.Menus
                                 + " 4) Trocar usuário, \n"
                                 + " 5) Sair: ");
 
-                int opcao = int.Parse(Console.ReadLine());
+                string opcao = Console.ReadLine();
 
                 switch (opcao)
                 {
-                    case 1:
+                    case "1":
                         usuarioAtual.AlterarSenha();
                         break;
-                    case 2:
-                        solicitacoesSindico.Insert(0, geradorSolicitacao.GerarNovaSolicitacao(usuarioAtual));
-                        solicitacoes.Insert(0, solicitacoesSindico[0]);
+                    case "2":
+                        Solicitacoes.AbrirNovaSolicitacao(solicitacoesMorador, solicitacoesSindico, usuarioAtual);
                         break;
-                    case 3:
-                        Solicitacoes.VisualizarHistoricoDeSolicitacoes(solicitacoes);
+                    case "3":
+                        Solicitacoes.VisualizarHistoricoDeSolicitacoes(solicitacoesMorador);
                         break;
-                    case 4:
+                    case "4":
                         Deslogar(ref usuarioAtual);
                         break;
-                    case 5:
+                    case "5":
                         Sair(ref opcaoSair);
                         break;
                     default:
+                        Console.WriteLine("Insira um número de acordo com o menu!");
                         break;
                 }
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Formato de texto inválido!");
             }
             catch (DomainExceptions e)
             {
@@ -297,9 +278,9 @@ namespace ProjetoInventti.Menus
                 Console.WriteLine("                                      BEM VINDO, MEU COMPATRIÓTAAAAAAAAAAAAAAA!!!!!!!!!!!                           \n");
                 Console.WriteLine("Para fazer login, informe os dados abaixo, por gentileza: \n");
                 Console.Write("Informe seu usuário: ");
-                var usuario = Console.ReadLine();
+                string usuario = Console.ReadLine();
                 Console.Write("Informe sua senha: ");
-                var senha = Console.ReadLine();
+                string senha = Console.ReadLine();
 
                 for (int i = 0; i < usuariosSistema.Count; i++)
                 {
