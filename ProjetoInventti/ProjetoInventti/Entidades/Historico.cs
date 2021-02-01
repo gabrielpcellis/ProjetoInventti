@@ -24,10 +24,12 @@ namespace ProjetoInventti
         }
         public void AdicionarAoHistorico(Historico historico)
         {
+            Console.Clear();
             HistoricoDeAcoes.Insert(0, historico);
         }
         public static void VisualizarHistoricoDeAcoes()
         {
+            Console.Clear();
             if (HistoricoDeAcoes.Count <= 0)
             {
                 throw new DomainExceptions("Histórico de ações vazio!");

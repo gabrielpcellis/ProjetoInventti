@@ -19,6 +19,7 @@ namespace ProjetoInventti
             List<Solicitacoes> solicitacoesMorador = new List<Solicitacoes>();
             List<Solicitacoes> historico = solicitacoesSindico;
 
+
             bool usuarioExistente = false;
             bool sair = false;
 

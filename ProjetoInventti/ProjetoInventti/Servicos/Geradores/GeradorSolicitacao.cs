@@ -35,8 +35,7 @@ namespace ProjetoInventti.Servicos.Geradores
 
             Solicitacoes solicitacao = new Solicitacoes(data, titulo, usuario.NomeCompleto, descricao, StatusSolicitacao.Recebido, observacao, usuario.PredioDoMorador);
             Console.WriteLine();
-            Console.WriteLine("Solicitação criada: ");
-            Console.WriteLine();
+            Console.WriteLine("Solicitação criada: \n");
             Console.WriteLine(solicitacao);
             Console.WriteLine();
 
