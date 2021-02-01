@@ -1,46 +1,68 @@
 ﻿using ProjetoInventti.Entidades;
 using ProjetoInventti.Enums;
+using ProjetoInventti.Excecoes.DomainExceptions;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace ProjetoInventti.Servicos
 {
     public class GeradorPessoa
     {
-        public Administrador CadastrarAdministrador()
+        public Administrador CadastrarAdministrador(List<Pessoa> usuarios)
         {
-            return new Administrador(GerarPessoa());
+            Console.WriteLine("Bem vindo ao cadastro de administrador: \n");
+            TipoNivelAcesso nivel = TipoNivelAcesso.Administrador;
+            Administrador novoAdm = new Administrador(GerarPessoa(nivel, usuarios));
+            Console.Clear();
+            Console.WriteLine("Novo usuário cadastrado: \n");
+            Console.WriteLine("Nome completo, data de nascimento, placa carro, modelo carro, telefone, usuário, senha: \n");
+            Console.WriteLine(novoAdm);
+            return novoAdm;
         }
-        public Sindico CadastrarSindico(List<Predio> predios)
+        public Sindico CadastrarSindico(List<Predio> predios, List<Pessoa> usuarios)
         {
-            Console.WriteLine("Escolha o prédio pelo nome: ");
-            predios.ForEach(p => Console.WriteLine(p.NomePredio));
-            string nome = Console.ReadLine();
-            Predio predio = predios.Find(f => f.NomePredio == nome);
-            return new Sindico(GerarPessoa(), predio, Salario());
+            Console.WriteLine("Bem vindo ao cadastro de síndico: \n");
+            Predio predio = new Predio();
+            predio.EscolherPredio(predio, predios);
+            TipoNivelAcesso nivel = TipoNivelAcesso.Sindico;
+            Sindico novoSindico = new Sindico(GerarPessoa(nivel, usuarios), predio, Salario());
+            Console.Clear();
+            Console.WriteLine("Novo usuário cadastrado: \n");
+            Console.WriteLine("Nome completo, data de nascimento, placa carro, modelo carro, telefone, usuário, senha: \n");
+            Console.WriteLine(novoSindico);
+            return novoSindico;
         }
-        public Zelador CadastrarZelador(List<Predio> predios)
+        public Zelador CadastrarZelador(List<Predio> predios, List<Pessoa> usuarios)
         {
-            Console.WriteLine("Escolha o prédio pelo nome: ");
-            predios.ForEach(p => Console.WriteLine(p.NomePredio));
-            string nome = Console.ReadLine();
-            Console.Write("Prédio: ");
-            Predio predio = predios.Find(f => f.NomePredio == nome);
-            return new Zelador(GerarPessoa(), predio, Salario());
+            Console.WriteLine("Bem vindo ao cadastro de zelador: \n");
+            Predio predio = new Predio();
+            predio.EscolherPredio(predio, predios);
+            TipoNivelAcesso nivel = TipoNivelAcesso.Zelador;
+            Zelador novoZelador = new Zelador(GerarPessoa(nivel, usuarios), predio, Salario());
+            Console.Clear();
+            Console.WriteLine("Novo usuário cadastrado: \n");
+            Console.WriteLine("Nome completo, data de nascimento, placa carro, modelo carro, telefone, usuário, senha: \n");
+            Console.WriteLine(novoZelador);
+            return novoZelador;
         }
-        public Morador CadastrarMorador(List<Predio> predios)
+        public Morador CadastrarMorador(List<Predio> predios, List<Pessoa> usuarios)
         {
-            Console.WriteLine("Escolha o prédio pelo nome: ");
-            predios.ForEach(p => Console.WriteLine(p.NomePredio));
-            Console.Write("Prédio: ");
-            string nome = Console.ReadLine();
-            Predio predio = predios.Find(f => f.NomePredio == nome);
-            return new Morador(GerarPessoa(), predio);
+            Console.WriteLine("Bem vindo ao cadastro de morador: \n");
+            Predio predio = new Predio();
+            predio.EscolherPredio(predio, predios);
+            TipoNivelAcesso nivel = TipoNivelAcesso.Morador;
+            Morador novoMorador = new Morador(GerarPessoa(nivel, usuarios), predio);
+            Console.Clear();
+            Console.WriteLine("Novo usuário cadastrado: \n");
+            Console.WriteLine("Nome completo, data de nascimento, placa carro, modelo carro, telefone, usuário, senha: \n");
+            Console.WriteLine(novoMorador);
+            return novoMorador;
         }
-        private Pessoa GerarPessoa()
+        private Pessoa GerarPessoa(TipoNivelAcesso nivel, List<Pessoa> usuariosDoSistema)
         {
             Console.WriteLine();
-            Console.WriteLine("Entre com os dados abaixo: ");
+            Console.WriteLine("Agora entre com os dados abaixo: ");
             Console.Write("Nome completo: ");
             string nomeCompleto = Console.ReadLine();
             Console.Write("Data de nascimento (dd/MM/yyyy): ");
@@ -48,54 +70,90 @@ namespace ProjetoInventti.Servicos
             Console.Write("Telefone: ");
             string telefone = Console.ReadLine();
             Console.WriteLine();
-
-            Console.WriteLine("Dados do carro");
-            Console.Write("Placa do carro: ");
-            string placaCarro = (Console.ReadLine());
-            Console.Write("Modelo do carro: ");
-            string modeloCarro = Console.ReadLine();
-            Carro carro = new Carro(placaCarro, modeloCarro);
-
-            Console.Write("Informe o nivel de acesso (Administrador, Sindico, Zelador, Morador): ");
-            TipoNivelAcesso nivel = Enum.Parse<TipoNivelAcesso>(Console.ReadLine());
-
-            Console.WriteLine();
-            Console.WriteLine("Entre com os dados para login");
-            Console.Write("Escolha seu usuário de acesso:");
-            string user = Console.ReadLine();
-            Console.Write("Escolha sua senha de acesso: ");
-            string senha = Console.ReadLine();
-
-            return new Pessoa(nomeCompleto, dataNascimento, carro, telefone, nivel, user, senha);
+            Carro carro = new Carro("não possui", "não possui");
+            Console.WriteLine("Possui carro (S ou N)?");
+            char s = char.Parse(Console.ReadLine());
+            if (s == 'S' || s == 's')
+            {
+                Console.WriteLine("Dados do carro");
+                Console.Write("Placa do carro: ");
+                string placaCarro = (Console.ReadLine());
+                Console.Write("Modelo do carro: ");
+                string modeloCarro = Console.ReadLine();
+                carro = new Carro(placaCarro, modeloCarro);
+            }
+            string[] usuarioSenha = Pessoa.CadastrarUsuarioESenha(usuariosDoSistema);
+            int id = Pessoa.Identificador(usuariosDoSistema);
+            return new Pessoa(id, nomeCompleto, dataNascimento, carro, telefone, nivel, usuarioSenha[0], usuarioSenha[1]);
         }
         private double Salario()
         {
             Console.WriteLine();
             Console.Write("Salário: ");
-            double salario = double.Parse(Console.ReadLine());
+            double salario = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
             return salario;
         }
-        public static void RemoverMorador(List<Pessoa> moradores, List<Pessoa> usuariosSistema)
+        public static void RemoverMorador(List<Pessoa> usuariosSistema)
         {
-            ExcluirMorador(moradores, usuariosSistema);
+            ExcluirMorador(usuariosSistema);
         }
-        static private void ExcluirMorador(List<Pessoa> moradores, List<Pessoa> usuariosSistema)
+        static private void ExcluirMorador(List<Pessoa> usuariosSistema)
         {
-            Console.WriteLine("Escolha o morador que deseja excluir: ");
-            Console.WriteLine();
+            Console.WriteLine("Escolha o morador que deseja excluir: \n");
 
-            for (int i = 0; i < moradores.Count; i++)
+            for (int i = 0; i < usuariosSistema.Count; i++)
             {
-                Console.WriteLine(i + 1 + ": " + moradores[i]);
+                if (usuariosSistema[i].TipoNivelAcesso == TipoNivelAcesso.Morador)
+                {
+                    Console.WriteLine("ID: {0} - " + usuariosSistema[i], usuariosSistema[i].Id);
+                }
             }
             Console.WriteLine();
-            Console.Write("Informe uma posição: ");
-            int posicaoNaLista = int.Parse(Console.ReadLine());
+            Console.Write("Informe uma posição de acordo com os identificadores acima: ");
+            int identificador = int.Parse(Console.ReadLine());
+            Console.WriteLine("Você selecionou o ID: " + identificador);
 
-            moradores.RemoveAt(posicaoNaLista - 1);
-            usuariosSistema.RemoveAt(posicaoNaLista - 1);
-            Console.WriteLine("Morador excluído.");
-            Console.WriteLine();
+            Console.Write("Tem certeza que deseja excluir este morador (S/N)? ");
+            char escolha = char.Parse(Console.ReadLine().ToUpper());
+            if (escolha == 'S')
+            {
+                foreach (var item in usuariosSistema)
+                {
+                    if (item.Id == identificador && item.TipoNivelAcesso == TipoNivelAcesso.Morador)
+                    {
+                        usuariosSistema.Remove(item);
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Exclusão cancelada, você só pode excluir moradores. \n");
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("Exclusão cancelada. Você voltou para o menu! \n");
+            }
         }
+        public static void VisualizarListaDeMoradores(List<Pessoa> usuariosSistema)
+        {
+            Console.Clear();
+            if (usuariosSistema.Count > 0)
+            {
+                Console.WriteLine("Lista de moradores: \n");
+                Console.WriteLine("Nome completo,  Data de nascimento,  Modelo,  Placa,    Telefone,  Usuário,  Senha \n");
+                List<Pessoa> moradores = usuariosSistema.FindAll(x => x.TipoNivelAcesso == TipoNivelAcesso.Morador);
+                foreach (var item in moradores)
+                {
+                    Console.WriteLine(item + "\n");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Lista vazia!");
+            }
+        }
+
     }
 }

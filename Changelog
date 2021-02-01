@@ -1,5 +1,39 @@
 # Projeto
 
+01/02/2021
+
+#Adicionado
+MelhoriaS na interação do usuário com a interface (GP-19)
+
+#Alterado
+Pequenos detalhes de reparo (GP-19)
+
+#Corrigido
+Bugs que podiam influcienciar no lançamento de exceções (GP-19)
+==================================================
+27/01/2021
+
+#Adicionado
+Métodos para melhor semântica do código (GP-18.1)
+
+#Alterado
+Refatoração para melhoria do código (GP-18.1)
+
+#Corrigido
+Bugs que podiam influcienciar no lançamento de exceções indesejadas (GP-18.1)
+==================================================
+22/01/2021
+
+#Adicionado
+Adicionadas exceções personalizadas (GP-18)
+
+#Alterado
+Comportamento de métodos e chamadas(GP-18)
+
+#Corrigido
+Correção de código para maior eficiência do programa, refatoração (GP-18)
+Quebras de linhas, eficiência de metodos, fluxo do processo (GP-18)
+==================================================
 20/01/2021
 
 #Adicionado
