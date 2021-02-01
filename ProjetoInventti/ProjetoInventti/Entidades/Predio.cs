@@ -25,10 +25,12 @@ namespace ProjetoInventti.Entidades
         }
         public void EscolherPredio(Predio predio, List<Predio> predios)
         {
+            Console.WriteLine("Escolha um dos prédios disponíveis:");
             string nome;
             do
             {
                 predios.ForEach(p => Console.WriteLine(p.NomePredio));
+                Console.WriteLine();
                 Console.Write("Prédio: ");
                 nome = Console.ReadLine();
                 foreach (var item in predios)

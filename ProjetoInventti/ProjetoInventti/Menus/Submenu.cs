@@ -9,6 +9,7 @@ namespace ProjetoInventti.Menus
     {
         public static void SubMenuSindico(List<Solicitacoes> solicitacoesPendentes, List<Solicitacoes> solicitacoesDoZelador)
         {
+            
             SubmenuSindico(solicitacoesPendentes, solicitacoesDoZelador);
         }
         public static void SubMenuZelador(List<Solicitacoes> solicitacoes)
@@ -41,13 +42,14 @@ namespace ProjetoInventti.Menus
             switch (opt)
             {
                 case "1":
-                    solicitacoesPendentes[posicao].AlterarStatus(solicitacoesPendentes, posicao);
                     historico = new Historico("A solicitação '", solicitacoesPendentes[posicao].Titulo, "' teve seu status alterado na data ", DateTime.Now);
+                    solicitacoesPendentes[posicao].AlterarStatus(solicitacoesPendentes, posicao);
+                    Solicitacoes.SolicitacoesEmAnalise(solicitacoesPendentes);
                     historico.AdicionarAoHistorico(historico);
                     break;
                 case "2":
-                    solicitacoesPendentes[posicao].AdicionarObservacao(solicitacoesPendentes, posicao);
                     historico = new Historico("Observação adicionada à solicitação '", solicitacoesPendentes[posicao].Titulo, "' na data ", DateTime.Now);
+                    solicitacoesPendentes[posicao].AdicionarObservacao(solicitacoesPendentes, posicao);
                     historico.AdicionarAoHistorico(historico);
                     break;
                 case "3":
@@ -64,9 +66,11 @@ namespace ProjetoInventti.Menus
                     Historico.VisualizarHistoricoDeAcoes();
                     break;
                 case "6":
+                    Console.Clear();
                     Console.WriteLine("Saindo...");
                     break;
                 default:
+                    Console.Clear();
                     Console.WriteLine("Insira um número de acordo com o menu!");
                     break;
             }
@@ -93,16 +97,19 @@ namespace ProjetoInventti.Menus
             switch (opt)
             {
                 case "1":
+                    
                     solicitacoes[posicao].AlterarStatus(solicitacoes, posicao);
                     break;
                 case "2":
                     solicitacoes[posicao].AdicionarObservacao(solicitacoes, posicao);
                     break;
                 case "3":
+                    Console.Clear();
                     Console.WriteLine("Cancelando...");
                     Console.WriteLine();
                     break;
                 default:
+                    Console.Clear();
                     Console.WriteLine("Insira um número de acordo com o menu!");
                     break;
             }

@@ -15,9 +15,11 @@ namespace ProjetoInventti.Entidades
         public TipoNivelAcesso TipoNivelAcesso { get; private set; }
         public string UsuarioAcesso { get; private set; }
         public string SenhaAcesso { get; private set; }
+        public int Id { get; private set; }
 
-        public Pessoa(string nomeCompleto, DateTime dataNascimento, Carro carro, string telefone, TipoNivelAcesso tipoNivelAcesso, string user, string senha)
+        public Pessoa(int id, string nomeCompleto, DateTime dataNascimento, Carro carro, string telefone, TipoNivelAcesso tipoNivelAcesso, string user, string senha)
         {
+            Id = id;
             NomeCompleto = nomeCompleto;
             DataNascimento = dataNascimento;
             Carro = carro;
@@ -32,6 +34,7 @@ namespace ProjetoInventti.Entidades
         }
         public void AlterarSenha()
         {
+            Console.Clear();
             Console.WriteLine();
             Console.WriteLine("Para alterar sua senha, informe os dados abaixo: ");
             Console.Write("Digite a nova senha: ");
@@ -68,6 +71,15 @@ namespace ProjetoInventti.Entidades
             usuarioSenha[1] = senha;
 
             return usuarioSenha;
+        }
+        public static int Identificador(List<Pessoa> usuarios)
+        {
+            int id = 0;
+            for (int i = 0; i < usuarios.Count; i++)
+            {
+                id = usuarios[i].Id += 1;
+            }
+            return id;
         }
         public override string ToString()
         {

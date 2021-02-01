@@ -98,17 +98,20 @@ namespace ProjetoInventti.Menus
                             + " 5) Solicitações pendentes, \n"
                             + " 6) Histórico de solicitações, \n"
                             + " 7) Excluir morador, \n"
-                            + " 8) Trocar usuário, \n"
-                            + " 9) Sair: ");
+                            + " 8) Solicitações em análise, \n"
+                            + " 9) Trocar usuário, \n"
+                            + " 10) Sair: ");
             try
             {
                 string opcao = Console.ReadLine();
                 switch (opcao)
                 {
                     case "1":
+                        Console.Clear();
                         usuariosSistema.Add(geradorPessoa.CadastrarMorador(predios, usuariosSistema));
                         break;
                     case "2":
+                        Console.Clear();
                         usuariosSistema.Add(geradorPessoa.CadastrarZelador(predios, usuariosSistema));
                         break;
                     case "3":
@@ -124,19 +127,29 @@ namespace ProjetoInventti.Menus
                         Submenu.SubMenuSindico(solicitacoesPendentes, solicitacoesDoZelador);
                         break;
                     case "6":
-                        Solicitacoes.VisualizarHistoricoDeSolicitacoes(historico);
+                        Console.Clear();
+                        Solicitacoes.VisualizarHistoricoDeSolicitacoes(historico, usuarioAtual);
                         break;
                     case "7":
-                        List<Pessoa> moradores = usuariosSistema.FindAll(x => x.TipoNivelAcesso == TipoNivelAcesso.Morador);
-                        GeradorPessoa.RemoverMorador(moradores, usuariosSistema);
+                        Console.Clear();
+                        GeradorPessoa.RemoverMorador(usuariosSistema);
                         break;
                     case "8":
-                        Deslogar(ref usuarioConectado);
+                        sindico = (Sindico)usuarioAtual;
+                        List<Solicitacoes> solicitacoesEmAnalise = SolicitacoesDoSindico.FindAll(x => x.Predio.NomePredio == sindico.Predio.NomePredio);
+                        List<Solicitacoes> solicitacoesEmAnaliseStatusFiltro = solicitacoesEmAnalise.FindAll(x => x.StatusSolicitacao == StatusSolicitacao.Analise);
+                        Solicitacoes.SolicitacoesEmAnalise(solicitacoesEmAnaliseStatusFiltro);
                         break;
                     case "9":
+                        Console.Clear();
+                        Deslogar(ref usuarioConectado);
+                        break;
+                    case "10":
+                        Console.Clear();
                         Sair(ref opcaoSair);
                         break;
                     default:
+                        Console.Clear();
                         Console.WriteLine("Insira um número de acordo com o menu!");
                         break;
                 }
@@ -169,9 +182,11 @@ namespace ProjetoInventti.Menus
                 switch (opcao)
                 {
                     case "1":
+                        Console.Clear();
                         usuarioAtual.AlterarSenha();
                         break;
                     case "2":
+                        Console.Clear();
                         Zelador zelador = (Zelador)usuarioAtual;
                         List<Solicitacoes> solicitacoesPendentes = SolicitacoesDoZelador.FindAll(x => x.Predio.NomePredio == zelador.Predio.NomePredio);
                         Submenu.SubMenuZelador(solicitacoesPendentes);
@@ -179,7 +194,7 @@ namespace ProjetoInventti.Menus
                     case "3":
                         zelador = (Zelador)usuarioAtual;
                         solicitacoesPendentes = SolicitacoesDoZelador.FindAll(x => x.Predio.NomePredio == zelador.Predio.NomePredio);
-                        Solicitacoes.VisualizarHistoricoDeSolicitacoes(solicitacoesPendentes);
+                        Solicitacoes.VisualizarHistoricoDeSolicitacoes(solicitacoesPendentes, usuarioAtual);
                         break;
                     case "4":
                         Deslogar(ref usuarioAtual);
@@ -221,21 +236,27 @@ namespace ProjetoInventti.Menus
                 switch (opcao)
                 {
                     case "1":
+                        Console.Clear();
                         usuarioAtual.AlterarSenha();
                         break;
                     case "2":
+                        Console.Clear();
                         Solicitacoes.AbrirNovaSolicitacao(solicitacoesMorador, solicitacoesSindico, usuarioAtual);
                         break;
                     case "3":
-                        Solicitacoes.VisualizarHistoricoDeSolicitacoes(solicitacoesMorador);
+                        Console.Clear();
+                        Solicitacoes.VisualizarHistoricoDeSolicitacoes(solicitacoesMorador, usuarioAtual);
                         break;
                     case "4":
+                        Console.Clear();
                         Deslogar(ref usuarioAtual);
                         break;
                     case "5":
+                        Console.Clear();
                         Sair(ref opcaoSair);
                         break;
                     default:
+                        Console.Clear();
                         Console.WriteLine("Insira um número de acordo com o menu!");
                         break;
                 }
@@ -255,7 +276,7 @@ namespace ProjetoInventti.Menus
         public void Deslogar(ref Pessoa usuarioConectado)
         {
             Console.WriteLine("Tem certeza que deseja trocar de usuário (S ou N)?");
-            char confirmacao = char.Parse(Console.ReadLine());
+            char confirmacao = char.Parse(Console.ReadLine().ToUpper());
             if (confirmacao == 'S' || confirmacao == 's')
             {
                 usuarioConectado = null;
@@ -296,6 +317,7 @@ namespace ProjetoInventti.Menus
                     Console.WriteLine("Usuário não encontrado \n");
                 }
             } while (!usuarioExistente);
+            Console.Clear();
         }
     }
 }
