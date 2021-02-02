@@ -1,4 +1,5 @@
 ﻿using ProjetoInventti.Entidades;
+using ProjetoInventti.Enums;
 using ProjetoInventti.Excecoes.DomainExceptions;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,6 @@ namespace ProjetoInventti.Menus
     {
         public static void SubMenuSindico(List<Solicitacoes> solicitacoesPendentes, List<Solicitacoes> solicitacoesDoZelador)
         {
-            
             SubmenuSindico(solicitacoesPendentes, solicitacoesDoZelador);
         }
         public static void SubMenuZelador(List<Solicitacoes> solicitacoes)
@@ -19,7 +19,8 @@ namespace ProjetoInventti.Menus
         #region Submenus
         private static void SubmenuSindico(List<Solicitacoes> solicitacoesPendentes, List<Solicitacoes> solicitacoesDoZelador)
         {
-            Solicitacoes.VisualizarSolicitacoesPendentes(solicitacoesPendentes);
+            
+            Solicitacoes.VisualizarSolicitacoes(solicitacoesPendentes);
 
             Console.WriteLine();
             Console.WriteLine("Para visualizar uma solicitação, escolha um número acima: ");
@@ -44,7 +45,6 @@ namespace ProjetoInventti.Menus
                 case "1":
                     historico = new Historico("A solicitação '", solicitacoesPendentes[posicao].Titulo, "' teve seu status alterado na data ", DateTime.Now);
                     solicitacoesPendentes[posicao].AlterarStatus(solicitacoesPendentes, posicao);
-                    Solicitacoes.SolicitacoesEmAnalise(solicitacoesPendentes);
                     historico.AdicionarAoHistorico(historico);
                     break;
                 case "2":
@@ -59,7 +59,7 @@ namespace ProjetoInventti.Menus
                     break;
                 case "4":
                     historico = new Historico("Solicitação '", solicitacoesPendentes[posicao].Titulo, "' transferida na data ", DateTime.Now);
-                    solicitacoesPendentes[posicao].TransferirSolicitacao(solicitacoesDoZelador, solicitacoesPendentes, posicao);
+                    Solicitacoes.TransferirSolicitacao(solicitacoesDoZelador, solicitacoesPendentes, posicao);
                     historico.AdicionarAoHistorico(historico);
                     break;
                 case "5":
@@ -77,7 +77,7 @@ namespace ProjetoInventti.Menus
         }
         private static void SubmenuZelador(List<Solicitacoes> solicitacoes)
         {
-            Solicitacoes.VisualizarSolicitacoesPendentes(solicitacoes);
+            Solicitacoes.VisualizarSolicitacoes(solicitacoes);
 
             Console.WriteLine();
             Console.WriteLine("Para visualizar uma solicitação, escolha um número acima: ");

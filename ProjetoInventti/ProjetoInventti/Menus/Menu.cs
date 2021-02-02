@@ -88,7 +88,7 @@ namespace ProjetoInventti.Menus
 
         #region Menu do síndico
         public void MenuSindico(List<Pessoa> usuariosSistema, Pessoa usuarioAtual, ref List<Solicitacoes> SolicitacoesDoSindico, List<Predio> predios,
-            List<Solicitacoes> solicitacoesDoZelador, ref bool opcaoSair, ref Pessoa usuarioConectado, List<Solicitacoes> historico)
+            List<Solicitacoes> solicitacoesDoZelador, ref bool opcaoSair, ref Pessoa usuarioConectado, List<Solicitacoes> historico, List<Solicitacoes> solicitacoesEmAnalise)
         {
             Console.WriteLine("Escolha uma opção, por favor: ");
             Console.WriteLine(" 1) Cadastrar novo Morador, \n"
@@ -124,7 +124,7 @@ namespace ProjetoInventti.Menus
                         Sindico sindico = (Sindico)usuarioAtual;
                         List<Solicitacoes> solicitacoesPendentes = SolicitacoesDoSindico.FindAll(x => x.Predio.NomePredio == sindico.Predio.NomePredio);
                         SolicitacoesDoSindico = solicitacoesPendentes;
-                        Submenu.SubMenuSindico(solicitacoesPendentes, solicitacoesDoZelador);
+                        Submenu.SubMenuSindico(SolicitacoesDoSindico, solicitacoesDoZelador);
                         break;
                     case "6":
                         Console.Clear();
@@ -136,9 +136,9 @@ namespace ProjetoInventti.Menus
                         break;
                     case "8":
                         sindico = (Sindico)usuarioAtual;
-                        List<Solicitacoes> solicitacoesEmAnalise = SolicitacoesDoSindico.FindAll(x => x.Predio.NomePredio == sindico.Predio.NomePredio);
-                        List<Solicitacoes> solicitacoesEmAnaliseStatusFiltro = solicitacoesEmAnalise.FindAll(x => x.StatusSolicitacao == StatusSolicitacao.Analise);
-                        Solicitacoes.SolicitacoesEmAnalise(solicitacoesEmAnaliseStatusFiltro);
+                        List<Solicitacoes> solicitacoesAnalise = SolicitacoesDoSindico.FindAll(x => x.Predio.NomePredio == sindico.Predio.NomePredio);
+                        //List<Solicitacoes> solicitacoesEmAnaliseStatusFiltro = solicitacoesEmAnalise.FindAll(x => x.StatusSolicitacao == StatusSolicitacao.Analise);
+                        Solicitacoes.SolicitacoesEmAnalise(solicitacoesAnalise);
                         break;
                     case "9":
                         Console.Clear();
