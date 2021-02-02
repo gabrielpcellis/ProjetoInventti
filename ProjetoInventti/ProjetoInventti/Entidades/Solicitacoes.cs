@@ -1,7 +1,6 @@
 ﻿using ProjetoInventti.Entidades;
 using ProjetoInventti.Enums;
 using ProjetoInventti.Excecoes.DomainExceptions;
-using ProjetoInventti.Menus;
 using ProjetoInventti.Servicos.Geradores;
 using System;
 using System.Collections.Generic;
@@ -19,6 +18,10 @@ namespace ProjetoInventti
         public string Observacao { get; set; }
         public Predio Predio { get; set; }
 
+        public Solicitacoes()
+        {
+        }
+
         public Solicitacoes(DateTime dataSolicitacao, string titulo, string nome, string descricaozinha, StatusSolicitacao tipoSolicitacao, string observacao, Predio predio)
         {
             DataSolicitacao = dataSolicitacao;
@@ -33,15 +36,17 @@ namespace ProjetoInventti
         {
             Console.Clear();
             solicitacao.RemoveAt(posicao);
-            Console.WriteLine("A solicitação foi excluída. \n");
+            //Console.WriteLine("A solicitação foi excluída. \n");
         }
-        public void TransferirSolicitacao(List<Solicitacoes> solicitacaoZelador, List<Solicitacoes> solicitacaoSindico, int posicao)
+
+        public static void TransferirSolicitacao(List<Solicitacoes> solicitacaoZelador, List<Solicitacoes> solicitacaoSindico, int posicao)
         {
             Console.Clear();
             solicitacaoZelador.Insert(0, solicitacaoSindico[posicao]);
             solicitacaoSindico.RemoveAt(posicao);
-            Console.WriteLine("Solicitação transferida. \n");
+            //Console.WriteLine("Solicitação transferida. \n");
         }
+
         public void AdicionarObservacao(List<Solicitacoes> solicitacoes, int posicao)
         {
             Console.Clear();
@@ -50,6 +55,7 @@ namespace ProjetoInventti
             solicitacoes[posicao].Observacao = observacao;
             Console.Write("Nova observação: " + solicitacoes[posicao].Observacao + "\n");
         }
+
         public void AlterarStatus(List<Solicitacoes> solicitacoesPendentes, int posicao)
         {
             Console.Clear();
@@ -68,6 +74,7 @@ namespace ProjetoInventti
                 }
             } while (status != "Analise" && status != "Finalizado");
         }
+
         public static void VisualizarHistoricoDeSolicitacoes(List<Solicitacoes> solicitacoes, Pessoa usuarioAtual)
         {
             Console.Clear();
@@ -82,6 +89,7 @@ namespace ProjetoInventti
             List<Solicitacoes> historico = solicitacoes.FindAll(x => x.Predio.NomePredio == sindico.Predio.NomePredio);
             historico.ForEach(p => Console.WriteLine(p));
         }
+
         public static void AbrirNovaSolicitacao(List<Solicitacoes> solicitacoesSindico, List<Solicitacoes> solicitacoesMorador, Pessoa usuarioAtual)
         {
             Console.Clear();
@@ -89,35 +97,54 @@ namespace ProjetoInventti
             solicitacoesSindico.Insert(0, gerador.GerarNovaSolicitacao(usuarioAtual));
             solicitacoesMorador.Insert(0, solicitacoesSindico[0]);
         }
-        public static void VisualizarSolicitacoesPendentes(List<Solicitacoes> solicitacoes)
+
+        public static void VisualizarSolicitacoes(List<Solicitacoes> solicitacoes)
         {
             Console.Clear();
-            if (solicitacoes.Count <= 0)
+            List<Solicitacoes> solicitacoesPendentesApenasRecebidos = solicitacoes.FindAll(x => x.StatusSolicitacao == StatusSolicitacao.Recebido);
+
+            if (solicitacoesPendentesApenasRecebidos.Count <= 0)
             {
                 throw new DomainExceptions("Não há solicitações pendentes no momento. \n");
             }
-            List<Solicitacoes> solicitacoesPendentesApenasRecebidos = solicitacoes.FindAll(x => x.StatusSolicitacao == StatusSolicitacao.Recebido);
-            Console.WriteLine("Solicitações pendentes: \n");
+
+            Console.WriteLine("Solicitações disponíveis: \n");
             //solicitacoes.ForEach(p => Console.WriteLine(p.Titulo));
             for (int i = 0; i < solicitacoesPendentesApenasRecebidos.Count; i++)
             {
                 Console.WriteLine(i + 1 + "- " + solicitacoesPendentesApenasRecebidos[i].Titulo);
             }
         }
+
         public static void SolicitacoesEmAnalise(List<Solicitacoes> solicitacoes)
         {
             Console.Clear();
-            if (solicitacoes.Count <= 0)
-            {
-                throw new DomainExceptions("Não há solicitações pendentes no momento. \n");
-            }
-            for (int i = 0; i < solicitacoes.Count; i++)
-            {
-                Console.WriteLine(i + 1 + "- " + solicitacoes[i].Titulo);
-            }
+            VisualizarSolicitacoes(solicitacoes);
 
+            Console.Write("Escolha uma solicitação: ");
+            int posicaoEscolhida = int.Parse(Console.ReadLine());
+            int posicao = posicaoEscolhida - 1;
 
         }
+
+        //public static void VisualizarSolicitacoes(List<Solicitacoes> solicitacoesEmAnalise)
+        //{
+        //    Console.Clear();
+        //    if (solicitacoesEmAnalise.Count <= 0)
+        //    {
+        //        throw new DomainExceptions("Não há solicitações pendentes no momento. \n");
+        //    }
+        //    List<Solicitacoes> solicitacoesPendentesApenasAnalise = solicitacoesEmAnalise.FindAll(x => x.StatusSolicitacao == StatusSolicitacao.Analise);
+        //    Console.WriteLine("Solicitações em Análise: \n");
+
+        //    for (int i = 0; i < solicitacoesPendentesApenasAnalise.Count; i++)
+        //    {
+        //        Console.WriteLine(i + 1 + "- " + solicitacoesPendentesApenasAnalise[i].Titulo);
+        //    }
+        //}
+
+
+
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
