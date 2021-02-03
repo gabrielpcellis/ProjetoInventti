@@ -20,7 +20,6 @@ namespace ProjetoInventti
             List<Solicitacoes> historico = solicitacoesSindico;
             List<Solicitacoes> solicitacoesEmAnalise = new List<Solicitacoes>();
 
-
             bool usuarioExistente = false;
             bool sair = false;
 

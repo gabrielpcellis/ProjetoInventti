@@ -28,6 +28,11 @@ namespace ProjetoInventti.Entidades
             UsuarioAcesso = user;
             SenhaAcesso = senha;
         }
+
+        public Pessoa()
+        {
+        }
+
         public bool VerificarDadosDeAcesso(string usuario, string senha)
         {
             return usuario == UsuarioAcesso && senha == SenhaAcesso;

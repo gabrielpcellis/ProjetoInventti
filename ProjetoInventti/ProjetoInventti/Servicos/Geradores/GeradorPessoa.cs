@@ -70,10 +70,10 @@ namespace ProjetoInventti.Servicos
             Console.Write("Telefone: ");
             string telefone = Console.ReadLine();
             Console.WriteLine();
-            Carro carro = new Carro("não possui", "não possui");
+            Carro carro = new Carro();
             Console.WriteLine("Possui carro (S ou N)?");
-            char s = char.Parse(Console.ReadLine());
-            if (s == 'S' || s == 's')
+            char s = char.Parse(Console.ReadLine().ToUpper());
+            if (s == 'S')
             {
                 Console.WriteLine("Dados do carro");
                 Console.Write("Placa do carro: ");
@@ -81,6 +81,10 @@ namespace ProjetoInventti.Servicos
                 Console.Write("Modelo do carro: ");
                 string modeloCarro = Console.ReadLine();
                 carro = new Carro(placaCarro, modeloCarro);
+            }
+            else
+            {
+                carro = new Carro("Não possui", "Não possui");
             }
             string[] usuarioSenha = Pessoa.CadastrarUsuarioESenha(usuariosDoSistema);
             int id = Pessoa.Identificador(usuariosDoSistema);
@@ -117,18 +121,20 @@ namespace ProjetoInventti.Servicos
             char escolha = char.Parse(Console.ReadLine().ToUpper());
             if (escolha == 'S')
             {
+                Pessoa obj = new Pessoa();
                 foreach (var item in usuariosSistema)
                 {
                     if (item.Id == identificador && item.TipoNivelAcesso == TipoNivelAcesso.Morador)
                     {
+                        obj = item;
                         usuariosSistema.Remove(item);
+                        Console.WriteLine("Um morador foi removido.");
                         break;
                     }
-                    else
-                    {
-                        Console.WriteLine("Exclusão cancelada, você só pode excluir moradores. \n");
-                        break;
-                    }
+                }
+                if (obj.Id != identificador || obj.TipoNivelAcesso != TipoNivelAcesso.Morador)
+                {
+                    Console.WriteLine("Só é possível excluir moradores.");
                 }
             }
             else

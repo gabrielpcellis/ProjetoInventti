@@ -33,7 +33,7 @@ namespace ProjetoInventti.Servicos.Geradores
                 observacao = Console.ReadLine();
             }
 
-            Solicitacoes solicitacao = new Solicitacoes(data, titulo, usuario.NomeCompleto, descricao, StatusSolicitacao.Recebido, observacao, usuario.PredioDoMorador);
+            Solicitacoes solicitacao = new Solicitacoes(data, titulo, usuario.NomeCompleto, descricao, StatusSolicitacao.Recebido, observacao, usuario.Predio);
             Console.WriteLine();
             Console.WriteLine("Solicitação criada: \n");
             Console.WriteLine(solicitacao);

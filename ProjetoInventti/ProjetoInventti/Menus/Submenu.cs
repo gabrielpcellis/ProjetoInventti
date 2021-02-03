@@ -45,6 +45,10 @@ namespace ProjetoInventti.Menus
                 case "1":
                     historico = new Historico("A solicitação '", solicitacoesPendentes[posicao].Titulo, "' teve seu status alterado na data ", DateTime.Now);
                     solicitacoesPendentes[posicao].AlterarStatus(solicitacoesPendentes, posicao);
+<<<<<<< HEAD
+                    //Solicitacoes.VisualizarSolicitacoesEmAnalise(solicitacoesPendentes);
+=======
+>>>>>>> main
                     historico.AdicionarAoHistorico(historico);
                     break;
                 case "2":

@@ -9,6 +9,10 @@ namespace ProjetoInventti.Entidades
         public string PlacaCarro { get; set; }
         public string ModeloCarro { get; set; }
 
+        public Carro()
+        {
+        }
+
         public Carro(string placaCarro, string modeloCarro)
         {
             PlacaCarro = placaCarro;

@@ -84,37 +84,60 @@ namespace ProjetoInventti
             }
             Console.WriteLine("HISTÓRICO DE SOLICITAÇÕES:");
             Console.WriteLine();
+            
+            solicitacoes.ForEach(p => Console.WriteLine(p));
 
-            Sindico sindico = (Sindico)usuarioAtual;
-            List<Solicitacoes> historico = solicitacoes.FindAll(x => x.Predio.NomePredio == sindico.Predio.NomePredio);
-            historico.ForEach(p => Console.WriteLine(p));
+            //Sindico sindico = (Sindico)usuarioAtual;
+            //List<Solicitacoes> historico = solicitacoes.FindAll(x => x.Predio.NomePredio == sindico.Predio.NomePredio);
+            //historico.ForEach(p => Console.WriteLine(p));
         }
 
         public static void AbrirNovaSolicitacao(List<Solicitacoes> solicitacoesSindico, List<Solicitacoes> solicitacoesMorador, Pessoa usuarioAtual)
         {
             Console.Clear();
             GeradorSolicitacao gerador = new GeradorSolicitacao();
-            solicitacoesSindico.Insert(0, gerador.GerarNovaSolicitacao(usuarioAtual));
-            solicitacoesMorador.Insert(0, solicitacoesSindico[0]);
+            solicitacoesMorador.Insert(0, gerador.GerarNovaSolicitacao(usuarioAtual));
+            solicitacoesSindico.Insert(0, solicitacoesMorador[0]);
         }
 
         public static void VisualizarSolicitacoes(List<Solicitacoes> solicitacoes)
         {
             Console.Clear();
             List<Solicitacoes> solicitacoesPendentesApenasRecebidos = solicitacoes.FindAll(x => x.StatusSolicitacao == StatusSolicitacao.Recebido);
+<<<<<<< HEAD
+=======
 
+>>>>>>> main
             if (solicitacoesPendentesApenasRecebidos.Count <= 0)
             {
                 throw new DomainExceptions("Não há solicitações pendentes no momento. \n");
             }
+<<<<<<< HEAD
+            Console.WriteLine("Solicitações pendentes: \n");
+=======
 
             Console.WriteLine("Solicitações disponíveis: \n");
+>>>>>>> main
             //solicitacoes.ForEach(p => Console.WriteLine(p.Titulo));
             for (int i = 0; i < solicitacoesPendentesApenasRecebidos.Count; i++)
             {
                 Console.WriteLine(i + 1 + "- " + solicitacoesPendentesApenasRecebidos[i].Titulo);
             }
         }
+<<<<<<< HEAD
+        public static void VisualizarSolicitacoesEmAnalise(List<Solicitacoes> solicitacoes)
+        {
+            Console.Clear();
+            List<Solicitacoes> solicitacoesComStatusEmAnalise = solicitacoes.FindAll(x => x.StatusSolicitacao == StatusSolicitacao.Analise);
+            if (solicitacoesComStatusEmAnalise.Count <= 0)
+            {
+                throw new DomainExceptions("Não há solicitações pendentes no momento. \n");
+            }
+            for (int i = 0; i < solicitacoesComStatusEmAnalise.Count; i++)
+            {
+                Console.WriteLine(i + 1 + "- " + solicitacoesComStatusEmAnalise[i].Titulo);
+            }
+=======
 
         public static void SolicitacoesEmAnalise(List<Solicitacoes> solicitacoes)
         {
@@ -125,6 +148,7 @@ namespace ProjetoInventti
             int posicaoEscolhida = int.Parse(Console.ReadLine());
             int posicao = posicaoEscolhida - 1;
 
+>>>>>>> main
         }
 
         //public static void VisualizarSolicitacoes(List<Solicitacoes> solicitacoesEmAnalise)
