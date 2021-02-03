@@ -88,7 +88,7 @@ namespace ProjetoInventti.Menus
 
         #region Menu do síndico
         public void MenuSindico(List<Pessoa> usuariosSistema, Pessoa usuarioAtual, ref List<Solicitacoes> SolicitacoesDoSindico, List<Predio> predios,
-            List<Solicitacoes> solicitacoesDoZelador, ref bool opcaoSair, ref Pessoa usuarioConectado, List<Solicitacoes> historico)
+            List<Solicitacoes> solicitacoesDoZelador, ref bool opcaoSair, ref Pessoa usuarioConectado, List<Solicitacoes> historicoAcoes)
         {
             Console.WriteLine("Escolha uma opção, por favor: ");
             Console.WriteLine(" 1) Cadastrar novo Morador, \n"
@@ -123,12 +123,14 @@ namespace ProjetoInventti.Menus
                     case "5":
                         Sindico sindico = (Sindico)usuarioAtual;
                         List<Solicitacoes> solicitacoesPendentes = SolicitacoesDoSindico.FindAll(x => x.Predio.NomePredio == sindico.Predio.NomePredio);
-                        SolicitacoesDoSindico = solicitacoesPendentes;
+                        //SolicitacoesDoSindico = solicitacoesPendentes; //Estava causando problemas na hora de acessar com os outros síndicos
                         Submenu.SubMenuSindico(solicitacoesPendentes, solicitacoesDoZelador);
                         break;
                     case "6":
                         Console.Clear();
-                        Solicitacoes.VisualizarHistoricoDeSolicitacoes(historico, usuarioAtual);
+                        sindico = (Sindico)usuarioAtual;
+                        List<Solicitacoes> historico = SolicitacoesDoSindico.FindAll(x => x.Predio.NomePredio == sindico.Predio.NomePredio);
+                        Solicitacoes.VisualizarHistoricoDeSolicitacoes(historicoAcoes, usuarioAtual);
                         break;
                     case "7":
                         Console.Clear();
@@ -138,7 +140,7 @@ namespace ProjetoInventti.Menus
                         sindico = (Sindico)usuarioAtual;
                         List<Solicitacoes> solicitacoesEmAnalise = SolicitacoesDoSindico.FindAll(x => x.Predio.NomePredio == sindico.Predio.NomePredio);
                         List<Solicitacoes> solicitacoesEmAnaliseStatusFiltro = solicitacoesEmAnalise.FindAll(x => x.StatusSolicitacao == StatusSolicitacao.Analise);
-                        Solicitacoes.SolicitacoesEmAnalise(solicitacoesEmAnaliseStatusFiltro);
+                        Solicitacoes.VisualizarSolicitacoesEmAnalise(solicitacoesEmAnaliseStatusFiltro);
                         break;
                     case "9":
                         Console.Clear();
@@ -241,10 +243,12 @@ namespace ProjetoInventti.Menus
                         break;
                     case "2":
                         Console.Clear();
-                        Solicitacoes.AbrirNovaSolicitacao(solicitacoesMorador, solicitacoesSindico, usuarioAtual);
+                        Solicitacoes.AbrirNovaSolicitacao(solicitacoesSindico, solicitacoesMorador, usuarioAtual);
                         break;
                     case "3":
                         Console.Clear();
+                        Morador morador = (Morador)usuarioAtual;
+                        List<Solicitacoes> historicoSolicitacoes = solicitacoesMorador.FindAll(x => x.Predio.NomePredio == morador.Predio.NomePredio);
                         Solicitacoes.VisualizarHistoricoDeSolicitacoes(solicitacoesMorador, usuarioAtual);
                         break;
                     case "4":

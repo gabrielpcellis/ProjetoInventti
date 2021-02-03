@@ -1,5 +1,18 @@
 # Projeto
 
+03/02/2021
+
+#Adicionado
+Método de solicitações em análise (GP-21)
+
+#Alterado
+Comportamento de métodos nas classes Solicitacoes e Menu (GP-21)
+
+#Corrigido
+Bug ao excluir moradores (GP-21)
+Lançamento do index out of range exception na chamada de métodos (GP-21)
+Bug ao visualizar solicitações pendentes no perfil morador (GP-21)
+==================================================
 01/02/2021
 
 #Adicionado

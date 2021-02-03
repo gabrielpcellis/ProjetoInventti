@@ -65,10 +65,10 @@ namespace ProjetoInventti
 
             List<Solicitacoes> solicitacoes = new List<Solicitacoes>
             {
-                new Solicitacoes (DateTime.Now, "Vizinho chato", "Fulano", "Vou descer a porrada nele", Enums.StatusSolicitacao.Recebido, "observação 1", predio[0]),
-                new Solicitacoes (DateTime.Now, "Problema no encanamento", "Beltrano", "Cano perfurado", Enums.StatusSolicitacao.Recebido, "observação 2", predio[1]),
-                new Solicitacoes (DateTime.Now, "Tem um pinguim na geladeira", "Gabriel", "Me ajuda", Enums.StatusSolicitacao.Recebido, "observação 3", predio[0]),
-                new Solicitacoes (DateTime.Now, "Godzilla ou King Kong?", "Zé ruela", "Decidam pls", Enums.StatusSolicitacao.Recebido, "Sério mesmo", predio[2])
+                new Solicitacoes (DateTime.Now, "Vizinho chato", "Fulano", "Vou descer a porrada nele", Enums.StatusSolicitacao.Recebido, "observação prédio 0", predio[0]),
+                new Solicitacoes (DateTime.Now, "Tem um pinguim na geladeira", "Gabriel", "Me ajuda", Enums.StatusSolicitacao.Recebido, "observação prédio 0", predio[0]),
+                new Solicitacoes (DateTime.Now, "Problema no encanamento", "Beltrano", "Cano perfurado", Enums.StatusSolicitacao.Recebido, "observação prédio 1", predio[1]),
+                new Solicitacoes (DateTime.Now, "Godzilla ou King Kong?", "Zé ruela", "Decidam pls", Enums.StatusSolicitacao.Recebido, "Sério mesmo prédio 2", predio[2])
             };
             return solicitacoes;
         }
