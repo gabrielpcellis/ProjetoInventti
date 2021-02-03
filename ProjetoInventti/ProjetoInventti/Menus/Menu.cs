@@ -88,7 +88,7 @@ namespace ProjetoInventti.Menus
 
         #region Menu do síndico
         public void MenuSindico(List<Pessoa> usuariosSistema, Pessoa usuarioAtual, ref List<Solicitacoes> SolicitacoesDoSindico, List<Predio> predios,
-            List<Solicitacoes> solicitacoesDoZelador, ref bool opcaoSair, ref Pessoa usuarioConectado, List<Solicitacoes> historicoAcoes)
+            List<Solicitacoes> solicitacoesDoZelador, ref bool opcaoSair, ref Pessoa usuarioConectado, List<Solicitacoes> historicoAcoes, List<Solicitacoes> solicitacoesEmAnalise)
         {
             Console.WriteLine("Escolha uma opção, por favor: ");
             Console.WriteLine(" 1) Cadastrar novo Morador, \n"
@@ -138,7 +138,7 @@ namespace ProjetoInventti.Menus
                         break;
                     case "8":
                         sindico = (Sindico)usuarioAtual;
-                        List<Solicitacoes> solicitacoesEmAnalise = SolicitacoesDoSindico.FindAll(x => x.Predio.NomePredio == sindico.Predio.NomePredio);
+                        solicitacoesEmAnalise = SolicitacoesDoSindico.FindAll(x => x.Predio.NomePredio == sindico.Predio.NomePredio);
                         List<Solicitacoes> solicitacoesEmAnaliseStatusFiltro = solicitacoesEmAnalise.FindAll(x => x.StatusSolicitacao == StatusSolicitacao.Analise);
                         Solicitacoes.VisualizarSolicitacoesEmAnalise(solicitacoesEmAnaliseStatusFiltro);
                         break;

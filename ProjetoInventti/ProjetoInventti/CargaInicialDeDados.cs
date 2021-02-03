@@ -55,7 +55,6 @@ namespace ProjetoInventti
             {
                 new Contas (DateTime.Now,Enums.TipoConta.Pagar, 2400.00m),
                 new Contas (DateTime.Now, Enums.TipoConta.Receber, 10000.00m)
-
             };
             return contasAPagar;
         }
