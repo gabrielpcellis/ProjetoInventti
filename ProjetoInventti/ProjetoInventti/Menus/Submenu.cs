@@ -9,15 +9,16 @@ namespace ProjetoInventti.Menus
     {
         public static void SubMenuSindico(List<Solicitacoes> solicitacoesPendentes, List<Solicitacoes> solicitacoesDoZelador)
         {
-            
-            SubmenuSindico(solicitacoesPendentes, solicitacoesDoZelador);
+            SubMenu(solicitacoesPendentes, solicitacoesDoZelador);
         }
+
         public static void SubMenuZelador(List<Solicitacoes> solicitacoes)
         {
-            SubmenuZelador(solicitacoes);
+            SubMenu(solicitacoes);
         }
+
         #region Submenus
-        private static void SubmenuSindico(List<Solicitacoes> solicitacoesPendentes, List<Solicitacoes> solicitacoesDoZelador)
+        private static void SubMenu(List<Solicitacoes> solicitacoesPendentes, List<Solicitacoes> solicitacoesDoZelador)
         {
             Solicitacoes.VisualizarSolicitacoesPendentes(solicitacoesPendentes);
 
@@ -42,40 +43,46 @@ namespace ProjetoInventti.Menus
             switch (opt)
             {
                 case "1":
-                    historico = new Historico("A solicitação '", solicitacoesPendentes[posicao].Titulo, "' teve seu status alterado na data ", DateTime.Now);
+                    historico = new Historico("Solicitação '", solicitacoesPendentes[posicao].Titulo, "' teve seu status alterado na data ", DateTime.Now);
                     solicitacoesPendentes[posicao].AlterarStatus(solicitacoesPendentes, posicao);
                     //Solicitacoes.VisualizarSolicitacoesEmAnalise(solicitacoesPendentes);
                     historico.AdicionarAoHistorico(historico);
                     break;
+
                 case "2":
                     historico = new Historico("Observação adicionada à solicitação '", solicitacoesPendentes[posicao].Titulo, "' na data ", DateTime.Now);
                     solicitacoesPendentes[posicao].AdicionarObservacao(solicitacoesPendentes, posicao);
                     historico.AdicionarAoHistorico(historico);
                     break;
+
                 case "3":
-                    historico = new Historico("A solicitação '", solicitacoesPendentes[posicao].Titulo, "' Foi removida na data ", DateTime.Now);
+                    historico = new Historico("Solicitação '", solicitacoesPendentes[posicao].Titulo, "' removida na data ", DateTime.Now);
                     solicitacoesPendentes[posicao].RemoverSolicitacao(solicitacoesPendentes, posicao);
                     historico.AdicionarAoHistorico(historico);
                     break;
+
                 case "4":
                     historico = new Historico("Solicitação '", solicitacoesPendentes[posicao].Titulo, "' transferida na data ", DateTime.Now);
                     solicitacoesPendentes[posicao].TransferirSolicitacao(solicitacoesDoZelador, solicitacoesPendentes, posicao);
                     historico.AdicionarAoHistorico(historico);
                     break;
+
                 case "5":
                     Historico.VisualizarHistoricoDeAcoes();
                     break;
+
                 case "6":
                     Console.Clear();
                     Console.WriteLine("Saindo...");
                     break;
+
                 default:
                     Console.Clear();
                     Console.WriteLine("Insira um número de acordo com o menu!");
                     break;
             }
         }
-        private static void SubmenuZelador(List<Solicitacoes> solicitacoes)
+        private static void SubMenu(List<Solicitacoes> solicitacoes)
         {
             Solicitacoes.VisualizarSolicitacoesPendentes(solicitacoes);
 
@@ -97,17 +104,19 @@ namespace ProjetoInventti.Menus
             switch (opt)
             {
                 case "1":
-                    
                     solicitacoes[posicao].AlterarStatus(solicitacoes, posicao);
                     break;
+
                 case "2":
                     solicitacoes[posicao].AdicionarObservacao(solicitacoes, posicao);
                     break;
+
                 case "3":
                     Console.Clear();
                     Console.WriteLine("Cancelando...");
                     Console.WriteLine();
                     break;
+
                 default:
                     Console.Clear();
                     Console.WriteLine("Insira um número de acordo com o menu!");

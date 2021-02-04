@@ -16,6 +16,11 @@ namespace ProjetoInventti.Entidades
         public string UsuarioAcesso { get; private set; }
         public string SenhaAcesso { get; private set; }
         public int Id { get; private set; }
+        public Predio Predio { get; set; }
+
+        public Pessoa()
+        {
+        }
 
         public Pessoa(int id, string nomeCompleto, DateTime dataNascimento, Carro carro, string telefone, TipoNivelAcesso tipoNivelAcesso, string user, string senha)
         {
@@ -29,14 +34,17 @@ namespace ProjetoInventti.Entidades
             SenhaAcesso = senha;
         }
 
-        public Pessoa()
+        public Pessoa(string nomeCompleto, DateTime dataNascimento, Carro carro, string telefone, TipoNivelAcesso tipoNivelAcesso, string usuarioAcesso, string senhaAcesso, int id, Predio predio)
+            : this (id, nomeCompleto, dataNascimento, carro, telefone, tipoNivelAcesso, usuarioAcesso, senhaAcesso)
         {
+           Predio = predio;
         }
 
         public bool VerificarDadosDeAcesso(string usuario, string senha)
         {
             return usuario == UsuarioAcesso && senha == SenhaAcesso;
         }
+
         public void AlterarSenha()
         {
             Console.Clear();
@@ -48,6 +56,7 @@ namespace ProjetoInventti.Entidades
             SenhaAcesso = novaSenha;
             Console.WriteLine("Nova senha: " + SenhaAcesso + "\n");
         }
+
         public static string[] CadastrarUsuarioESenha(List<Pessoa> usuarios)
         {
             Console.WriteLine();
@@ -77,6 +86,7 @@ namespace ProjetoInventti.Entidades
 
             return usuarioSenha;
         }
+
         public static int Identificador(List<Pessoa> usuarios)
         {
             int id = 0;
@@ -86,16 +96,17 @@ namespace ProjetoInventti.Entidades
             }
             return id;
         }
+
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append(NomeCompleto + ", ");
-            sb.Append(DataNascimento.ToString("dd/MM/yyyy HH:mm:ss") + ", ");
-            sb.Append(Carro.ModeloCarro + ", ");
-            sb.Append(Carro.PlacaCarro + ", ");
-            sb.Append(Telefone + ", ");
-            sb.Append(UsuarioAcesso + ", ");
-            sb.Append(SenhaAcesso);
+            sb.AppendLine("Nome: " + NomeCompleto + ". ");
+            sb.AppendLine("Data de Nascimento: " + DataNascimento.ToString("dd/MM/yyyy HH:mm:ss") + ". ");
+            sb.AppendLine("Modelo do carro: " + Carro.ModeloCarro + ". ");
+            sb.AppendLine("Placa do carro: " + Carro.PlacaCarro + ". ");
+            sb.AppendLine("Telefone: " + Telefone + ". ");
+            sb.AppendLine("Usuário: " + UsuarioAcesso + ". ");
+            sb.AppendLine("Senha: " + SenhaAcesso + ".");
             return sb.ToString();
         }
     }

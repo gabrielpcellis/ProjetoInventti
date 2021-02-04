@@ -34,9 +34,11 @@ namespace ProjetoInventti.Menus
                     case "1":
                         usuariosSistema.Add(geradorPessoa.CadastrarAdministrador(usuariosSistema));
                         break;
+
                     case "2":
                         usuariosSistema.Add(geradorPessoa.CadastrarSindico(predios, usuariosSistema));
                         break;
+
                     case "3":
                         Console.WriteLine("CONTAS A PAGAR:");
                         foreach (var obj in contas)
@@ -45,6 +47,7 @@ namespace ProjetoInventti.Menus
                                 Console.WriteLine(obj);
                         }
                         break;
+
                     case "4":
                         Console.WriteLine("CONTAS A RECEBER:");
                         foreach (var obj in contas)
@@ -53,6 +56,7 @@ namespace ProjetoInventti.Menus
                                 Console.WriteLine(obj);
                         }
                         break;
+
                     case "5":
                         Console.WriteLine("HISTÓRICO DE GASTOS:");
                         decimal totalGasto = 0.0m;
@@ -64,15 +68,19 @@ namespace ProjetoInventti.Menus
                         Console.Write("Total: ");
                         Console.WriteLine(totalGasto.ToString("F2", CultureInfo.InvariantCulture));
                         break;
+
                     case "6":
                         contas.AddRange(geradorConta.GerarConta());
                         break;
+
                     case "7":
                         Deslogar(ref usuarioConectado);
                         break;
+
                     case "8":
                         Sair(ref opcaoSair);
                         break;
+
                     default:
                         Console.WriteLine("Insira um número de acordo com o menu!");
                         break;
@@ -110,46 +118,55 @@ namespace ProjetoInventti.Menus
                         Console.Clear();
                         usuariosSistema.Add(geradorPessoa.CadastrarMorador(predios, usuariosSistema));
                         break;
+
                     case "2":
                         Console.Clear();
                         usuariosSistema.Add(geradorPessoa.CadastrarZelador(predios, usuariosSistema));
                         break;
+
                     case "3":
                         usuarioAtual.AlterarSenha();
                         break;
+
                     case "4":
                         GeradorPessoa.VisualizarListaDeMoradores(usuariosSistema);
                         break;
+
                     case "5":
                         Sindico sindico = (Sindico)usuarioAtual;
                         List<Solicitacoes> solicitacoesPendentes = SolicitacoesDoSindico.FindAll(x => x.Predio.NomePredio == sindico.Predio.NomePredio);
-                        //SolicitacoesDoSindico = solicitacoesPendentes; //Estava causando problemas na hora de acessar com os outros síndicos
                         Submenu.SubMenuSindico(solicitacoesPendentes, solicitacoesDoZelador);
                         break;
+
                     case "6":
                         Console.Clear();
                         sindico = (Sindico)usuarioAtual;
                         List<Solicitacoes> historico = SolicitacoesDoSindico.FindAll(x => x.Predio.NomePredio == sindico.Predio.NomePredio);
-                        Solicitacoes.VisualizarHistoricoDeSolicitacoes(historicoAcoes, usuarioAtual);
+                        Solicitacoes.VisualizarHistoricoDeSolicitacoes(historico);
                         break;
+
                     case "7":
                         Console.Clear();
                         GeradorPessoa.RemoverMorador(usuariosSistema);
                         break;
+
                     case "8":
                         sindico = (Sindico)usuarioAtual;
                         solicitacoesEmAnalise = SolicitacoesDoSindico.FindAll(x => x.Predio.NomePredio == sindico.Predio.NomePredio);
                         List<Solicitacoes> solicitacoesEmAnaliseStatusFiltro = solicitacoesEmAnalise.FindAll(x => x.StatusSolicitacao == StatusSolicitacao.Analise);
                         Solicitacoes.VisualizarSolicitacoesEmAnalise(solicitacoesEmAnaliseStatusFiltro);
                         break;
+
                     case "9":
                         Console.Clear();
                         Deslogar(ref usuarioConectado);
                         break;
+
                     case "10":
                         Console.Clear();
                         Sair(ref opcaoSair);
                         break;
+
                     default:
                         Console.Clear();
                         Console.WriteLine("Insira um número de acordo com o menu!");
@@ -187,23 +204,28 @@ namespace ProjetoInventti.Menus
                         Console.Clear();
                         usuarioAtual.AlterarSenha();
                         break;
+
                     case "2":
                         Console.Clear();
                         Zelador zelador = (Zelador)usuarioAtual;
                         List<Solicitacoes> solicitacoesPendentes = SolicitacoesDoZelador.FindAll(x => x.Predio.NomePredio == zelador.Predio.NomePredio);
                         Submenu.SubMenuZelador(solicitacoesPendentes);
                         break;
+
                     case "3":
                         zelador = (Zelador)usuarioAtual;
                         solicitacoesPendentes = SolicitacoesDoZelador.FindAll(x => x.Predio.NomePredio == zelador.Predio.NomePredio);
-                        Solicitacoes.VisualizarHistoricoDeSolicitacoes(solicitacoesPendentes, usuarioAtual);
+                        Solicitacoes.VisualizarHistoricoDeSolicitacoes(solicitacoesPendentes);
                         break;
+
                     case "4":
                         Deslogar(ref usuarioAtual);
                         break;
+
                     case "5":
                         Sair(ref opcaoSair);
                         break;
+
                     default:
                         Console.WriteLine("Insira um número de acordo com o menu!");
                         break;
@@ -241,24 +263,29 @@ namespace ProjetoInventti.Menus
                         Console.Clear();
                         usuarioAtual.AlterarSenha();
                         break;
+
                     case "2":
                         Console.Clear();
                         Solicitacoes.AbrirNovaSolicitacao(solicitacoesSindico, solicitacoesMorador, usuarioAtual);
                         break;
+
                     case "3":
                         Console.Clear();
                         Morador morador = (Morador)usuarioAtual;
                         List<Solicitacoes> historicoSolicitacoes = solicitacoesMorador.FindAll(x => x.Predio.NomePredio == morador.Predio.NomePredio);
-                        Solicitacoes.VisualizarHistoricoDeSolicitacoes(solicitacoesMorador, usuarioAtual);
+                        Solicitacoes.VisualizarHistoricoDeSolicitacoes(solicitacoesMorador);
                         break;
+
                     case "4":
                         Console.Clear();
                         Deslogar(ref usuarioAtual);
                         break;
+
                     case "5":
                         Console.Clear();
                         Sair(ref opcaoSair);
                         break;
+
                     default:
                         Console.Clear();
                         Console.WriteLine("Insira um número de acordo com o menu!");
@@ -286,6 +313,7 @@ namespace ProjetoInventti.Menus
                 usuarioConectado = null;
             }
         }
+
         public void Sair(ref bool opcaoSair)
         {
             Console.Write("Tem certeza que deseja sair (S ou N)? ");
@@ -296,11 +324,12 @@ namespace ProjetoInventti.Menus
                 Console.WriteLine("Saindo...");
             }
         }
+
         public static void ValidarUsuario(ref Pessoa usuarioConectado, List<Pessoa> usuariosSistema, bool usuarioExistente)
         {
             do
             {
-                Console.WriteLine("                                      BEM VINDO, MEU COMPATRIÓTAAAAAAAAAAAAAAA!!!!!!!!!!!                           \n");
+                Console.WriteLine("                                      BEM VINDO!                           \n");
                 Console.WriteLine("Para fazer login, informe os dados abaixo, por gentileza: \n");
                 Console.Write("Informe seu usuário: ");
                 string usuario = Console.ReadLine();
