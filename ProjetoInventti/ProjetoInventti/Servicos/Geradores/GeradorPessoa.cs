@@ -20,6 +20,7 @@ namespace ProjetoInventti.Servicos
             Console.WriteLine(novoAdm);
             return novoAdm;
         }
+
         public Sindico CadastrarSindico(List<Predio> predios, List<Pessoa> usuarios)
         {
             Console.WriteLine("Bem vindo ao cadastro de síndico: \n");
@@ -33,6 +34,7 @@ namespace ProjetoInventti.Servicos
             Console.WriteLine(novoSindico);
             return novoSindico;
         }
+
         public Zelador CadastrarZelador(List<Predio> predios, List<Pessoa> usuarios)
         {
             Console.WriteLine("Bem vindo ao cadastro de zelador: \n");
@@ -46,11 +48,13 @@ namespace ProjetoInventti.Servicos
             Console.WriteLine(novoZelador);
             return novoZelador;
         }
+
         public Morador CadastrarMorador(List<Predio> predios, List<Pessoa> usuarios)
         {
             Console.WriteLine("Bem vindo ao cadastro de morador: \n");
             Predio predio = new Predio();
-            predio.EscolherPredio(predio, predios);
+            //Finalizar o lance dos apartamentos
+            //predio.DefinirPredioEApartamento(predio, predios, );
             TipoNivelAcesso nivel = TipoNivelAcesso.Morador;
             Morador novoMorador = new Morador(GerarPessoa(nivel, usuarios), predio);
             Console.Clear();
@@ -59,6 +63,7 @@ namespace ProjetoInventti.Servicos
             Console.WriteLine(novoMorador);
             return novoMorador;
         }
+
         private Pessoa GerarPessoa(TipoNivelAcesso nivel, List<Pessoa> usuariosDoSistema)
         {
             Console.WriteLine();
@@ -76,9 +81,9 @@ namespace ProjetoInventti.Servicos
             if (s == 'S')
             {
                 Console.WriteLine("Dados do carro");
-                Console.Write("Placa do carro: ");
+                Console.Write("Placa do carro (ex: DWV19F): ");
                 string placaCarro = (Console.ReadLine());
-                Console.Write("Modelo do carro: ");
+                Console.Write("Modelo do carro (ex: Fiat): ");
                 string modeloCarro = Console.ReadLine();
                 carro = new Carro(placaCarro, modeloCarro);
             }
@@ -90,6 +95,7 @@ namespace ProjetoInventti.Servicos
             int id = Pessoa.Identificador(usuariosDoSistema);
             return new Pessoa(id, nomeCompleto, dataNascimento, carro, telefone, nivel, usuarioSenha[0], usuarioSenha[1]);
         }
+
         private double Salario()
         {
             Console.WriteLine();
@@ -97,13 +103,15 @@ namespace ProjetoInventti.Servicos
             double salario = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
             return salario;
         }
+
         public static void RemoverMorador(List<Pessoa> usuariosSistema)
         {
             ExcluirMorador(usuariosSistema);
         }
+
         static private void ExcluirMorador(List<Pessoa> usuariosSistema)
         {
-            Console.WriteLine("Escolha o morador que deseja excluir: \n");
+            Console.WriteLine("Escolha o morador que desejas excluir: \n");
 
             for (int i = 0; i < usuariosSistema.Count; i++)
             {
@@ -112,13 +120,15 @@ namespace ProjetoInventti.Servicos
                     Console.WriteLine("ID: {0} - " + usuariosSistema[i], usuariosSistema[i].Id);
                 }
             }
+
             Console.WriteLine();
-            Console.Write("Informe uma posição de acordo com os identificadores acima: ");
+            Console.Write("Informe o ID do morador que desejas excluir: ");
             int identificador = int.Parse(Console.ReadLine());
             Console.WriteLine("Você selecionou o ID: " + identificador);
 
             Console.Write("Tem certeza que deseja excluir este morador (S/N)? ");
             char escolha = char.Parse(Console.ReadLine().ToUpper());
+
             if (escolha == 'S')
             {
                 Pessoa obj = new Pessoa();
@@ -128,13 +138,14 @@ namespace ProjetoInventti.Servicos
                     {
                         obj = item;
                         usuariosSistema.Remove(item);
-                        Console.WriteLine("Um morador foi removido.");
+                        Console.WriteLine("Impossível excluir.");
                         break;
                     }
                 }
+
                 if (obj.Id != identificador || obj.TipoNivelAcesso != TipoNivelAcesso.Morador)
                 {
-                    Console.WriteLine("Só é possível excluir moradores.");
+                    Console.WriteLine("Exclusão não permitida.");
                 }
             }
             else
@@ -142,13 +153,13 @@ namespace ProjetoInventti.Servicos
                 Console.WriteLine("Exclusão cancelada. Você voltou para o menu! \n");
             }
         }
+
         public static void VisualizarListaDeMoradores(List<Pessoa> usuariosSistema)
         {
             Console.Clear();
             if (usuariosSistema.Count > 0)
             {
                 Console.WriteLine("Lista de moradores: \n");
-                Console.WriteLine("Nome completo,  Data de nascimento,  Modelo,  Placa,    Telefone,  Usuário,  Senha \n");
                 List<Pessoa> moradores = usuariosSistema.FindAll(x => x.TipoNivelAcesso == TipoNivelAcesso.Morador);
                 foreach (var item in moradores)
                 {

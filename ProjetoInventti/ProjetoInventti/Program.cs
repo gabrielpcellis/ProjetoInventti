@@ -29,7 +29,7 @@ namespace ProjetoInventti
                 {
                     Menu.ValidarUsuario(ref usuarioConectado, usuariosSistema, usuarioExistente);
                 }
-                Console.WriteLine("Olá '{0}', seja bem vindo! \n", usuarioConectado.NomeCompleto);
+                Console.WriteLine("Você está logado como: '{0}', seja bem vindo! \n", usuarioConectado.NomeCompleto);
                 Menu menu = new Menu();
 
                 switch (usuarioConectado.TipoNivelAcesso)
