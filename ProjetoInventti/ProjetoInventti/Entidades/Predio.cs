@@ -55,58 +55,34 @@ namespace ProjetoInventti.Entidades
                 }
             } while (predio.NomePredio != nome);
         }
-        //Talvez possamos utilizar uma sobrecarga do método já existente
-        public void DefinirPredioEApartamento(Predio predio, List<Predio> listaDePredios, List<Morador> listaDeUsuarios)
+
+        public static void EscolherPredio(List<Predio> listaDePredios, List<Pessoa> listaDeUsuarios, Morador morador)
         {
-            Console.Write("Informa o nome do prédio: ");
-            string nomePredio;
-            do
-            {
-                listaDePredios.ForEach(x => Console.WriteLine(x.NomePredio));
-                nomePredio = Console.ReadLine();
-                Console.WriteLine();
-                Console.Write("Prédio: ");
-                foreach (var item in listaDePredios)
-                {
-                    if (item.NomePredio == nomePredio)
-                    {
-                        predio = listaDePredios.Find(f => f.NomePredio == nomePredio);
-                    }
-                }
-
-                if (predio.NomePredio != nomePredio)
-                {
-                    Console.WriteLine("Prédio não existente, tente novamente: \n");
-                }
-            } while (predio.NomePredio != nomePredio);
-
             bool retornaVerdadeiroSeOApartamentoNaoExistir = false;
             do
             {
-                Console.Write("Agora informe o número do apartamento: ");
+                Console.Write("Informe o número do apartamento: ");
                 int numeroApartamento = int.Parse(Console.ReadLine());
                 bool retornaVerdadeiroSeOApartamentoEscolhidoNaoPossuirDono = false;
                 foreach (var item in listaDePredios)
                 {
-                    if (numeroApartamento > 0 && numeroApartamento < predio.QuantidadeApartamentos)
+                    if (numeroApartamento > 0 && numeroApartamento < morador.Predio.QuantidadeApartamentos)
                     {
-                        do
+                        retornaVerdadeiroSeOApartamentoEscolhidoNaoPossuirDono = listaDeUsuarios.Exists(x => x.Predio.NumeroApartamento == numeroApartamento);
+                        if (!retornaVerdadeiroSeOApartamentoEscolhidoNaoPossuirDono)
                         {
-                            retornaVerdadeiroSeOApartamentoEscolhidoNaoPossuirDono = listaDeUsuarios.Exists(x => x.Predio.NumeroApartamento != numeroApartamento);
-                            if (retornaVerdadeiroSeOApartamentoEscolhidoNaoPossuirDono)
-                            {
-                                predio.NumeroApartamento = numeroApartamento;
-                            }
-                            else
-                            {
-                                Console.WriteLine("O apartamento escolhido já possui dono.");
-                            }
-                        } while (!retornaVerdadeiroSeOApartamentoEscolhidoNaoPossuirDono);
+                            morador.Predio.NumeroApartamento = numeroApartamento;
+                        }
+                        else
+                        {
+                            Console.WriteLine("O apartamento escolhido já possui dono.");
+                        }
                     }
                     else
                     {
                         retornaVerdadeiroSeOApartamentoNaoExistir = true;
                         Console.WriteLine("Este apartamento não existe.");
+                        break;
                     }
                 }
             } while (retornaVerdadeiroSeOApartamentoNaoExistir);

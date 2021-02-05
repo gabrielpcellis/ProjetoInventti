@@ -10,8 +10,8 @@ namespace ProjetoInventti
         {
             List<Predio> predio = new List<Predio>
             {
-                new Predio("Anemona", "Bloco A", 10, 40, new DateTime(2007, 08, 28)),
-                new Predio("Alpinea Rosa", "Bloco B", 5, 20, new DateTime(2007, 08, 28)),
+                new Predio("Anemona", "Bloco A", 10, 50, new DateTime(2007, 08, 28)),
+                new Predio("Alpinea Rosa", "Bloco B", 5, 50, new DateTime(2007, 08, 28)),
                 new Predio("Fox", "Bloco C", 15, 50, new DateTime(2007, 08, 28))
             };
 
@@ -19,7 +19,7 @@ namespace ProjetoInventti
         }
         public static List<Pessoa> GerarCarga()
         {
-            List<Carro> carros = new List<Carro> 
+            List<Carro> carros = new List<Carro>
             {
                 new Carro("FHC12", "Fiat Uno"),
                 new Carro("ABC55", "Ferrari"),
@@ -33,9 +33,9 @@ namespace ProjetoInventti
                 new Morador(1,"morador 2", DateTime.Now, carros[1], "telefone 2", "usuario2", "senha2", predio[1]),
                 new Morador(2,"morador 3", DateTime.Now, carros[2], "telefone 3", "usuario3", "senha3", predio[2]),
 
-                new Administrador(3,"administrador 1", DateTime.Now, carros[0], "telefone 1", "usuario4", "senha4"),
-                new Administrador(4,"administrador 2", DateTime.Now, carros[1], "telefone 2", "usuario5", "senha5"),
-                new Administrador(5,"administrador 3", DateTime.Now, carros[2], "telefone 3", "usuario6", "senha6"),
+                new Administrador(3,"administrador 1", DateTime.Now, carros[0], "telefone 1", "usuario4", "senha4", predio[0]),
+                new Administrador(4,"administrador 2", DateTime.Now, carros[1], "telefone 2", "usuario5", "senha5", predio[1]),
+                new Administrador(5,"administrador 3", DateTime.Now, carros[2], "telefone 3", "usuario6", "senha6", predio[2]),
                 new Morador(6,"morador 7", DateTime.Now, carros[0], "telefone 7", "morador 7", "morador 7", predio[1]),
 
                 new Sindico(7,"síndico 1", DateTime.Now, predio[0], carros[0], "telefone 1", "usuario7", "senha7", 1000.00),

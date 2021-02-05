@@ -45,7 +45,6 @@ namespace ProjetoInventti.Menus
                 case "1":
                     historico = new Historico("Solicitação '", solicitacoesPendentes[posicao].Titulo, "' teve seu status alterado na data ", DateTime.Now);
                     solicitacoesPendentes[posicao].AlterarStatus(solicitacoesPendentes, posicao);
-                    //Solicitacoes.VisualizarSolicitacoesEmAnalise(solicitacoesPendentes);
                     historico.AdicionarAoHistorico(historico);
                     break;
 
@@ -63,7 +62,7 @@ namespace ProjetoInventti.Menus
 
                 case "4":
                     historico = new Historico("Solicitação '", solicitacoesPendentes[posicao].Titulo, "' transferida na data ", DateTime.Now);
-                    solicitacoesPendentes[posicao].TransferirSolicitacao(solicitacoesDoZelador, solicitacoesPendentes, posicao);
+                    Solicitacoes.TransferirSolicitacao(solicitacoesDoZelador, solicitacoesPendentes, posicao);
                     historico.AdicionarAoHistorico(historico);
                     break;
 

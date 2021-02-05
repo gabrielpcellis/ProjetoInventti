@@ -1,6 +1,5 @@
 ﻿using ProjetoInventti.Entidades;
 using ProjetoInventti.Enums;
-using ProjetoInventti.Excecoes.DomainExceptions;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -9,11 +8,13 @@ namespace ProjetoInventti.Servicos
 {
     public class GeradorPessoa
     {
-        public Administrador CadastrarAdministrador(List<Pessoa> usuarios)
+        public Administrador CadastrarAdministrador(List<Pessoa> usuarios, List<Predio> predios)
         {
             Console.WriteLine("Bem vindo ao cadastro de administrador: \n");
             TipoNivelAcesso nivel = TipoNivelAcesso.Administrador;
-            Administrador novoAdm = new Administrador(GerarPessoa(nivel, usuarios));
+            Predio predio = new Predio();
+            predio.EscolherPredio(predio, predios);
+            Administrador novoAdm = new Administrador(GerarPessoa(nivel, usuarios), predio);
             Console.Clear();
             Console.WriteLine("Novo usuário cadastrado: \n");
             Console.WriteLine("Nome completo, data de nascimento, placa carro, modelo carro, telefone, usuário, senha: \n");
@@ -49,14 +50,20 @@ namespace ProjetoInventti.Servicos
             return novoZelador;
         }
 
-        public Morador CadastrarMorador(List<Predio> predios, List<Pessoa> usuarios)
+        public Morador CadastrarMorador(List<Predio> predios, List<Pessoa> usuarios, Pessoa usuarioAtual)
         {
             Console.WriteLine("Bem vindo ao cadastro de morador: \n");
             Predio predio = new Predio();
-            //Finalizar o lance dos apartamentos
-            //predio.DefinirPredioEApartamento(predio, predios, );
+            foreach (var item in predios)
+            {
+                if (item.NomePredio == usuarioAtual.Predio.NomePredio)
+                {
+                    predio = usuarioAtual.Predio;
+                }
+            }
             TipoNivelAcesso nivel = TipoNivelAcesso.Morador;
             Morador novoMorador = new Morador(GerarPessoa(nivel, usuarios), predio);
+            Predio.EscolherPredio(predios, usuarios,  novoMorador);
             Console.Clear();
             Console.WriteLine("Novo usuário cadastrado: \n");
             Console.WriteLine("Nome completo, data de nascimento, placa carro, modelo carro, telefone, usuário, senha: \n");

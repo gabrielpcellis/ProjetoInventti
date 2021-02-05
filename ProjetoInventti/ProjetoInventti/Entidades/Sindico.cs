@@ -5,7 +5,6 @@ namespace ProjetoInventti.Entidades
 {
     public class Sindico : Pessoa
     {
-        public Predio Predio { get; set; }
         public double Salario { get; set; }
 
         public Sindico(int id, string nomeCompleto, DateTime dataNascimento, Predio predio, Carro carro, string telefone, string user, string senha, double salario)

@@ -37,7 +37,7 @@ namespace ProjetoInventti
             Console.WriteLine("A solicitação foi excluída. \n");
         }
 
-        public void TransferirSolicitacao(List<Solicitacoes> solicitacaoZelador, List<Solicitacoes> solicitacaoSindico, int posicao)
+        public static void TransferirSolicitacao(List<Solicitacoes> solicitacaoZelador, List<Solicitacoes> solicitacaoSindico, int posicao)
         {
             Console.Clear();
             solicitacaoZelador.Insert(0, solicitacaoSindico[posicao]);
