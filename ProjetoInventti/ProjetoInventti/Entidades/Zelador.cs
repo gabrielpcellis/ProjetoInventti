@@ -5,7 +5,6 @@ namespace ProjetoInventti.Entidades
 {
     public class Zelador : Pessoa
     {
-        public Predio Predio { get; set; }
         public double Salario { get; set; }
 
         public Zelador(int id, string nomeCompleto, DateTime dataNascimento, Carro carro, string telefone, string user, string senha, Predio predio, double salario)

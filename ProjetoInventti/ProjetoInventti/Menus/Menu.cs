@@ -32,7 +32,7 @@ namespace ProjetoInventti.Menus
                 switch (opcao)
                 {
                     case "1":
-                        usuariosSistema.Add(geradorPessoa.CadastrarAdministrador(usuariosSistema));
+                        usuariosSistema.Add(geradorPessoa.CadastrarAdministrador(usuariosSistema, predios));
                         break;
 
                     case "2":
@@ -40,6 +40,7 @@ namespace ProjetoInventti.Menus
                         break;
 
                     case "3":
+                        Console.Clear();
                         Console.WriteLine("CONTAS A PAGAR:");
                         foreach (var obj in contas)
                         {
@@ -49,6 +50,7 @@ namespace ProjetoInventti.Menus
                         break;
 
                     case "4":
+                        Console.Clear();
                         Console.WriteLine("CONTAS A RECEBER:");
                         foreach (var obj in contas)
                         {
@@ -58,6 +60,7 @@ namespace ProjetoInventti.Menus
                         break;
 
                     case "5":
+                        Console.Clear();
                         Console.WriteLine("HISTÓRICO DE GASTOS:");
                         decimal totalGasto = 0.0m;
                         foreach (var obj in contas)
@@ -70,6 +73,7 @@ namespace ProjetoInventti.Menus
                         break;
 
                     case "6":
+                        Console.Clear();
                         contas.AddRange(geradorConta.GerarConta());
                         break;
 
@@ -82,6 +86,7 @@ namespace ProjetoInventti.Menus
                         break;
 
                     default:
+                        Console.Clear();
                         Console.WriteLine("Insira um número de acordo com o menu!");
                         break;
                 }
@@ -95,8 +100,8 @@ namespace ProjetoInventti.Menus
         #endregion
 
         #region Menu do síndico
-        public void MenuSindico(List<Pessoa> usuariosSistema, Pessoa usuarioAtual, ref List<Solicitacoes> SolicitacoesDoSindico, List<Predio> predios,
-            List<Solicitacoes> solicitacoesDoZelador, ref bool opcaoSair, ref Pessoa usuarioConectado, List<Solicitacoes> historicoAcoes, List<Solicitacoes> solicitacoesEmAnalise)
+        public void MenuSindico(List<Pessoa> usuariosSistema, ref List<Solicitacoes> SolicitacoesDoSindico, List<Predio> predios,
+            List<Solicitacoes> solicitacoesDoZelador, ref bool opcaoSair, ref Pessoa usuarioAtual, List<Solicitacoes> historicoAcoes, List<Solicitacoes> solicitacoesEmAnalise)
         {
             Console.WriteLine("Escolha uma opção, por favor: ");
             Console.WriteLine(" 1) Cadastrar novo Morador, \n"
@@ -116,7 +121,7 @@ namespace ProjetoInventti.Menus
                 {
                     case "1":
                         Console.Clear();
-                        usuariosSistema.Add(geradorPessoa.CadastrarMorador(predios, usuariosSistema));
+                        usuariosSistema.Add(geradorPessoa.CadastrarMorador(predios, usuariosSistema, usuarioAtual));
                         break;
 
                     case "2":
@@ -159,7 +164,7 @@ namespace ProjetoInventti.Menus
 
                     case "9":
                         Console.Clear();
-                        Deslogar(ref usuarioConectado);
+                        Deslogar(ref usuarioAtual);
                         break;
 
                     case "10":

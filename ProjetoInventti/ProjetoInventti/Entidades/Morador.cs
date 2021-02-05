@@ -5,8 +5,6 @@ namespace ProjetoInventti.Entidades
 {
     public class Morador : Pessoa
     {
-        public Predio Predio { get; set; }
-
         public Morador(int id, string nomeCompleto, DateTime dataNascimento, Carro carro, string telefone, string user, string senha, Predio predio)
             : base(id, nomeCompleto, dataNascimento, carro, telefone, TipoNivelAcesso.Morador, user, senha)
         {
@@ -18,6 +16,6 @@ namespace ProjetoInventti.Entidades
         {
             Predio = predio;
         }
-
     }
+
 }

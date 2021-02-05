@@ -34,12 +34,6 @@ namespace ProjetoInventti.Entidades
             SenhaAcesso = senha;
         }
 
-        public Pessoa(string nomeCompleto, DateTime dataNascimento, Carro carro, string telefone, TipoNivelAcesso tipoNivelAcesso, string usuarioAcesso, string senhaAcesso, int id, Predio predio)
-            : this (id, nomeCompleto, dataNascimento, carro, telefone, tipoNivelAcesso, usuarioAcesso, senhaAcesso)
-        {
-           Predio = predio;
-        }
-
         public bool VerificarDadosDeAcesso(string usuario, string senha)
         {
             return usuario == UsuarioAcesso && senha == SenhaAcesso;
@@ -107,6 +101,8 @@ namespace ProjetoInventti.Entidades
             sb.AppendLine("Telefone: " + Telefone + ". ");
             sb.AppendLine("Usuário: " + UsuarioAcesso + ". ");
             sb.AppendLine("Senha: " + SenhaAcesso + ".");
+            sb.AppendLine("Prédio: " + Predio.NomePredio + ".");
+            sb.AppendLine("Apartamento: " + Predio.NumeroApartamento + ".");
             return sb.ToString();
         }
     }

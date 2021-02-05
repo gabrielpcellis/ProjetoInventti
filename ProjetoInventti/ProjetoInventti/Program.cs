@@ -38,7 +38,7 @@ namespace ProjetoInventti
                         menu.MenuAdministrador(usuariosSistema, contas, predios, ref sair, ref usuarioConectado);
                         break;
                     case TipoNivelAcesso.Sindico:
-                        menu.MenuSindico(usuariosSistema, usuarioConectado, ref solicitacoesSindico, predios, solicitacoesZelador, ref sair,
+                        menu.MenuSindico(usuariosSistema, ref solicitacoesSindico, predios, solicitacoesZelador, ref sair,
                             ref usuarioConectado, historico, solicitacoesEmAnalise);
                         break;
                     case TipoNivelAcesso.Zelador:
